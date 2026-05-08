@@ -1,0 +1,403 @@
+.step-finalization {
+
+  max-width: 1280px;
+
+  margin: 0 auto;
+
+  min-height: 100vh;
+
+  background: white;
+
+}
+
+/* header */
+.step-finalization__header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 24px 0;
+
+  border-bottom: 1px solid #ececec;
+
+}
+
+.step-finalization__brand {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+}
+
+.step-finalization__logo {
+
+  width: 64px;
+
+  height: 64px;
+
+  border-radius: 50%;
+
+}
+
+.step-finalization__brand-text {
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+.step-finalization__brand-text h1 {
+
+  margin: 0;
+
+  font-size: 28px;
+
+  font-weight: 700;
+
+}
+
+.step-finalization__brand-text span {
+
+  color: #777;
+
+}
+
+/* suporte */
+.step-finalization__support {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+}
+
+.step-finalization__support a {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  color: #19b15f;
+
+  text-decoration: none;
+
+  font-weight: 600;
+
+}
+
+/* stepper */
+.step-finalization__steps {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 40px 0;
+
+}
+
+.step {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: #b7b7b7;
+
+}
+
+.step--active {
+
+  color: #ef3d37;
+
+}
+
+.step__circle {
+
+  width: 42px;
+
+  height: 42px;
+
+  border-radius: 50%;
+
+  background: #ececec;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-weight: 700;
+
+}
+
+.step--active .step__circle,
+.step--completed .step__circle {
+
+  background: #ef3d37;
+
+  color: white;
+
+}
+
+/* content */
+.step-finalization__content {
+
+  padding-bottom: 48px;
+
+}
+
+.step-finalization__content h2 {
+
+  font-size: 42px;
+
+  margin-bottom: 10px;
+
+}
+
+.step-finalization__content p {
+
+  color: #777;
+
+  margin-bottom: 28px;
+
+}
+
+/* sections */
+.finalization-section {
+
+  margin-top: 28px;
+
+}
+
+.finalization-section label {
+
+  display: block;
+
+  margin-bottom: 12px;
+
+  font-weight: 600;
+
+}
+
+/* upload */
+.upload-box {
+
+  height: 180px;
+
+  border: 2px dashed #d9d9d9;
+
+  border-radius: 14px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  cursor: pointer;
+
+}
+
+.upload-icon {
+
+  font-size: 42px;
+
+  color: #ef3d37;
+
+}
+
+/* grid */
+.finalization-grid {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 40px;
+
+}
+
+/* radios */
+.radio-group {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+
+}
+
+.radio-group--inline {
+
+  flex-direction: row;
+
+}
+
+.radio-item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  cursor: pointer;
+
+}
+
+.custom-radio {
+
+  width: 18px;
+
+  height: 18px;
+
+  border-radius: 50%;
+
+  border: 2px solid #cfcfcf;
+
+}
+
+.custom-radio--active {
+
+  border-color: #ef3d37;
+
+  background: #ef3d37;
+
+  box-shadow: inset 0 0 0 4px white;
+
+}
+
+/* textarea */
+textarea {
+
+  width: 100%;
+
+  height: 140px;
+
+  border-radius: 12px;
+
+  border: 1px solid #d9d9d9;
+
+  padding: 16px;
+
+  resize: none;
+
+}
+
+/* privacy */
+.privacy-box {
+
+  margin-top: 28px;
+
+  background: #f7f7f7;
+
+  border-radius: 10px;
+
+  padding: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  cursor: pointer;
+
+}
+
+.custom-checkbox {
+
+  width: 18px;
+
+  height: 18px;
+
+  border-radius: 4px;
+
+  border: 2px solid #cfcfcf;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 12px;
+
+}
+
+.custom-checkbox--active {
+
+  background: #ef3d37;
+
+  border-color: #ef3d37;
+
+  color: white;
+
+}
+
+/* footer */
+.step-finalization__footer {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 32px 0;
+
+  border-top: 1px solid #ececec;
+
+}
+
+.secondary-button {
+
+  height: 52px;
+
+  padding: 0 28px;
+
+  border-radius: 12px;
+
+  border: 1px solid #d9d9d9;
+
+  background: white;
+
+}
+
+.primary-button {
+
+  height: 52px;
+
+  padding: 0 32px;
+
+  border-radius: 12px;
+
+  border: none;
+
+  background: #ef3d37;
+
+  color: white;
+
+}

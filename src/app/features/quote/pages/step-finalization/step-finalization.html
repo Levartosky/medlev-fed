@@ -1,0 +1,290 @@
+<div class="step-finalization">
+
+  <!-- HEADER -->
+  <header class="step-finalization__header">
+
+    <div class="step-finalization__brand">
+
+      <img
+        src="/logo-medlev.png"
+        alt="Logo MedLev"
+        class="step-finalization__logo"
+      >
+
+      <div class="step-finalization__brand-text">
+
+        <h1>MedLev</h1>
+
+        <span>arquitetura</span>
+
+      </div>
+
+    </div>
+
+    <div class="step-finalization__support">
+
+      <span>
+        Precisa de ajuda?
+      </span>
+
+      <a href="#">
+
+        <span class="material-symbols-outlined">
+          chat
+        </span>
+
+        Falar no WhatsApp
+
+      </a>
+
+    </div>
+
+  </header>
+
+  <!-- STEPPER -->
+  <section class="step-finalization__steps">
+
+    <div class="step step--completed">
+      <div class="step__circle">✓</div>
+      <span>Contato</span>
+    </div>
+
+    <div class="step step--completed">
+      <div class="step__circle">✓</div>
+      <span>Imóvel</span>
+    </div>
+
+    <div class="step step--completed">
+      <div class="step__circle">✓</div>
+      <span>Escopo</span>
+    </div>
+
+    <div class="step step--completed">
+      <div class="step__circle">✓</div>
+      <span>Entregáveis</span>
+    </div>
+
+    <div class="step step--active">
+      <div class="step__circle">5</div>
+      <span>Finalização</span>
+    </div>
+
+  </section>
+
+  <!-- CONTENT -->
+  <main class="step-finalization__content">
+
+    <h2>
+      Quase lá!
+    </h2>
+
+    <p>
+      Anexe materiais e nos conte detalhes finais.
+    </p>
+
+    <!-- UPLOAD -->
+    <section class="finalization-section">
+
+      <label>
+        Fotos ou plantas existentes (opcional)
+      </label>
+
+      <div class="upload-box">
+
+        <span class="material-symbols-outlined upload-icon">
+          upload
+        </span>
+
+        <strong>
+          Arraste aqui ou clique para enviar
+        </strong>
+
+        <span>
+          JPG, PNG, PDF, DWG - até 10MB cada
+        </span>
+
+      </div>
+
+      <small>
+        💡 Fotos ajudam a agilizar significativamente seu orçamento.
+      </small>
+
+    </section>
+
+    <!-- GRID -->
+    <div class="finalization-grid">
+
+      <!-- URGÊNCIA -->
+      <section class="finalization-section">
+
+        <label>
+          Qual a urgência?
+        </label>
+
+        <div class="radio-group">
+
+          <div
+            class="radio-item"
+            (click)="selectUrgency('Esta semana')"
+          >
+
+            <div
+              class="custom-radio"
+              [class.custom-radio--active]="selectedUrgency === 'Esta semana'"
+            ></div>
+
+            <span>
+              Esta semana
+            </span>
+
+          </div>
+
+          <div
+            class="radio-item"
+            (click)="selectUrgency('Este mês')"
+          >
+
+            <div
+              class="custom-radio"
+              [class.custom-radio--active]="selectedUrgency === 'Este mês'"
+            ></div>
+
+            <span>
+              Este mês
+            </span>
+
+          </div>
+
+          <div
+            class="radio-item"
+            (click)="selectUrgency('Sem pressa')"
+          >
+
+            <div
+              class="custom-radio"
+              [class.custom-radio--active]="selectedUrgency === 'Sem pressa'"
+            ></div>
+
+            <span>
+              Sem pressa
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- RPA -->
+      <section class="finalization-section">
+
+        <label>
+          Precisa de RPA?
+        </label>
+
+        <div class="radio-group radio-group--inline">
+
+          <div
+            class="radio-item"
+            (click)="selectRpa('Sim')"
+          >
+
+            <div
+              class="custom-radio"
+              [class.custom-radio--active]="selectedRpa === 'Sim'"
+            ></div>
+
+            <span>
+              Sim
+            </span>
+
+          </div>
+
+          <div
+            class="radio-item"
+            (click)="selectRpa('Não')"
+          >
+
+            <div
+              class="custom-radio"
+              [class.custom-radio--active]="selectedRpa === 'Não'"
+            ></div>
+
+            <span>
+              Não
+            </span>
+
+          </div>
+
+        </div>
+
+        <small>
+          🧾 Recibo de Pagamento Autônomo
+        </small>
+
+      </section>
+
+    </div>
+
+    <!-- OBS -->
+    <section class="finalization-section">
+
+      <label>
+        Observações
+      </label>
+
+      <textarea
+        placeholder="Qualquer detalhe adicional que possa ajudar no orçamento..."
+      ></textarea>
+
+    </section>
+
+    <!-- PRIVACY -->
+    <div
+      class="privacy-box"
+      (click)="togglePrivacy()"
+    >
+
+      <div
+        class="custom-checkbox"
+        [class.custom-checkbox--active]="acceptedPrivacy"
+      >
+
+        ✓
+
+      </div>
+
+      <span>
+
+        Autorizo o uso dos meus dados conforme a
+
+        <strong>
+          Política de Privacidade
+        </strong>
+
+      </span>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="step-finalization__footer">
+
+    <button
+      class="secondary-button"
+      (click)="previousStep()"
+    >
+      ← Voltar
+    </button>
+
+    <button
+      class="primary-button"
+      (click)="submitForm()"
+    >
+      Enviar solicitação ✈
+    </button>
+
+  </footer>
+
+</div>
