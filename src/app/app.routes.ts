@@ -118,6 +118,27 @@ TELA DE SUCESSO
       .then(m => m.SuccessComponent)
 
 },
+
+/*
+========================================================
+SOBRE
+========================================================
+
+Página institucional premium
+da MEDLEV.
+
+URL:
+localhost:4200/sobre
+*/
+{
+  path: 'sobre',
+
+  loadComponent: () =>
+
+    import('./features/about/about')
+      .then(m => m.AboutComponent)
+
+},
   /*
   ========================================================
   FALLBACK

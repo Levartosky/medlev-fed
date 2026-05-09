@@ -94,8 +94,6 @@ export class StepDeliverablesComponent {
       '/orcamento/finalizacao'
     ]);
 
-    console.log('Próxima etapa');
-
   }
 
 }
