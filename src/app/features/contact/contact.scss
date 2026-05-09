@@ -1,0 +1,558 @@
+/*
+========================================================
+CONTACT PAGE — MEDLEV ARQUITETURA
+========================================================
+
+IMPORTANTE:
+Os blocos RESET, BODY, HERO, HEADER, BRAND, NAV e BUTTON
+são cópia fiel do home.scss.
+Isso garante que o header seja IDÊNTICO ao da Home.
+
+Estilos exclusivos do Contact usam prefixo contact__.
+
+========================================================
+*/
+
+/*
+========================================================
+RESET GLOBAL — cópia exata do home.scss
+========================================================
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*
+========================================================
+BODY — cópia exata do home.scss
+========================================================
+*/
+
+body {
+  background: #050505;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/*
+========================================================
+CONTACT — wrapper da página
+========================================================
+*/
+
+.contact {
+  background: #050505;
+  color: white;
+  min-height: 100vh;
+}
+
+/*
+========================================================
+HERO SECTION — cópia exata do home.scss
+========================================================
+
+Mesma classe .hero da Home.
+Mesma imagem, mesmo padding, mesmo min-height.
+*/
+
+.hero {
+  overflow: hidden;
+  position: relative;
+  min-height: 720px;
+  background-image: url('/home-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 32px 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+Overlay — cópia exata do home.scss.
+*/
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.88),
+      rgba(0, 0, 0, 0.50)
+    );
+  z-index: 1;
+}
+
+/*
+Fade para preto no rodapé do hero — cópia exata do home.scss.
+*/
+
+.hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 420px;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(5, 5, 5, 0) 0%,
+      rgba(5, 5, 5, 0.15) 20%,
+      rgba(5, 5, 5, 0.45) 45%,
+      rgba(5, 5, 5, 0.82) 75%,
+      rgba(5, 5, 5, 1) 100%
+    );
+}
+
+/*
+========================================================
+HEADER — cópia exata do home.scss
+========================================================
+*/
+
+.header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/*
+========================================================
+BRAND / LOGO — cópia exata do home.scss
+========================================================
+*/
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.brand__logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.brand:hover .brand__logo {
+  transform: scale(1.05);
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand__text strong {
+  color: white;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.brand__text span {
+  color: #d4d4d4;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/*
+========================================================
+NAVBAR — cópia exata do home.scss
+========================================================
+*/
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+}
+
+.header__nav a {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+/*
+Underline vermelho animado no hover e item ativo.
+*/
+
+.header__nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 0;
+  height: 2px;
+  background: #ef3b3b;
+  transition: width 0.3s ease;
+}
+
+.header__nav a:hover::after,
+.header__nav a.active::after {
+  width: 100%;
+}
+
+/*
+========================================================
+BOTÃO HEADER — cópia exata do home.scss
+========================================================
+*/
+
+.header__button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: #ef3b3b;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  transition: 0.3s ease;
+}
+
+.header__button:hover {
+  transform: translateY(-2px);
+  background: #ff4a4a;
+}
+
+/*
+========================================================
+HERO CONTENT — CONTACT ESPECÍFICO
+========================================================
+
+Alinhado à esquerda — sem card lateral.
+Label + H1 + divider + descrição.
+*/
+
+.contact__hero-body {
+  position: relative;
+  z-index: 2;
+  margin-top: 80px;
+  max-width: 620px;
+}
+
+.contact__label {
+  display: block;
+  color: #ef3b3b;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.contact__hero-body h1 {
+  font-size: 3.4rem;
+  line-height: 1.1;
+  font-weight: 800;
+  color: white;
+}
+
+/*
+Palavra em destaque vermelho.
+*/
+
+.contact__hero-body h1 strong {
+  color: #ef3b3b;
+}
+
+.contact__divider {
+  width: 60px;
+  height: 4px;
+  background: #ef3b3b;
+  margin: 24px 0;
+}
+
+.contact__hero-body p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/*
+========================================================
+SEÇÃO PRINCIPAL — CANAIS + FORMULÁRIO
+========================================================
+
+Grid de 2 colunas lado a lado.
+Fundo preto escuro (#090909) para manter o dark luxury.
+*/
+
+.contact__body {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 0;
+  background: #050505;
+}
+
+/*
+========================================================
+CANAIS DE ATENDIMENTO — ESQUERDA
+========================================================
+*/
+
+.contact__channels {
+  padding: 72px 60px 72px 80px;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.contact__section-tag {
+  display: block;
+  color: #ef3b3b;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.contact__channels h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  line-height: 1.25;
+  margin-bottom: 24px;
+}
+
+/*
+Cada item de canal.
+Ícone + texto lado a lado.
+*/
+
+.contact__channel-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-top: 28px;
+}
+
+/*
+Círculo do ícone — glow vermelho sutil.
+*/
+
+.contact__channel-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    circle,
+    rgba(239, 59, 59, 0.22),
+    rgba(239, 59, 59, 0.05)
+  );
+  border: 1px solid rgba(239, 59, 59, 0.18);
+}
+
+.contact__channel-icon .material-symbols-outlined {
+  color: #ef3b3b;
+  font-size: 1.4rem;
+}
+
+.contact__channel-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.contact__channel-info strong {
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.contact__channel-info span {
+  color: #ef3b3b;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.contact__channel-info p {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+/*
+========================================================
+FORMULÁRIO DE CONTATO — DIREITA
+========================================================
+*/
+
+.contact__form-wrapper {
+  padding: 72px 80px 72px 60px;
+}
+
+.contact__form-wrapper h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.contact__form-subtitle {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/*
+Linha com dois campos lado a lado.
+*/
+
+.contact__form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/*
+Grupo: label + input/textarea.
+*/
+
+.contact__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/*
+Full width — ocupa toda a linha.
+*/
+
+.contact__form-group--full {
+  grid-column: 1 / -1;
+}
+
+.contact__form-group label {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/*
+Inputs e textarea — dark glassmorphism.
+*/
+
+.contact__form-group input,
+.contact__form-group textarea {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: white;
+  font-size: 0.9rem;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: border-color 0.3s ease, background 0.3s ease;
+  outline: none;
+  resize: none;
+}
+
+.contact__form-group input::placeholder,
+.contact__form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.contact__form-group input:focus,
+.contact__form-group textarea:focus {
+  border-color: rgba(239, 59, 59, 0.5);
+  background: rgba(239, 59, 59, 0.04);
+}
+
+/*
+Rodapé do formulário: checkbox + botão.
+*/
+
+.contact__form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+/*
+Checkbox personalizado.
+*/
+
+.contact__form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.contact__form-check input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  accent-color: #ef3b3b;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+.contact__form-check span {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+/*
+Botão de envio — vermelho pill, igual ao padrão do projeto.
+*/
+
+.contact__form-submit {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: #ef3b3b;
+  color: white;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s ease;
+  white-space: nowrap;
+}
+
+.contact__form-submit:hover {
+  transform: translateY(-2px);
+  background: #ff4a4a;
+}
+
+.contact__form-submit .material-symbols-outlined {
+  font-size: 1.1rem;
+}
+

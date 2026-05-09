@@ -139,6 +139,28 @@ localhost:4200/sobre
       .then(m => m.AboutComponent)
 
 },
+
+/*
+========================================================
+CONTATO
+========================================================
+
+Página de contato com canais de atendimento
+e formulário de envio de mensagem.
+
+URL:
+localhost:4200/contato
+*/
+{
+  path: 'contato',
+
+  loadComponent: () =>
+
+    import('./features/contact/contact')
+      .then(m => m.ContactComponent)
+
+},
+
   /*
   ========================================================
   FALLBACK
