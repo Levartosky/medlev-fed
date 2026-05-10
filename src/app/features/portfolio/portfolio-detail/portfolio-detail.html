@@ -1,0 +1,601 @@
+<!--
+========================================================
+PORTFOLIO DETAIL PAGE — MEDLEV ARQUITETURA
+========================================================
+
+Página de detalhe de um projeto do portfólio.
+
+Seções:
+1. Hero — header + breadcrumb + título + imagem principal
+2. Galeria — slider + planta + thumbnails
+3. Sobre o projeto — descrição + diferenciais + técnico
+4. CTA final — barra de conversão
+5. Footer — institucional completo
+
+========================================================
+-->
+
+<main class="detail" *ngIf="project">
+
+  <!--
+  ========================================================
+  HERO SECTION
+  ========================================================
+
+  Mesma estrutura de fundo da página de Portfolio.
+  Conteúdo dividido em 2 colunas:
+  Esquerda: breadcrumb + categoria + título + CTAs
+  Direita: imagem principal do projeto
+  -->
+  <section class="hero">
+
+    <!-- Overlay cinematográfico -->
+    <div class="hero__overlay"></div>
+
+    <!--
+    ========================================================
+    HEADER — IDÊNTICO AO PORTFOLIO
+    ========================================================
+    -->
+    <header class="header" [class.scrolled]="isNavScrolled">
+
+      <a routerLink="/" class="brand">
+        <img
+          src="/logo-medlev.png"
+          alt="Logo MedLev Arquitetura"
+          class="brand__logo"
+        />
+        <div class="brand__text">
+          <strong>MedLev</strong>
+          <span>Arquitetura</span>
+        </div>
+      </a>
+
+      <nav class="header__nav">
+        <a routerLink="/">Início</a>
+        <a routerLink="/portfolio" class="active">Portfólio</a>
+        <a routerLink="/servicos">Serviços</a>
+        <a routerLink="/sobre">Sobre</a>
+        <a routerLink="/contato">Contato</a>
+      </nav>
+
+      <a routerLink="/orcamento" class="header__button">
+        Solicitar orçamento <span>→</span>
+      </a>
+
+    </header>
+
+    <!--
+    ========================================================
+    CONTEÚDO HERO — 2 COLUNAS
+    ========================================================
+    -->
+    <div class="detail__hero-body">
+
+      <!--
+      ====================================================
+      ESQUERDA — INFORMAÇÕES DO PROJETO
+      ====================================================
+      -->
+      <div class="detail__hero-left">
+
+        <!--
+        Breadcrumb de navegação.
+        Permite ao usuário voltar ao portfólio ou à home.
+        -->
+        <nav class="detail__breadcrumb reveal">
+          <a routerLink="/">Portfolio</a>
+          <span class="detail__breadcrumb-sep">›</span>
+          <a routerLink="/portfolio">{{ project.categoryLabel | titlecase }}</a>
+          <span class="detail__breadcrumb-sep">›</span>
+          <span>{{ project.name }} – {{ project.subtitle }}</span>
+        </nav>
+
+        <!-- Label de categoria -->
+        <span class="detail__category reveal">{{ project.categoryLabel }}</span>
+
+        <!-- Título principal do projeto -->
+        <h1 class="reveal">
+          {{ project.name }}<br>
+          <strong>{{ project.subtitle }}</strong>
+        </h1>
+
+        <!-- Descrição resumida -->
+        <p class="detail__desc reveal">
+          {{ project.description }}
+        </p>
+
+        <!--
+        Chips de informação rápida:
+        Tipo de projeto | Área | Ano
+        -->
+        <div class="detail__chips reveal">
+
+          <div class="detail__chip">
+            <span class="detail__chip-icon">🏠</span>
+            <div class="detail__chip-info">
+              <small>Tipo de projeto</small>
+              <strong>{{ project.type }}</strong>
+            </div>
+          </div>
+
+          <div class="detail__chip">
+            <span class="detail__chip-icon">📐</span>
+            <div class="detail__chip-info">
+              <small>Área</small>
+              <strong>{{ project.area }}</strong>
+            </div>
+          </div>
+
+          <div class="detail__chip">
+            <span class="detail__chip-icon">📅</span>
+            <div class="detail__chip-info">
+              <small>Ano</small>
+              <strong>{{ project.year }}</strong>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Botões de ação principais -->
+        <div class="detail__hero-actions reveal">
+
+          <a routerLink="/orcamento" class="btn btn--primary">
+            Quero um projeto parecido <span>→</span>
+          </a>
+
+          <a
+            href="https://wa.me/5511972651827?text=Olá!%20Vi%20o%20portfólio%20da%20MedLev%20e%20gostaria%20de%20saber%20mais."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn--secondary"
+          >
+            💬 Falar no WhatsApp
+          </a>
+
+        </div>
+
+      </div>
+
+      <!--
+      ====================================================
+      DIREITA — IMAGEM PRINCIPAL
+      ====================================================
+
+      Imagem hero do projeto com borda arredondada
+      e leve borda de vidro (glassmorphism).
+      -->
+      <div class="detail__hero-right reveal">
+        <div class="detail__hero-image">
+          <img
+            [src]="project.heroImage"
+            [alt]="project.name + ' — MedLev Arquitetura'"
+          />
+        </div>
+      </div>
+
+    </div>
+
+    <!--
+    ====================================================
+    BADGES — DESTAQUES TÉCNICOS
+    ====================================================
+
+    Selos exibidos no rodapé do hero com os principais
+    pontos técnicos do projeto.
+    -->
+    <div class="detail__badges reveal">
+
+      <div
+        *ngFor="let badge of project.badges"
+        class="detail__badge"
+      >
+        <span class="detail__badge-icon">{{ badge.icon }}</span>
+        <div class="detail__badge-info">
+          <strong>{{ badge.title }}</strong>
+          <small>{{ badge.subtitle }}</small>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!--
+  ========================================================
+  SEÇÃO GALERIA
+  ========================================================
+
+  Exibe o slider de imagens à esquerda e a
+  planta/blueprint do imóvel à direita.
+  Abaixo: strip de thumbnails.
+  -->
+  <section class="detail__gallery">
+
+    <div class="container">
+
+      <!--
+      Grid principal: slider | planta
+      -->
+      <div class="detail__gallery-main reveal">
+
+        <!--
+        ====================================================
+        SLIDER DE IMAGENS
+        ====================================================
+
+        Exibe a imagem no índice currentSlide.
+        Botões prev/next navegam entre as imagens.
+        -->
+        <div class="detail__slider">
+
+          <!-- Imagem ativa do slider -->
+          <div class="detail__slider-track">
+            <img
+              *ngFor="let img of project.galleryImages; let i = index"
+              [src]="img"
+              [alt]="project.name + ' — foto ' + (i + 1)"
+              [class.active]="i === currentSlide"
+              class="detail__slider-img"
+            />
+          </div>
+
+          <!-- Botão anterior -->
+          <button class="detail__slider-btn detail__slider-btn--prev" (click)="prevSlide()">
+            ←
+          </button>
+
+          <!-- Botão próximo -->
+          <button class="detail__slider-btn detail__slider-btn--next" (click)="nextSlide()">
+            →
+          </button>
+
+          <!-- Indicadores de ponto -->
+          <div class="detail__slider-dots">
+            <button
+              *ngFor="let img of project.galleryImages; let i = index"
+              class="detail__slider-dot"
+              [class.active]="i === currentSlide"
+              (click)="goToSlide(i)"
+            ></button>
+          </div>
+
+        </div>
+
+        <!--
+        ====================================================
+        PLANTA DO IMÓVEL
+        ====================================================
+
+        Imagem da planta técnica (blueprint).
+        -->
+        <div class="detail__blueprint">
+          <img
+            [src]="project.blueprintImage"
+            [alt]="project.name + ' — planta técnica'"
+          />
+        </div>
+
+      </div>
+
+      <!--
+      ====================================================
+      STRIP DE THUMBNAILS
+      ====================================================
+
+      Miniaturas clicáveis que alteram o slide ativo.
+      O último thumbnail exibe "+N Ver mais" se houver
+      mais imagens além das visíveis.
+      -->
+      <div class="detail__thumbnails reveal">
+
+        <button
+          *ngFor="let thumb of project.thumbnails; let i = index"
+          class="detail__thumb"
+          [class.active]="i === currentSlide"
+          (click)="goToSlide(i < project.galleryImages.length ? i : project.galleryImages.length - 1)"
+        >
+          <img [src]="thumb" [alt]="'Foto ' + (i + 1)" />
+
+          <!-- Overlay "+N Ver mais" na última thumbnail -->
+          <div class="detail__thumb-overlay" *ngIf="i === project.thumbnails.length - 1">
+            <span>+{{ project.thumbnails.length - 4 }}</span>
+            <small>Ver mais</small>
+          </div>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!--
+  ========================================================
+  SEÇÃO SOBRE + INFORMAÇÕES TÉCNICAS
+  ========================================================
+
+  Dividida em 2 colunas:
+  Esquerda: texto descritivo + cards de diferenciais
+  Direita: tabela com dados técnicos do projeto
+  -->
+  <section class="detail__about">
+
+    <div class="container">
+
+      <div class="detail__about-grid">
+
+        <!--
+        ====================================================
+        ESQUERDA — SOBRE O PROJETO
+        ====================================================
+        -->
+        <div class="detail__about-left">
+
+          <!-- Título da seção -->
+          <div class="detail__section-header reveal">
+            <div class="detail__section-line"></div>
+            <h2>Sobre o projeto</h2>
+          </div>
+
+          <!-- Parágrafos descritivos -->
+          <div class="detail__about-text reveal">
+            <p *ngFor="let para of project.aboutText">{{ para }}</p>
+          </div>
+
+          <!--
+          Cards de diferenciais do projeto.
+          Ícone + título + descrição.
+          -->
+          <div class="detail__features reveal">
+
+            <div
+              *ngFor="let feature of project.features"
+              class="detail__feature"
+            >
+              <span class="detail__feature-icon">{{ feature.icon }}</span>
+              <div class="detail__feature-body">
+                <strong>{{ feature.title }}</strong>
+                <p>{{ feature.desc }}</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--
+        ====================================================
+        DIREITA — INFORMAÇÕES TÉCNICAS
+        ====================================================
+        -->
+        <div class="detail__about-right">
+
+          <div class="detail__section-header reveal">
+            <div class="detail__section-line"></div>
+            <h2>Informações técnicas</h2>
+          </div>
+
+          <!-- Tabela de dados técnicos -->
+          <div class="detail__tech-table reveal">
+
+            <div class="detail__tech-row">
+              <span class="detail__tech-icon">🏠</span>
+              <span class="detail__tech-label">Tipo de projeto</span>
+              <span class="detail__tech-value">{{ project.type }}</span>
+            </div>
+
+            <div class="detail__tech-row">
+              <span class="detail__tech-icon">🏷️</span>
+              <span class="detail__tech-label">Categoria</span>
+              <span class="detail__tech-value">{{ project.categoryLabel | titlecase }}</span>
+            </div>
+
+            <div class="detail__tech-row">
+              <span class="detail__tech-icon">📐</span>
+              <span class="detail__tech-label">Área do imóvel</span>
+              <span class="detail__tech-value">{{ project.area }}</span>
+            </div>
+
+            <div class="detail__tech-row">
+              <span class="detail__tech-icon">📍</span>
+              <span class="detail__tech-label">Localização</span>
+              <span class="detail__tech-value">{{ project.cityState }}</span>
+            </div>
+
+            <div class="detail__tech-row">
+              <span class="detail__tech-icon">📅</span>
+              <span class="detail__tech-label">Ano de execução</span>
+              <span class="detail__tech-value">{{ project.year }}</span>
+            </div>
+
+            <div class="detail__tech-row">
+              <span class="detail__tech-icon">📄</span>
+              <span class="detail__tech-label">Entrega</span>
+              <span class="detail__tech-value">{{ project.delivery }}</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!--
+  ========================================================
+  CTA FINAL
+  ========================================================
+
+  Barra de conversão no estilo da página de portfólio.
+  Fundo escuro com borda avermelhada.
+  -->
+  <section class="detail__cta">
+
+    <div class="detail__cta-inner">
+
+      <!-- Ícone decorativo -->
+      <div class="detail__cta-icon">
+        <span>🏗️</span>
+      </div>
+
+      <!-- Texto -->
+      <div class="detail__cta-text">
+        <strong>Tem um imóvel e precisa de<br>medição ou levantamento técnico?</strong>
+        <p>Fale com a gente e receba um orçamento personalizado.</p>
+      </div>
+
+      <!-- Botões de ação -->
+      <div class="detail__cta-actions">
+
+        <a
+          href="https://wa.me/5511972651827?text=Olá!%20Vi%20o%20portfólio%20da%20MedLev%20e%20gostaria%20de%20fazer%20um%20orçamento."
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn--ghost"
+        >
+          💬 Falar no WhatsApp
+        </a>
+
+        <a routerLink="/orcamento" class="btn btn--primary">
+          Solicitar orçamento <span>→</span>
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!--
+  ========================================================
+  FOOTER
+  ========================================================
+
+  Footer institucional com 4 colunas:
+  1. Logo + descrição
+  2. Navegação
+  3. Serviços
+  4. Contato
+  -->
+  <footer class="footer">
+
+    <div class="footer__container">
+
+      <!--
+      ====================================================
+      COLUNA 1 — BRAND
+      ====================================================
+      -->
+      <div class="footer__brand">
+
+        <a routerLink="/" class="footer__logo">
+          <img src="/logo-medlev.png" alt="MedLev Arquitetura" />
+          <div>
+            <strong>MedLev</strong>
+            <span>arquitetura</span>
+          </div>
+        </a>
+
+        <p>
+          Excelência em medição, levantamentos e projetos arquitetônicos.
+        </p>
+
+      </div>
+
+      <!--
+      ====================================================
+      COLUNA 2 — NAVEGAÇÃO
+      ====================================================
+      -->
+      <div class="footer__col">
+
+        <h4>NAVEGAÇÃO</h4>
+
+        <nav>
+          <a routerLink="/">Início</a>
+          <a routerLink="/portfolio">Portfólio</a>
+          <a routerLink="/servicos">Serviços</a>
+          <a routerLink="/sobre">Sobre</a>
+          <a routerLink="/contato">Contato</a>
+        </nav>
+
+      </div>
+
+      <!--
+      ====================================================
+      COLUNA 3 — SERVIÇOS
+      ====================================================
+      -->
+      <div class="footer__col">
+
+        <h4>SERVIÇOS</h4>
+
+        <nav>
+          <a routerLink="/servicos">Levantamento técnico</a>
+          <a routerLink="/servicos">Medição de imóveis</a>
+          <a routerLink="/servicos">Projetos arquitetônicos</a>
+          <a routerLink="/servicos">Planta digitalizada</a>
+          <a routerLink="/servicos">Levantamento 3D</a>
+        </nav>
+
+      </div>
+
+      <!--
+      ====================================================
+      COLUNA 4 — CONTATO
+      ====================================================
+      -->
+      <div class="footer__col">
+
+        <h4>CONTATO</h4>
+
+        <div class="footer__contact">
+
+          <a href="tel:+5511999999999" class="footer__contact-item">
+            <span>📞</span>
+            (11) 99999-9999
+          </a>
+
+          <a href="mailto:contato@medlev.arq.br" class="footer__contact-item">
+            <span>✉️</span>
+            contato@medlev.arq.br
+          </a>
+
+          <span class="footer__contact-item">
+            <span>📍</span>
+            São Paulo – SP
+          </span>
+
+          <a
+            href="https://instagram.com/medlev.arq"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer__contact-item"
+          >
+            <span>📸</span>
+            @medlev.arq
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!--
+    Barra inferior do footer:
+    copyright | crédito de desenvolvimento
+    -->
+    <div class="footer__bottom">
+      <p>© 2024 MedLev Arquitetura. Todos os direitos reservados.</p>
+      <p>Desenvolvido com ♥</p>
+    </div>
+
+  </footer>
+
+</main>

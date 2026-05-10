@@ -124,17 +124,6 @@ Seções:
 
       </div>
 
-      <!--
-      ====================================================
-      DIREITA — ELEMENTO DECORATIVO
-      ====================================================
-
-      Imagem do hero com tratamento diferenciado,
-      posicionada como elemento visual secundário.
-      -->
-      <div class="portfolio__hero-visual">
-        <div class="portfolio__hero-visual-inner"></div>
-      </div>
 
     </div>
 
@@ -187,9 +176,14 @@ Seções:
       -->
       <div class="portfolio__grid">
 
-        <article
+        <!--
+        Cada card é um link que navega para /portfolio/:id.
+        routerLink garante navegação SPA sem reload da página.
+        -->
+        <a
           *ngFor="let project of filteredProjects"
           class="portfolio__card"
+          [routerLink]="['/portfolio', project.id]"
         >
 
           <!--
@@ -225,16 +219,14 @@ Seções:
                 <p>{{ project.location }}</p>
               </div>
 
-              <!-- Botão de seta -->
-              <button class="portfolio__card-arrow">
-                →
-              </button>
+              <!-- Seta de navegação -->
+              <span class="portfolio__card-arrow">→</span>
 
             </div>
 
           </div>
 
-        </article>
+        </a>
 
       </div>
 
@@ -268,7 +260,12 @@ Seções:
     <div class="portfolio__cta-actions">
 
       <!-- WhatsApp -->
-      <a href="#" class="btn btn--secondary">
+      <a
+        href="https://wa.me/5511972651827?text=Olá!%20Vi%20o%20portfólio%20da%20MedLev%20Arquitetura%20e%20gostaria%20de%20saber%20mais."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn--secondary"
+      >
         <span class="material-symbols-outlined">chat</span>
         Falar no WhatsApp
       </a>

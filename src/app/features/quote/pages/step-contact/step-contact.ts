@@ -14,9 +14,15 @@ Responsável por:
 */
 
 /*
-Importa Component.
+Importa Component e hooks de ciclo de vida.
 */
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnDestroy, PLATFORM_ID } from '@angular/core';
+
+/*
+isPlatformBrowser: garante que o IntersectionObserver
+só rode no browser (não no SSR).
+*/
+import { isPlatformBrowser } from '@angular/common';
 
 /*
 Importa Router.
@@ -60,7 +66,12 @@ COMPONENT
 CLASSE PRINCIPAL
 ========================================================
 */
-export class StepContactComponent {
+export class StepContactComponent implements AfterViewInit, OnDestroy {
+
+  /*
+  Observer para animação reveal nos elementos da página.
+  */
+  private observer?: IntersectionObserver;
 
   /*
   ========================================================
@@ -71,8 +82,39 @@ export class StepContactComponent {
   navegação entre rotas.
   */
   constructor(
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: object
   ) {}
+
+  /*
+  ========================================================
+  LIFECYCLE — REVEAL ANIMATION
+  ========================================================
+
+  IntersectionObserver observa elementos com .reveal
+  e adiciona .visible quando entram na viewport.
+  */
+  ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    this.observer = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          this.observer?.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => this.observer!.observe(el));
+  }
+
+  /*
+  Limpa o observer ao destruir o componente
+  para evitar memory leaks.
+  */
+  ngOnDestroy(): void {
+    this.observer?.disconnect();
+  }
 
   /*
   ========================================================

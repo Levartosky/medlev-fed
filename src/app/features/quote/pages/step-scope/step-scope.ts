@@ -9,9 +9,17 @@ do levantamento arquitetônico.
 ========================================================
 */
 
-import { Component } from '@angular/core';
+/*
+Importa Component do Angular e hooks de ciclo de vida.
+*/
+import { AfterViewInit, Component, Inject, OnDestroy, PLATFORM_ID } from '@angular/core';
 
-import { CommonModule } from '@angular/common';
+/*
+CommonModule: habilita *ngFor, *ngIf, etc.
+isPlatformBrowser: garante que o IntersectionObserver
+só rode no browser (não no SSR).
+*/
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 import { Router } from '@angular/router';
 
@@ -31,7 +39,12 @@ import { Router } from '@angular/router';
 
 })
 
-export class StepScopeComponent {
+export class StepScopeComponent implements AfterViewInit, OnDestroy {
+
+  /*
+  Observer para animação reveal nos elementos da página.
+  */
+  private observer?: IntersectionObserver;
 
   /*
   ========================================================
@@ -39,8 +52,32 @@ export class StepScopeComponent {
   ========================================================
   */
   constructor(
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: object
   ) {}
+
+  /*
+  ========================================================
+  LIFECYCLE — REVEAL ANIMATION
+  ========================================================
+  */
+  ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    this.observer = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          this.observer?.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => this.observer!.observe(el));
+  }
+
+  ngOnDestroy(): void {
+    this.observer?.disconnect();
+  }
 
   /*
   ========================================================

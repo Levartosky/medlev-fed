@@ -17,19 +17,16 @@ Objetivos:
 */
 
 /*
-Importa Component do Angular.
+Importa Component do Angular e hooks de ciclo de vida.
 */
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnDestroy, PLATFORM_ID } from '@angular/core';
 
 /*
-Importa CommonModule.
-
-Responsável por:
-- *ngFor
-- diretivas Angular
-- estruturas básicas
+CommonModule: habilita *ngFor, *ngIf, etc.
+isPlatformBrowser: garante que o IntersectionObserver
+só rode no browser (não no SSR).
 */
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 /*
 Importa Router.
@@ -80,7 +77,12 @@ DECORATOR COMPONENT
 CLASSE PRINCIPAL
 ========================================================
 */
-export class StepPropertyComponent {
+export class StepPropertyComponent implements AfterViewInit, OnDestroy {
+
+  /*
+  Observer para animação reveal nos elementos da página.
+  */
+  private observer?: IntersectionObserver;
 
   /*
   ========================================================
@@ -90,8 +92,39 @@ export class StepPropertyComponent {
   Responsável pela navegação.
   */
   constructor(
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: object
   ) {}
+
+  /*
+  ========================================================
+  LIFECYCLE — REVEAL ANIMATION
+  ========================================================
+
+  IntersectionObserver observa elementos com .reveal
+  e adiciona .visible quando entram na viewport.
+  */
+  ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    this.observer = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          this.observer?.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => this.observer!.observe(el));
+  }
+
+  /*
+  Limpa o observer ao destruir o componente
+  para evitar memory leaks.
+  */
+  ngOnDestroy(): void {
+    this.observer?.disconnect();
+  }
 
   /*
   ========================================================
@@ -186,20 +219,20 @@ export class StepPropertyComponent {
 
   }
 
-/*
-========================================================
-NEXT STEP
-========================================================
+  /*
+  ========================================================
+  NEXT STEP
+  ========================================================
 
-Navega para:
-ETAPA 3 - ESCOPO
-*/
-nextStep(): void {
+  Navega para:
+  ETAPA 3 - ESCOPO
+  */
+  nextStep(): void {
 
-  this.router.navigate([
-    '/orcamento/escopo'
-  ]);
+    this.router.navigate([
+      '/orcamento/escopo'
+    ]);
 
-}
+  }
 
 }
