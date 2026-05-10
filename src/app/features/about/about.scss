@@ -116,11 +116,25 @@ HEADER — cópia exata do home.scss
 */
 
 .header {
-  position: relative;
-  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 32px 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+}
+
+.header.scrolled {
+  background: rgba(10, 10, 11, 0.6);
+  backdrop-filter: blur(12px);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
 /*
@@ -281,7 +295,7 @@ esquerda: headline | direita: glass card
 .about__hero-body {
   position: relative;
   z-index: 2;
-  margin-top: 72px;
+  margin-top: 120px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -442,9 +456,21 @@ FILOSOFIA
 */
 
 .about__philosophy {
+  position: relative;
   padding: 80px 80px 72px;
   text-align: center;
   background: linear-gradient(to bottom, #050505, #090909);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+    pointer-events: none;
+  }
 }
 
 .about__philosophy h2 {
@@ -503,10 +529,22 @@ MÉTRICAS
 */
 
 .about__metrics {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  padding: 0 80px 72px;
+  padding: 48px 80px 72px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+    pointer-events: none;
+  }
 }
 
 .about__metric-card {
@@ -662,11 +700,23 @@ VALORES
 */
 
 .about__values {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
-  padding: 0 80px 72px;
+  padding: 48px 80px 72px;
   align-items: center;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+    pointer-events: none;
+  }
 }
 
 .about__values-text h2 {
@@ -799,3 +849,25 @@ Grid de 4 colunas: ícone | headline | descrição | botões.
   gap: 10px;
   align-items: flex-start;
 }
+
+/*
+========================================================
+ANIMAÇÕES — REVEAL
+========================================================
+*/
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about__hero-card {
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+

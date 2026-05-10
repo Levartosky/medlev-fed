@@ -28,7 +28,8 @@ Mais pra frente:
 /*
 Importa Component do Angular.
 */
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Inject, OnDestroy, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 /*
 Importa RouterModule.
@@ -86,14 +87,36 @@ Define:
 /*
 Classe principal do componente.
 */
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit, OnDestroy {
 
-  /*
-  Futuramente:
-  - integraremos APIs
-  - criaremos métodos
-  - capturaremos eventos
-  - faremos animações
-  */
+  isNavScrolled = false;
+  private observer?: IntersectionObserver;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
+
+  @HostListener('window:scroll')
+  onScroll(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isNavScrolled = window.scrollY > 20;
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    this.observer = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          this.observer?.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => this.observer!.observe(el));
+  }
+
+  ngOnDestroy(): void {
+    this.observer?.disconnect();
+  }
 
 }

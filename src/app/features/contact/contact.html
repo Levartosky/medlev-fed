@@ -40,7 +40,7 @@ Seções:
     HEADER — IDÊNTICO À HOME
     ========================================================
     -->
-    <header class="header">
+    <header class="header" [class.scrolled]="isNavScrolled">
 
       <!--
       Logo leva para a Home.
@@ -68,8 +68,8 @@ Seções:
       <nav class="header__nav">
 
         <a routerLink="/">Início</a>
-        <a>Portfólio</a>
-        <a>Serviços</a>
+        <a routerLink="/portfolio">Portfólio</a>
+        <a routerLink="/servicos">Serviços</a>
         <a routerLink="/sobre">Sobre</a>
         <a class="active">Contato</a>
 
@@ -140,15 +140,15 @@ Seções:
     <div class="contact__channels">
 
       <!-- Label vermelho superior -->
-      <span class="contact__section-tag">FALE COM A GENTE</span>
+      <span class="contact__section-tag reveal">FALE COM A GENTE</span>
 
-      <h2>Nossos canais<br>de atendimento</h2>
+      <h2 class="reveal">Nossos canais<br>de atendimento</h2>
 
       <!-- Linha divisória vermelha -->
       <div class="contact__divider"></div>
 
       <!-- CANAL 1 — WhatsApp -->
-      <div class="contact__channel-item">
+      <div class="contact__channel-item reveal">
 
         <div class="contact__channel-icon">
           <span class="material-symbols-outlined">chat</span>
@@ -163,7 +163,7 @@ Seções:
       </div>
 
       <!-- CANAL 2 — E-mail -->
-      <div class="contact__channel-item">
+      <div class="contact__channel-item reveal">
 
         <div class="contact__channel-icon">
           <span class="material-symbols-outlined">mail</span>
@@ -178,7 +178,7 @@ Seções:
       </div>
 
       <!-- CANAL 3 — Instagram -->
-      <div class="contact__channel-item">
+      <div class="contact__channel-item reveal">
 
         <div class="contact__channel-icon">
           <span class="material-symbols-outlined">photo_camera</span>
@@ -193,7 +193,7 @@ Seções:
       </div>
 
       <!-- CANAL 4 — Localização -->
-      <div class="contact__channel-item">
+      <div class="contact__channel-item reveal">
 
         <div class="contact__channel-icon">
           <span class="material-symbols-outlined">location_on</span>

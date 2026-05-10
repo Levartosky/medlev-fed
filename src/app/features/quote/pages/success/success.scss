@@ -4,6 +4,10 @@ SUCCESS PAGE
 ========================================================
 */
 
+:host {
+  display: block;
+}
+
 .success-page {
 
   position: relative;
@@ -162,7 +166,29 @@ STEPS
 
 }
 
+.success-steps::before {
+
+  content: '';
+
+  position: absolute;
+
+  top: 21px;
+
+  left: calc(50% - 264px);
+
+  right: calc(50% - 264px);
+
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.2);
+
+}
+
 .step {
+
+  position: relative;
+
+  z-index: 2;
 
   display: flex;
 

@@ -55,7 +55,7 @@ seguindo padrão enterprise/profissional.
     HEADER / NAVBAR
     ========================================================
     -->
-    <header class="header">
+    <header class="header" [class.scrolled]="isNavScrolled">
 
       <!--
       ========================================================
@@ -113,11 +113,11 @@ seguindo padrão enterprise/profissional.
           Início
         </a>
 
-        <a href="#">
+        <a routerLink="/portfolio">
           Portfólio
         </a>
 
-        <a href="#">
+        <a routerLink="/servicos">
           Serviços
         </a>
 
@@ -229,12 +229,12 @@ seguindo padrão enterprise/profissional.
     <div class="container">
 
       <!-- Título pequeno -->
-      <span class="section-tag">
+      <span class="section-tag reveal">
         O QUE FAZEMOS
       </span>
 
       <!-- Título principal -->
-      <h2>
+      <h2 class="reveal">
         Soluções técnicas com excelência
       </h2>
 
@@ -246,7 +246,7 @@ seguindo padrão enterprise/profissional.
       <div class="services__grid">
 
         <!-- CARD 1 -->
-        <article class="service-card">
+        <article class="service-card reveal">
 
           <div class="service-card__icon">
             📐
@@ -261,14 +261,14 @@ seguindo padrão enterprise/profissional.
             regularizações e documentação técnica.
           </p>
 
-          <a href="#">
+          <a routerLink="/servicos">
             Saiba mais →
           </a>
 
         </article>
 
         <!-- CARD 2 -->
-        <article class="service-card">
+        <article class="service-card reveal">
 
           <div class="service-card__icon">
             📏
@@ -283,14 +283,14 @@ seguindo padrão enterprise/profissional.
             para qualquer tipo de imóvel.
           </p>
 
-          <a href="#">
+          <a routerLink="/servicos">
             Saiba mais →
           </a>
 
         </article>
 
         <!-- CARD 3 -->
-        <article class="service-card">
+        <article class="service-card reveal">
 
           <div class="service-card__icon">
             🏠
@@ -305,7 +305,7 @@ seguindo padrão enterprise/profissional.
             e personalizados.
           </p>
 
-          <a href="#">
+          <a routerLink="/servicos">
             Saiba mais →
           </a>
 

@@ -62,7 +62,7 @@ HERO SECTION
   background-size: cover;
   background-position: center;
 
-  padding: 32px 80px;
+  padding: 0 80px;
 
   display: flex;
   flex-direction: column;
@@ -120,13 +120,30 @@ HEADER
 */
 
 .header {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 
-  z-index: 2;
+  z-index: 100;
+
+  padding: 32px 80px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: 1px solid transparent;
+
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+}
+
+.header.scrolled {
+  background: rgba(10, 10, 11, 0.6);
+  backdrop-filter: blur(12px);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
 /*
@@ -305,7 +322,7 @@ HERO CONTENT
 
   max-width: 760px;
 
-  padding-top: 80px;
+  padding-top: 160px;
   padding-bottom: 0;
 }
 
@@ -444,7 +461,40 @@ SERVICES SECTION
   padding: 120px 80px 80px;
 
   z-index: 5;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 120px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+    pointer-events: none;
+  }
 }
+
+/*
+========================================================
+ANIMAÇÕES — REVEAL
+========================================================
+*/
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero__content {
+  animation: fadeUp 0.8s ease both;
+}
+
 
 /*
 Container central.

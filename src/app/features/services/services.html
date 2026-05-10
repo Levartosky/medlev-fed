@@ -1,0 +1,207 @@
+<main class="page">
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+
+    <div class="hero__overlay"></div>
+
+    <header class="header" [class.scrolled]="isNavScrolled">
+
+      <a routerLink="/" class="brand">
+        <img src="/logo-medlev.png" alt="Logo MedLev Arquitetura" class="brand__logo" />
+        <div class="brand__text">
+          <strong>MedLev</strong>
+          <span>Arquitetura</span>
+        </div>
+      </a>
+
+      <nav class="header__nav">
+        <a routerLink="/">Início</a>
+        <a routerLink="/portfolio">Portfólio</a>
+        <a routerLink="/servicos" class="active">Serviços</a>
+        <a routerLink="/sobre">Sobre</a>
+        <a routerLink="/contato">Contato</a>
+      </nav>
+
+      <a routerLink="/orcamento" class="header__button">
+        Solicitar orçamento <span>→</span>
+      </a>
+
+    </header>
+
+    <div class="hero__content">
+
+      <span class="hero__subtitle">
+        Nossos serviços
+      </span>
+
+      <h1>
+        Soluções técnicas
+        <strong>sob medida</strong>
+      </h1>
+
+      <p>
+        Da medição precisa ao projeto autoral. Cada serviço é
+        desenhado para entregar resultado, segurança técnica e
+        visão arquitetônica integrada.
+      </p>
+
+      <div class="hero__actions">
+        <a href="#servicos" class="btn btn--primary">
+          Conheça os serviços <span>→</span>
+        </a>
+        <a routerLink="/contato" class="btn btn--secondary">
+          Falar com especialista <span>→</span>
+        </a>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== SERVIÇOS ===== -->
+  <section class="services" id="servicos">
+    <div class="container">
+
+      <span class="section-tag reveal">ESPECIALIDADES</span>
+
+      <h2 class="reveal">
+        6 serviços, uma só equipe
+      </h2>
+
+      <div class="services__grid">
+
+        @for (s of services; track s.number) {
+          <article class="service-card reveal">
+            <div class="service-card__icon">{{ s.icon }}</div>
+            <div class="service-card__number">{{ s.number }}</div>
+            <h3>{{ s.title }}</h3>
+            <p>{{ s.description }}</p>
+            <ul class="service-card__features">
+              @for (f of s.features; track f) {
+                <li>
+                  <span class="check">✓</span>
+                  {{ f }}
+                </li>
+              }
+            </ul>
+            <div class="service-card__price">{{ s.price }}</div>
+            <a routerLink="/orcamento" class="service-card__link">
+              Solicitar orçamento →
+            </a>
+          </article>
+        }
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== PROCESSO ===== -->
+  <section class="process">
+    <div class="container">
+
+      <span class="section-tag reveal">COMO TRABALHAMOS</span>
+
+      <h2 class="reveal">Do briefing à entrega</h2>
+
+      <div class="process__grid">
+
+        @for (step of processSteps; track step.number) {
+          <div class="process__step reveal">
+            <div class="process__number">{{ step.number }}</div>
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.description }}</p>
+          </div>
+        }
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== DIFERENCIAIS ===== -->
+  <section class="differentials">
+    <div class="container">
+
+      <span class="section-tag reveal">POR QUE A MEDLEV</span>
+
+      <h2 class="reveal">O que nos diferencia</h2>
+
+      <div class="diff__grid">
+
+        @for (d of differentials; track d.title) {
+          <article class="diff-card reveal">
+            <div class="diff-card__icon">{{ d.icon }}</div>
+            <h3>{{ d.title }}</h3>
+            <p>{{ d.description }}</p>
+          </article>
+        }
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="faq">
+    <div class="container">
+
+      <span class="section-tag reveal">DÚVIDAS FREQUENTES</span>
+
+      <h2 class="reveal">Perguntas e respostas</h2>
+
+      <div class="faq__list">
+
+        @for (item of faqItems; track item.question; let i = $index) {
+          <div class="faq__item" [class.open]="openFaqIndex === i">
+
+            <button class="faq__question" (click)="toggleFaq(i)">
+              <span>{{ item.question }}</span>
+              <span class="faq__icon">{{ openFaqIndex === i ? '−' : '+' }}</span>
+            </button>
+
+            <div class="faq__answer">
+              <p>{{ item.answer }}</p>
+            </div>
+
+          </div>
+        }
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta" id="cta">
+    <div class="container">
+
+      <div class="cta__card reveal">
+        <span class="hero__subtitle">Pronto para começar?</span>
+        <h2>Solicite um orçamento gratuito</h2>
+        <p>
+          Conte-nos sobre o seu projeto e nossa equipe entra em contato
+          em até 24 horas com uma proposta personalizada.
+        </p>
+        <div class="hero__actions">
+          <a routerLink="/orcamento" class="btn btn--primary">
+            Solicitar orçamento <span>→</span>
+          </a>
+          <a routerLink="/contato" class="btn btn--secondary">
+            Falar pelo WhatsApp <span>→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 MedLev Arquitetura. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+</main>

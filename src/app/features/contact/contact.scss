@@ -116,11 +116,25 @@ HEADER — cópia exata do home.scss
 */
 
 .header {
-  position: relative;
-  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 32px 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+}
+
+.header.scrolled {
+  background: rgba(10, 10, 11, 0.6);
+  backdrop-filter: blur(12px);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
 /*
@@ -242,7 +256,7 @@ Label + H1 + divider + descrição.
 .contact__hero-body {
   position: relative;
   z-index: 2;
-  margin-top: 80px;
+  margin-top: 120px;
   max-width: 620px;
 }
 
@@ -294,10 +308,23 @@ Fundo preto escuro (#090909) para manter o dark luxury.
 */
 
 .contact__body {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1.6fr;
   gap: 0;
   background: #050505;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+    pointer-events: none;
+    z-index: 1;
+  }
 }
 
 /*
@@ -555,4 +582,26 @@ Botão de envio — vermelho pill, igual ao padrão do projeto.
 .contact__form-submit .material-symbols-outlined {
   font-size: 1.1rem;
 }
+
+/*
+========================================================
+ANIMAÇÕES — REVEAL
+========================================================
+*/
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contact__hero-body {
+  animation: fadeUp 0.8s ease both;
+}
+
 

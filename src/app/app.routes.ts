@@ -121,6 +121,48 @@ TELA DE SUCESSO
 
 /*
 ========================================================
+PORTFÓLIO
+========================================================
+
+Página de portfólio com filtros por categoria
+e grid de projetos realizados.
+
+URL:
+localhost:4200/portfolio
+*/
+{
+  path: 'portfolio',
+
+  loadComponent: () =>
+
+    import('./features/portfolio/portfolio')
+      .then(m => m.PortfolioComponent)
+
+},
+
+/*
+========================================================
+SERVIÇOS
+========================================================
+
+Catálogo completo de serviços da MEDLEV
+com accordion, FAQ e animações.
+
+URL:
+localhost:4200/servicos
+*/
+{
+  path: 'servicos',
+
+  loadComponent: () =>
+
+    import('./features/services/services')
+      .then(m => m.ServicesComponent)
+
+},
+
+/*
+========================================================
 SOBRE
 ========================================================
 
@@ -160,7 +202,6 @@ localhost:4200/contato
       .then(m => m.ContactComponent)
 
 },
-
   /*
   ========================================================
   FALLBACK

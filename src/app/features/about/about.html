@@ -46,7 +46,7 @@ Seções:
     HEADER — IDÊNTICO À HOME
     ========================================================
     -->
-    <header class="header">
+    <header class="header" [class.scrolled]="isNavScrolled">
 
       <!--
       Logo leva para a Home.
@@ -74,8 +74,8 @@ Seções:
       <nav class="header__nav">
 
         <a routerLink="/">Início</a>
-        <a>Portfólio</a>
-        <a>Serviços</a>
+        <a routerLink="/portfolio">Portfólio</a>
+        <a routerLink="/servicos">Serviços</a>
         <a routerLink="/sobre" class="active">Sobre</a>
         <a routerLink="/contato">Contato</a>
 
@@ -109,23 +109,23 @@ Seções:
       <div class="about__hero-text">
 
         <!-- Label vermelho superior -->
-        <span class="about__label">SOBRE A MEDLEV</span>
+        <span class="about__label reveal">SOBRE A MEDLEV</span>
 
         <!--
         Título principal.
         Palavras-chave em vermelho = destaques de identidade.
         -->
-        <h1>
+        <h1 class="reveal">
           Criamos espaços que unem
           <strong>estética,<br>precisão</strong>
           e experiência.
         </h1>
 
         <!-- Linha divisória vermelha -->
-        <div class="about__divider"></div>
+        <div class="about__divider reveal"></div>
 
-        <p>Acreditamos que arquitetura vai além da planta ou execução.</p>
-        <p>Projetamos ambientes capazes de gerar sensações, conforto e identidade.</p>
+        <p class="reveal">Acreditamos que arquitetura vai além da planta ou execução.</p>
+        <p class="reveal">Projetamos ambientes capazes de gerar sensações, conforto e identidade.</p>
 
       </div>
 
@@ -170,28 +170,28 @@ Seções:
   -->
   <section class="about__philosophy">
 
-    <span class="about__section-tag">NOSSA FILOSOFIA</span>
+    <span class="about__section-tag reveal">NOSSA FILOSOFIA</span>
 
-    <h2>Cada detalhe <em>importa.</em></h2>
+    <h2 class="reveal">Cada detalhe <em>importa.</em></h2>
 
     <div class="about__philosophy-grid">
 
       <!-- PILAR 1 -->
-      <div class="about__philosophy-card">
+      <div class="about__philosophy-card reveal">
         <span class="material-symbols-outlined">center_focus_strong</span>
         <h3>Precisão técnica</h3>
         <p>Levantamentos e medições com máxima confiabilidade para decisões seguras.</p>
       </div>
 
       <!-- PILAR 2 -->
-      <div class="about__philosophy-card">
+      <div class="about__philosophy-card reveal">
         <span class="material-symbols-outlined">deployed_code</span>
         <h3>Visão contemporânea</h3>
         <p>Projetos alinhados às tendências da arquitetura moderna, com soluções funcionais e elegantes.</p>
       </div>
 
       <!-- PILAR 3 -->
-      <div class="about__philosophy-card">
+      <div class="about__philosophy-card reveal">
         <span class="material-symbols-outlined">groups</span>
         <h3>Atendimento próximo</h3>
         <p>Processos claros e acompanhamento em todas as etapas, do início à entrega final.</p>
@@ -212,7 +212,7 @@ Seções:
   <section class="about__metrics">
 
     <!-- CARD 1 -->
-    <div class="about__metric-card">
+    <div class="about__metric-card reveal">
       <span class="material-symbols-outlined">apartment</span>
       <strong>+120</strong>
       <span class="about__metric-label">PROJETOS ENTREGUES</span>
@@ -220,7 +220,7 @@ Seções:
     </div>
 
     <!-- CARD 2 -->
-    <div class="about__metric-card">
+    <div class="about__metric-card reveal">
       <span class="material-symbols-outlined">calendar_month</span>
       <strong>+8</strong>
       <span class="about__metric-label">ANOS DE EXPERIÊNCIA</span>
@@ -228,7 +228,7 @@ Seções:
     </div>
 
     <!-- CARD 3 -->
-    <div class="about__metric-card">
+    <div class="about__metric-card reveal">
       <span class="material-symbols-outlined">groups</span>
       <strong>100%</strong>
       <span class="about__metric-label">PROJETOS PERSONALIZADOS</span>
@@ -236,7 +236,7 @@ Seções:
     </div>
 
     <!-- CARD 4 -->
-    <div class="about__metric-card">
+    <div class="about__metric-card reveal">
       <span class="material-symbols-outlined">location_on</span>
       <strong>Atuação</strong>
       <span class="about__metric-label">EM TODO O BRASIL</span>
@@ -267,9 +267,9 @@ Seções:
     -->
     <div class="about__diff-text">
 
-      <span class="about__section-tag">NOSSO DIFERENCIAL</span>
+      <span class="about__section-tag reveal">NOSSO DIFERENCIAL</span>
 
-      <h2>Não entregamos apenas desenhos.</h2>
+      <h2 class="reveal">Não entregamos apenas desenhos.</h2>
 
       <h3>
         Entregamos clareza,
