@@ -1,0 +1,762 @@
+/*
+========================================================
+PORTFOLIO PAGE — MEDLEV ARQUITETURA
+========================================================
+
+IMPORTANTE:
+Os blocos RESET, BODY, HERO, HEADER, BRAND, NAV e BUTTON
+são cópia fiel do home.scss.
+Isso garante que o header seja IDÊNTICO ao da Home.
+
+Estilos exclusivos do Portfolio usam prefixo portfolio__.
+
+========================================================
+*/
+
+/*
+========================================================
+RESET GLOBAL — cópia exata do home.scss
+========================================================
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*
+========================================================
+BODY — cópia exata do home.scss
+========================================================
+*/
+
+body {
+  background: #050505;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/*
+========================================================
+PORTFOLIO — wrapper da página
+========================================================
+*/
+
+.portfolio {
+  background: #050505;
+  color: white;
+  min-height: 100vh;
+}
+
+/*
+========================================================
+HERO SECTION — cópia exata do home.scss
+========================================================
+
+Mesma classe .hero da Home.
+Mesma imagem, mesmo padding, mesmo min-height.
+*/
+
+.hero {
+  overflow: hidden;
+  position: relative;
+  min-height: 720px;
+  background-image: url('/home-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  padding: 32px 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+Overlay — cópia exata do home.scss.
+*/
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.85),
+      rgba(0, 0, 0, 0.45)
+    );
+  z-index: 1;
+}
+
+/*
+Fade para preto no rodapé do hero — cópia exata do home.scss.
+*/
+
+.hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 420px;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(5, 5, 5, 0) 0%,
+      rgba(5, 5, 5, 0.15) 20%,
+      rgba(5, 5, 5, 0.45) 45%,
+      rgba(5, 5, 5, 0.82) 75%,
+      rgba(5, 5, 5, 1) 100%
+    );
+}
+
+/*
+========================================================
+HEADER — cópia exata do home.scss
+========================================================
+*/
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 32px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+}
+
+.header.scrolled {
+  background: rgba(10, 10, 11, 0.6);
+  backdrop-filter: blur(12px);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+/*
+========================================================
+BRAND / LOGO — cópia exata do home.scss
+========================================================
+*/
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.brand__logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.brand:hover .brand__logo {
+  transform: scale(1.05);
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand__text strong {
+  color: white;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.brand__text span {
+  color: #d4d4d4;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/*
+========================================================
+NAVBAR — cópia exata do home.scss
+========================================================
+*/
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+}
+
+.header__nav a {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+/*
+Underline vermelho animado no hover e item ativo.
+*/
+
+.header__nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 0;
+  height: 2px;
+  background: #ef3b3b;
+  transition: width 0.3s ease;
+}
+
+.header__nav a:hover::after,
+.header__nav a.active::after {
+  width: 100%;
+}
+
+/*
+========================================================
+BOTÃO HEADER — cópia exata do home.scss
+========================================================
+*/
+
+.header__button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: #ef3b3b;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  transition: 0.3s ease;
+}
+
+.header__button:hover {
+  transform: translateY(-2px);
+  background: #ff4a4a;
+}
+
+/*
+========================================================
+BOTÕES REUTILIZÁVEIS — cópia exata do home.scss
+========================================================
+
+Usados no CTA final do Portfolio.
+*/
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 30px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: 0.3s ease;
+}
+
+.btn--primary {
+  background: white;
+  color: #050505;
+}
+
+.btn--primary:hover {
+  transform: translateY(-2px);
+  background: #f0f0f0;
+}
+
+.btn--secondary {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: white;
+  backdrop-filter: blur(8px);
+}
+
+.btn--secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/*
+========================================================
+HERO CONTENT — PORTFOLIO ESPECÍFICO
+========================================================
+
+Split de 2 colunas dentro do hero:
+esquerda: headline | direita: visual decorativo
+*/
+
+.portfolio__hero-body {
+  position: relative;
+  z-index: 2;
+  margin-top: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  flex: 1;
+}
+
+/*
+Coluna de texto.
+*/
+
+.portfolio__hero-text {
+  max-width: 560px;
+}
+
+.portfolio__label {
+  display: block;
+  color: #ef3b3b;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.portfolio__hero-text h1 {
+  margin-top: 18px;
+  font-size: 3.8rem;
+  line-height: 1.05;
+  font-weight: 800;
+  color: white;
+}
+
+/*
+Palavra em destaque vermelho.
+*/
+
+.portfolio__hero-text h1 strong {
+  color: #ef3b3b;
+}
+
+.portfolio__divider {
+  width: 60px;
+  height: 4px;
+  background: #ef3b3b;
+  margin: 24px 0;
+}
+
+.portfolio__hero-text p {
+  color: #d1d1d1;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/*
+Coluna visual decorativa.
+Usa a mesma imagem do hero com maior opacidade
+para criar profundidade.
+*/
+
+.portfolio__hero-visual {
+  flex-shrink: 0;
+  width: 420px;
+  height: 300px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.portfolio__hero-visual-inner {
+  width: 100%;
+  height: 100%;
+  background-image: url('/home-hero.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.5) contrast(1.1);
+  transition: transform 0.6s ease;
+}
+
+.portfolio__hero-visual:hover .portfolio__hero-visual-inner {
+  transform: scale(1.04);
+}
+
+/*
+========================================================
+CONTAINER CENTRAL
+========================================================
+*/
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/*
+========================================================
+SEÇÃO PRINCIPAL — FILTROS + GRID
+========================================================
+*/
+
+.portfolio__body {
+  position: relative;
+  padding: 72px 80px 80px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+    pointer-events: none;
+  }
+}
+
+/*
+========================================================
+FILTROS DE CATEGORIA
+========================================================
+
+Barra de pills horizontais para filtrar projetos.
+O pill ativo é preenchido em vermelho.
+*/
+
+.portfolio__filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 52px;
+}
+
+/*
+Botão de filtro base.
+*/
+
+.portfolio__filter-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 22px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.portfolio__filter-btn:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: white;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/*
+Filtro ativo — fundo vermelho.
+*/
+
+.portfolio__filter-btn.active {
+  background: #ef3b3b;
+  border-color: #ef3b3b;
+  color: white;
+}
+
+.portfolio__filter-btn.active:hover {
+  background: #ff4a4a;
+  border-color: #ff4a4a;
+}
+
+.portfolio__filter-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/*
+========================================================
+GRID DE PROJETOS
+========================================================
+
+3 colunas, 2 linhas = 6 cards.
+Cada card é um article com imagem de fundo.
+*/
+
+.portfolio__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/*
+========================================================
+CARD DE PROJETO
+========================================================
+
+Card com:
+- imagem de fundo
+- overlay escuro
+- label de categoria
+- nome + localização
+- botão seta
+*/
+
+.portfolio__card {
+  position: relative;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  height: 280px;
+
+  cursor: pointer;
+
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.portfolio__card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(239, 59, 59, 0.35);
+}
+
+/*
+Imagem de fundo do card.
+*/
+
+.portfolio__card-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+}
+
+.portfolio__card:hover .portfolio__card-image {
+  transform: scale(1.05);
+}
+
+/*
+Overlay escuro gradiente.
+Mais escuro na base para legibilidade do texto.
+*/
+
+.portfolio__card-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.28) 0%,
+      rgba(0, 0, 0, 0.72) 100%
+    );
+  transition: background 0.3s ease;
+}
+
+.portfolio__card:hover .portfolio__card-overlay {
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.35) 0%,
+      rgba(0, 0, 0, 0.82) 100%
+    );
+}
+
+/*
+Conteúdo sobreposto (z-index acima do overlay).
+*/
+
+.portfolio__card-content {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 22px 22px 20px;
+}
+
+/*
+Label de categoria — topo esquerdo.
+*/
+
+.portfolio__card-category {
+  display: inline-block;
+
+  color: #ef3b3b;
+
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/*
+Rodapé do card: nome + localização + botão.
+*/
+
+.portfolio__card-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.portfolio__card-info h3 {
+  color: white;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.portfolio__card-info p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.82rem;
+}
+
+/*
+Botão seta — canto inferior direito.
+*/
+
+.portfolio__card-arrow {
+  flex-shrink: 0;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+
+  color: white;
+
+  font-size: 1.1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.portfolio__card:hover .portfolio__card-arrow {
+  background: #ef3b3b;
+  border-color: #ef3b3b;
+}
+
+/*
+========================================================
+CTA FINAL
+========================================================
+
+Barra de conversão ao final da página.
+Fundo vermelho com gradiente para chamar atenção.
+Grid: ícone | texto | botões
+*/
+
+.portfolio__cta {
+  margin: 0 80px 72px;
+  padding: 40px 48px;
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #c42a2a,
+      #ef3b3b 60%,
+      #d43232
+    );
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 36px;
+  align-items: center;
+}
+
+/*
+Ícone decorativo no círculo escuro.
+*/
+
+.portfolio__cta-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.portfolio__cta-icon span {
+  color: white;
+  font-size: 1.8rem;
+}
+
+/*
+Bloco de texto.
+*/
+
+.portfolio__cta-text strong {
+  display: block;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.portfolio__cta-text p {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.9rem;
+}
+
+/*
+Botões de ação.
+*/
+
+.portfolio__cta-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+/*
+========================================================
+ANIMAÇÕES — REVEAL
+========================================================
+*/
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.portfolio__hero-text {
+  animation: fadeUp 0.8s ease both;
+}

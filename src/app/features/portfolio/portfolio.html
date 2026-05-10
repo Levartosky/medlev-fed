@@ -1,0 +1,285 @@
+<!--
+========================================================
+PORTFOLIO PAGE — MEDLEV ARQUITETURA
+========================================================
+
+Página de portfólio premium.
+
+IMPORTANTE:
+O header desta página usa as MESMAS classes da Home:
+.brand / .header__nav / .header__button
+Isso garante padrão visual 100% idêntico.
+
+Seções:
+1. Hero — mesmo container da Home, conteúdo adaptado
+2. Filtros + Grid de projetos — dark, filtro por categoria
+3. CTA final — barra de conversão
+
+========================================================
+-->
+
+<main class="portfolio">
+
+  <!--
+  ========================================================
+  HERO SECTION
+  ========================================================
+
+  Usa EXATAMENTE a mesma estrutura da Home:
+  - .hero (mesma classe)
+  - .hero__overlay (mesmo overlay)
+  - .header com .brand / .header__nav / .header__button
+
+  Conteúdo hero: split em 2 colunas.
+  Esquerda: headline | Direita: detalhe arquitetônico.
+  -->
+  <section class="hero">
+
+    <!-- Overlay cinematográfico — igual à Home -->
+    <div class="hero__overlay"></div>
+
+    <!--
+    ========================================================
+    HEADER — IDÊNTICO À HOME
+    ========================================================
+    -->
+    <header class="header" [class.scrolled]="isNavScrolled">
+
+      <!--
+      Logo leva para a Home.
+      Usa <a> e classe .brand — igual à Home.
+      -->
+      <a routerLink="/" class="brand">
+
+        <img
+          src="/logo-medlev.png"
+          alt="Logo MedLev Arquitetura"
+          class="brand__logo"
+        />
+
+        <div class="brand__text">
+          <strong>MedLev</strong>
+          <span>Arquitetura</span>
+        </div>
+
+      </a>
+
+      <!--
+      Navegação — mesma classe .header__nav da Home.
+      "Portfólio" recebe .active para exibir underline vermelho.
+      -->
+      <nav class="header__nav">
+
+        <a routerLink="/">Início</a>
+        <a routerLink="/portfolio" class="active">Portfólio</a>
+        <a routerLink="/servicos">Serviços</a>
+        <a routerLink="/sobre">Sobre</a>
+        <a routerLink="/contato">Contato</a>
+
+      </nav>
+
+      <!--
+      Botão CTA — mesma classe .header__button da Home.
+      -->
+      <a routerLink="/orcamento" class="header__button">
+        Solicitar orçamento <span>→</span>
+      </a>
+
+    </header>
+
+    <!--
+    ========================================================
+    CONTEÚDO HERO — PORTFOLIO
+    ========================================================
+
+    Split de 2 colunas:
+    Esquerda: label + título + descrição
+    Direita: elemento decorativo arquitetônico
+    -->
+    <div class="portfolio__hero-body">
+
+      <!--
+      ====================================================
+      ESQUERDA — HEADLINE
+      ====================================================
+      -->
+      <div class="portfolio__hero-text">
+
+        <!-- Label vermelho superior -->
+        <span class="portfolio__label reveal">PORTFÓLIO</span>
+
+        <!-- Título principal -->
+        <h1 class="reveal">
+          Nossos <strong>projetos</strong>
+        </h1>
+
+        <!-- Linha divisória vermelha -->
+        <div class="portfolio__divider reveal"></div>
+
+        <p class="reveal">
+          Conheça alguns dos projetos que desenvolvemos com<br>
+          precisão técnica, atenção aos detalhes e compromisso<br>
+          com cada cliente.
+        </p>
+
+      </div>
+
+      <!--
+      ====================================================
+      DIREITA — ELEMENTO DECORATIVO
+      ====================================================
+
+      Imagem do hero com tratamento diferenciado,
+      posicionada como elemento visual secundário.
+      -->
+      <div class="portfolio__hero-visual">
+        <div class="portfolio__hero-visual-inner"></div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!--
+  ========================================================
+  SEÇÃO PRINCIPAL — FILTROS + GRID
+  ========================================================
+
+  Fundo escuro contínuo.
+  Filtros por categoria + grid 3 colunas de projetos.
+  -->
+  <section class="portfolio__body">
+
+    <div class="container">
+
+      <!--
+      ====================================================
+      FILTROS DE CATEGORIA
+      ====================================================
+
+      Barra de filtros com pills clicáveis.
+      O filtro ativo recebe a classe .active (fundo vermelho).
+      NgFor itera sobre o array filters do componente.
+      NgClass aplica .active quando o id bate com activeFilter.
+      -->
+      <div class="portfolio__filters reveal">
+
+        <button
+          *ngFor="let filter of filters"
+          [ngClass]="{ 'active': activeFilter === filter.id }"
+          (click)="setFilter(filter.id)"
+          class="portfolio__filter-btn"
+        >
+          <span *ngIf="filter.icon" class="portfolio__filter-icon">{{ filter.icon }}</span>
+          {{ filter.label }}
+        </button>
+
+      </div>
+
+      <!--
+      ====================================================
+      GRID DE PROJETOS
+      ====================================================
+
+      3 colunas com cards de projeto.
+      NgFor itera sobre filteredProjects (getter do componente).
+      Cada card exibe imagem, categoria, nome e localização.
+      -->
+      <div class="portfolio__grid">
+
+        <article
+          *ngFor="let project of filteredProjects"
+          class="portfolio__card"
+        >
+
+          <!--
+          Imagem de fundo do card.
+          O src aponta para public/<nome>.jpg
+          -->
+          <div
+            class="portfolio__card-image"
+            [style.background-image]="'url(' + project.image + ')'"
+          ></div>
+
+          <!-- Overlay escuro sobre a imagem -->
+          <div class="portfolio__card-overlay"></div>
+
+          <!--
+          Conteúdo sobreposto à imagem:
+          - label da categoria (canto superior esquerdo)
+          - nome e localização (rodapé)
+          - botão de seta (canto inferior direito)
+          -->
+          <div class="portfolio__card-content">
+
+            <!-- Label da categoria no topo -->
+            <span class="portfolio__card-category">
+              {{ project.categoryLabel }}
+            </span>
+
+            <!-- Rodapé: nome + localização + botão -->
+            <div class="portfolio__card-footer">
+
+              <div class="portfolio__card-info">
+                <h3>{{ project.name }}</h3>
+                <p>{{ project.location }}</p>
+              </div>
+
+              <!-- Botão de seta -->
+              <button class="portfolio__card-arrow">
+                →
+              </button>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!--
+  ========================================================
+  CTA FINAL
+  ========================================================
+
+  Barra de conversão ao final da página.
+  Fundo vermelho/degradê para atrair atenção.
+  Estrutura: ícone | texto | botões
+  -->
+  <section class="portfolio__cta">
+
+    <!-- Ícone decorativo -->
+    <div class="portfolio__cta-icon">
+      <span class="material-symbols-outlined">description</span>
+    </div>
+
+    <!-- Texto -->
+    <div class="portfolio__cta-text">
+      <strong>Tem um projeto em mente?</strong>
+      <p>Fale com a gente e receba um orçamento personalizado.</p>
+    </div>
+
+    <!-- Botões de ação -->
+    <div class="portfolio__cta-actions">
+
+      <!-- WhatsApp -->
+      <a href="#" class="btn btn--secondary">
+        <span class="material-symbols-outlined">chat</span>
+        Falar no WhatsApp
+      </a>
+
+      <!-- Orçamento -->
+      <a routerLink="/orcamento" class="btn btn--primary">
+        Solicitar orçamento <span>→</span>
+      </a>
+
+    </div>
+
+  </section>
+
+</main>
