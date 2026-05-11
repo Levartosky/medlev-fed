@@ -29,6 +29,8 @@ HERO SECTION
   padding: 0 80px;
   display: flex;
   flex-direction: column;
+  /* z-index acima do .services (z-index:5) para os botões do hero serem clicáveis */
+  z-index: 6;
 }
 
 .hero__overlay {

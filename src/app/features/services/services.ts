@@ -48,6 +48,7 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
 
   readonly services = [
     {
+      number: '01',
       icon: '📐',
       title: 'Levantamento técnico',
       description: 'Levantamento minucioso de imóveis para diagnóstico estrutural, dimensional e fotográfico. Base técnica essencial para qualquer projeto.',
@@ -55,6 +56,7 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
       price: 'A partir de R$ 8/m²',
     },
     {
+      number: '02',
       icon: '📏',
       title: 'Medição de imóveis',
       description: 'Medições oficiais para registro, averbação ou compra/venda. Precisão milimétrica e laudo certificado por profissional habilitado.',
@@ -62,6 +64,7 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
       price: 'A partir de R$ 1.200',
     },
     {
+      number: '03',
       icon: '🏠',
       title: 'Projetos arquitetônicos',
       description: 'Projetos que combinam estética contemporânea, funcionalidade e viabilidade técnica. Do conceito ao executivo.',
@@ -69,6 +72,7 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
       price: 'Sob consulta',
     },
     {
+      number: '04',
       icon: '📋',
       title: 'Regularização de imóveis',
       description: 'Regularização junto à prefeitura, cartório e órgãos competentes. Habite-se, averbação e adequações pendentes.',
@@ -76,6 +80,7 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
       price: 'Sob análise',
     },
     {
+      number: '05',
       icon: '🔧',
       title: 'Projeto de reforma',
       description: 'Reformas com planejamento técnico completo: do projeto à obra finalizada. Orçamento detalhado e gestão de fornecedores.',
@@ -83,6 +88,7 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
       price: 'Sob consulta',
     },
     {
+      number: '06',
       icon: '📄',
       title: 'As Built',
       description: 'Documentação fiel da edificação como construída. Essencial para manutenção, ampliações futuras e regularização.',
@@ -92,10 +98,10 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
   ];
 
   readonly processSteps = [
-    { title: 'Briefing', description: 'Entendimento das necessidades, visita técnica e diagnóstico inicial.' },
-    { title: 'Proposta', description: 'Escopo detalhado, cronograma e investimento apresentados com clareza.' },
-    { title: 'Execução', description: 'Desenvolvimento técnico com revisões e aprovação contínua do cliente.' },
-    { title: 'Entrega', description: 'Documentação completa e suporte pós-entrega até o resultado final.' },
+    { number: '01', title: 'Briefing', description: 'Entendimento das necessidades, visita técnica e diagnóstico inicial.' },
+    { number: '02', title: 'Proposta', description: 'Escopo detalhado, cronograma e investimento apresentados com clareza.' },
+    { number: '03', title: 'Execução', description: 'Desenvolvimento técnico com revisões e aprovação contínua do cliente.' },
+    { number: '04', title: 'Entrega', description: 'Documentação completa e suporte pós-entrega até o resultado final.' },
   ];
 
   readonly differentials = [

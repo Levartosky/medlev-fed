@@ -226,21 +226,65 @@ Seções:
         Preencha o formulário ao lado que entraremos em contato com você.
       </p>
 
-      <form class="contact__form">
+      <form class="contact__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <!--
+        Feedback de sucesso
+        -->
+        @if (formState === 'success') {
+          <div class="contact__feedback contact__feedback--success">
+            <span class="material-symbols-outlined">check_circle</span>
+            <div class="contact__feedback-text">
+              <strong>Mensagem enviada!</strong>
+              <p>Entraremos em contato em breve pelo e-mail ou WhatsApp informados.</p>
+            </div>
+            <button type="button" class="contact__feedback-close" (click)="resetState()">
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+        }
+
+        <!--
+        Feedback de erro
+        -->
+        @if (formState === 'error') {
+          <div class="contact__feedback contact__feedback--error">
+            <span class="material-symbols-outlined">error</span>
+            <div class="contact__feedback-text">
+              <strong>Falha ao enviar.</strong>
+              <p>Tente novamente ou entre em contato pelo WhatsApp.</p>
+            </div>
+            <button type="button" class="contact__feedback-close" (click)="resetState()">
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+        }
 
         <!--
         Linha 1: Nome + WhatsApp
         -->
         <div class="contact__form-row">
 
-          <div class="contact__form-group">
-            <label>Nome completo</label>
-            <input type="text" placeholder="Seu nome" />
+          <div
+            class="contact__form-group"
+            [class.contact__form-group--invalid]="form.get('nome')?.invalid && form.get('nome')?.touched"
+          >
+            <label>Nome *</label>
+            <input type="text" placeholder="Seu nome" formControlName="nome" />
+            @if (form.get('nome')?.invalid && form.get('nome')?.touched) {
+              <span class="contact__form-error">Informe seu nome completo.</span>
+            }
           </div>
 
-          <div class="contact__form-group">
-            <label>WhatsApp</label>
-            <input type="tel" placeholder="(11) 99999-9999" />
+          <div
+            class="contact__form-group"
+            [class.contact__form-group--invalid]="form.get('whatsapp')?.invalid && form.get('whatsapp')?.touched"
+          >
+            <label>WhatsApp *</label>
+            <input type="tel" placeholder="(11) 99999-9999" formControlName="whatsapp" maxlength="15" (input)="maskWhatsApp($event)" />
+            @if (form.get('whatsapp')?.invalid && form.get('whatsapp')?.touched) {
+              <span class="contact__form-error">Informe um WhatsApp válido: (XX) XXXXX-XXXX.</span>
+            }
           </div>
 
         </div>
@@ -250,14 +294,26 @@ Seções:
         -->
         <div class="contact__form-row">
 
-          <div class="contact__form-group">
-            <label>E-mail</label>
-            <input type="email" placeholder="seu&#64;email.com" />
+          <div
+            class="contact__form-group"
+            [class.contact__form-group--invalid]="form.get('email')?.invalid && form.get('email')?.touched"
+          >
+            <label>E-mail *</label>
+            <input type="email" placeholder="seu&#64;email.com" formControlName="email" />
+            @if (form.get('email')?.invalid && form.get('email')?.touched) {
+              <span class="contact__form-error">Informe um e-mail válido.</span>
+            }
           </div>
 
-          <div class="contact__form-group">
-            <label>Assunto</label>
-            <input type="text" placeholder="Sobre o que deseja falar?" />
+          <div
+            class="contact__form-group"
+            [class.contact__form-group--invalid]="form.get('assunto')?.invalid && form.get('assunto')?.touched"
+          >
+            <label>Assunto *</label>
+            <input type="text" placeholder="Sobre o que deseja falar?" formControlName="assunto" />
+            @if (form.get('assunto')?.invalid && form.get('assunto')?.touched) {
+              <span class="contact__form-error">Informe o assunto.</span>
+            }
           </div>
 
         </div>
@@ -265,9 +321,15 @@ Seções:
         <!--
         Mensagem — campo full width
         -->
-        <div class="contact__form-group contact__form-group--full">
-          <label>Mensagem</label>
-          <textarea rows="5" placeholder="Conte mais sobre seu projeto ou dúvida..."></textarea>
+        <div
+          class="contact__form-group contact__form-group--full"
+          [class.contact__form-group--invalid]="form.get('mensagem')?.invalid && form.get('mensagem')?.touched"
+        >
+          <label>Mensagem *</label>
+          <textarea rows="5" placeholder="Conte mais sobre seu projeto ou dúvida..." formControlName="mensagem"></textarea>
+          @if (form.get('mensagem')?.invalid && form.get('mensagem')?.touched) {
+            <span class="contact__form-error">Escreva sua mensagem (mínimo 10 caracteres).</span>
+          }
         </div>
 
         <!--
@@ -275,14 +337,27 @@ Seções:
         -->
         <div class="contact__form-footer">
 
-          <label class="contact__form-check">
-            <input type="checkbox" />
+          <label
+            class="contact__form-check"
+            [class.contact__form-check--invalid]="form.get('autorizo')?.invalid && form.get('autorizo')?.touched"
+          >
+            <input type="checkbox" formControlName="autorizo" />
             <span>Autorizo o uso dos meus dados para atendimento desta solicitação</span>
           </label>
 
-          <button type="submit" class="contact__form-submit">
-            <span class="material-symbols-outlined">send</span>
-            Enviar mensagem
+          <button
+            type="submit"
+            class="contact__form-submit"
+            [class.contact__form-submit--sending]="formState === 'sending'"
+            [disabled]="formState === 'sending' || !form.get('autorizo')?.value"
+          >
+            @if (formState === 'sending') {
+              <span class="contact__form-spinner"></span>
+              Enviando...
+            } @else {
+              <span class="material-symbols-outlined">send</span>
+              Enviar mensagem
+            }
           </button>
 
         </div>
