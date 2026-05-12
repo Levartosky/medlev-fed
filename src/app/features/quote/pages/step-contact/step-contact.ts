@@ -136,13 +136,10 @@ export class StepContactComponent implements AfterViewInit, OnDestroy {
   ========================================================
   PREVIOUS STEP
   ========================================================
-
-  Futuramente:
-  poderá retornar para home.
   */
   previousStep(): void {
 
-    console.log('Voltar');
+    this.router.navigate(['/']);
 
   }
 

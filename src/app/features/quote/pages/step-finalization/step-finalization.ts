@@ -7,7 +7,7 @@ STEP FINALIZATION PAGE
 /*
 Importa Component do Angular e hooks de ciclo de vida.
 */
-import { AfterViewInit, Component, Inject, OnDestroy, PLATFORM_ID } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, PLATFORM_ID, ViewChild } from '@angular/core';
 
 /*
 CommonModule: habilita *ngFor, *ngIf, etc.
@@ -39,7 +39,11 @@ export class StepFinalizationComponent implements AfterViewInit, OnDestroy {
   /*
   Observer para animação reveal nos elementos da página.
   */
+  @ViewChild('fileInput') fileInputRef!: ElementRef<HTMLInputElement>;
+
   private observer?: IntersectionObserver;
+
+  selectedFiles: File[] = [];
 
   /*
   ========================================================
@@ -91,6 +95,17 @@ export class StepFinalizationComponent implements AfterViewInit, OnDestroy {
   SELECT URGENCY
   ========================================================
   */
+  triggerFileInput(): void {
+    this.fileInputRef.nativeElement.click();
+  }
+
+  onFilesSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      this.selectedFiles = Array.from(input.files);
+    }
+  }
+
   selectUrgency(value: string): void {
 
     this.selectedUrgency = value;

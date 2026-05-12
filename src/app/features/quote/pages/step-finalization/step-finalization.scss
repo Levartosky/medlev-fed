@@ -259,6 +259,28 @@
 
 }
 
+/* arquivos selecionados */
+.upload-files {
+  list-style: none;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.88rem;
+    color: #444;
+
+    .material-symbols-outlined {
+      font-size: 1.1rem;
+      color: #ef3d37;
+    }
+  }
+}
+
 /* grid */
 .finalization-grid {
 

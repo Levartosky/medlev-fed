@@ -27,7 +27,11 @@
         Precisa de ajuda?
       </span>
 
-      <a href="#">
+      <a
+        href="https://wa.me/5511972651827?text=Olá!%20Estou%20preenchendo%20um%20orçamento%20pela%20MedLev%20Arquitetura%20e%20preciso%20de%20ajuda."
+        target="_blank"
+        rel="noopener noreferrer"
+      >
 
         <span class="material-symbols-outlined">
           chat
@@ -89,7 +93,16 @@
         Fotos ou plantas existentes (opcional)
       </label>
 
-      <div class="upload-box">
+      <div class="upload-box" (click)="triggerFileInput()">
+
+        <input
+          type="file"
+          #fileInput
+          accept=".jpg,.jpeg,.png,.pdf,.dwg"
+          multiple
+          style="display:none"
+          (change)="onFilesSelected($event)"
+        >
 
         <span class="material-symbols-outlined upload-icon">
           upload
@@ -104,6 +117,17 @@
         </span>
 
       </div>
+
+      @if (selectedFiles.length > 0) {
+        <ul class="upload-files">
+          @for (file of selectedFiles; track file.name) {
+            <li>
+              <span class="material-symbols-outlined">description</span>
+              {{ file.name }}
+            </li>
+          }
+        </ul>
+      }
 
       <small>
         💡 Fotos ajudam a agilizar significativamente seu orçamento.
