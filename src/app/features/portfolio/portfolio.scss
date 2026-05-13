@@ -1,736 +1,742 @@
-/*
-========================================================
-PORTFOLIO PAGE — MEDLEV ARQUITETURA
-========================================================
+// ─── Variables ────────────────────────────────────────────────────────────────
 
-IMPORTANTE:
-Os blocos RESET, BODY, HERO, HEADER, BRAND, NAV e BUTTON
-são cópia fiel do home.scss.
-Isso garante que o header seja IDÊNTICO ao da Home.
+$red:       #ef3b3b;
+$red-hover: #ff4a4a;
+$bg-dark:   #050505;
+$bg-stage:  #080d1a;
+$blue-main: #1d4ed8;
+$blue-line: #2563eb;
+$text-dim:  rgba(255,255,255,0.72);
+$text-sub:  rgba(255,255,255,0.45);
+$border:    rgba(255,255,255,0.08);
 
-Estilos exclusivos do Portfolio usam prefixo portfolio__.
+// ─── Host ──────────────────────────────────────────────────────────────────────
 
-========================================================
-*/
+:host { display: block; }
 
-/*
-========================================================
-RESET GLOBAL — cópia exata do home.scss
-========================================================
-*/
+// ─── Reset ────────────────────────────────────────────────────────────────────
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-/*
-========================================================
-BODY — cópia exata do home.scss
-========================================================
-*/
+// ─── Wrapper ──────────────────────────────────────────────────────────────────
 
-body {
-  background: #050505;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/*
-========================================================
-PORTFOLIO — wrapper da página
-========================================================
-*/
-
-.portfolio {
-  background: #050505;
+.portfolio-showcase {
+  background: $bg-dark;
   color: white;
   min-height: 100vh;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif;
 }
 
-/*
-========================================================
-HERO SECTION — cópia exata do home.scss
-========================================================
+// ─── Utility ─────────────────────────────────────────────────────────────────
 
-Mesma classe .hero da Home.
-Mesma imagem, mesmo padding, mesmo min-height.
-*/
+.mono { font-family: 'JetBrains Mono', monospace; }
 
-.hero {
-  overflow: hidden;
-  position: relative;
-  min-height: 720px;
-  background-image: url('/home-hero.jpg');
-  background-size: cover;
-  background-position: center;
-  padding: 32px 80px;
-  display: flex;
-  flex-direction: column;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: 0.25s ease;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+
+  &--primary {
+    background: white;
+    color: $bg-dark;
+
+    &:hover { transform: translateY(-2px); background: #f0f0f0; }
+    &:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  }
+
+  &--secondary {
+    border: 1px solid rgba(255,255,255,0.35);
+    color: white;
+    background: transparent;
+    backdrop-filter: blur(8px);
+
+    &:hover { background: rgba(255,255,255,0.1); }
+  }
 }
 
-/*
-Overlay — cópia exata do home.scss.
-*/
+// ─── NAV ─────────────────────────────────────────────────────────────────────
 
-.hero__overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.85),
-      rgba(0, 0, 0, 0.45)
-    );
-  z-index: 1;
-}
-
-/*
-Fade para preto no rodapé do hero — cópia exata do home.scss.
-*/
-
-.hero::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 420px;
-  pointer-events: none;
-  z-index: 1;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(5, 5, 5, 0) 0%,
-      rgba(5, 5, 5, 0.15) 20%,
-      rgba(5, 5, 5, 0.45) 45%,
-      rgba(5, 5, 5, 0.82) 75%,
-      rgba(5, 5, 5, 1) 100%
-    );
-}
-
-/*
-========================================================
-HEADER — cópia exata do home.scss
-========================================================
-*/
-
-.header {
+.ps-nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 32px 80px;
+  padding: 24px 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: transparent;
-  backdrop-filter: none;
   border-bottom: 1px solid transparent;
-  transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
-}
+  transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
 
-.header.scrolled {
-  background: rgba(10, 10, 11, 0.6);
-  backdrop-filter: blur(12px);
-  border-bottom-color: rgba(255, 255, 255, 0.08);
-}
-
-/*
-========================================================
-BRAND / LOGO — cópia exata do home.scss
-========================================================
-*/
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  text-decoration: none;
-}
-
-.brand__logo {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.brand:hover .brand__logo {
-  transform: scale(1.05);
-}
-
-.brand__text {
-  display: flex;
-  flex-direction: column;
-}
-
-.brand__text strong {
-  color: white;
-  font-size: 2rem;
-  font-weight: 800;
-}
-
-.brand__text span {
-  color: #d4d4d4;
-  font-size: 0.85rem;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-
-/*
-========================================================
-NAVBAR — cópia exata do home.scss
-========================================================
-*/
-
-.header__nav {
-  display: flex;
-  align-items: center;
-  gap: 42px;
-}
-
-.header__nav a {
-  position: relative;
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s ease;
-  cursor: pointer;
-}
-
-/*
-Underline vermelho animado no hover e item ativo.
-*/
-
-.header__nav a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -8px;
-  width: 0;
-  height: 2px;
-  background: #ef3b3b;
-  transition: width 0.3s ease;
-}
-
-.header__nav a:hover::after,
-.header__nav a.active::after {
-  width: 100%;
-}
-
-/*
-========================================================
-BOTÃO HEADER — cópia exata do home.scss
-========================================================
-*/
-
-.header__button {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 24px;
-  border-radius: 999px;
-  background: #ef3b3b;
-  color: white;
-  text-decoration: none;
-  font-weight: 700;
-  transition: 0.3s ease;
-}
-
-.header__button:hover {
-  transform: translateY(-2px);
-  background: #ff4a4a;
-}
-
-/*
-========================================================
-BOTÕES REUTILIZÁVEIS — cópia exata do home.scss
-========================================================
-
-Usados no CTA final do Portfolio.
-*/
-
-.btn {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 18px 30px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 700;
-  transition: 0.3s ease;
-}
-
-.btn--primary {
-  background: white;
-  color: #050505;
-}
-
-.btn--primary:hover {
-  transform: translateY(-2px);
-  background: #f0f0f0;
-}
-
-.btn--secondary {
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: white;
-  backdrop-filter: blur(8px);
-}
-
-.btn--secondary:hover {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-/*
-========================================================
-HERO CONTENT — PORTFOLIO ESPECÍFICO
-========================================================
-
-Split de 2 colunas dentro do hero:
-esquerda: headline | direita: visual decorativo
-*/
-
-.portfolio__hero-body {
-  position: relative;
-  z-index: 2;
-  margin-top: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 60px;
-  flex: 1;
-}
-
-/*
-Coluna de texto.
-*/
-
-.portfolio__hero-text {
-  max-width: 560px;
-}
-
-.portfolio__label {
-  display: block;
-  color: #ef3b3b;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
-.portfolio__hero-text h1 {
-  margin-top: 18px;
-  font-size: 5rem;
-  line-height: 1.0;
-  font-weight: 800;
-  color: white;
-}
-
-/*
-Palavra em destaque vermelho.
-*/
-
-.portfolio__hero-text h1 strong {
-  color: #ef3b3b;
-}
-
-.portfolio__divider {
-  width: 60px;
-  height: 4px;
-  background: #ef3b3b;
-  margin: 24px 0;
-}
-
-.portfolio__hero-text p {
-  color: #d1d1d1;
-  font-size: 1.2rem;
-  line-height: 1.8;
-}
-
-
-/*
-========================================================
-CONTAINER CENTRAL
-========================================================
-*/
-
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-/*
-========================================================
-SEÇÃO PRINCIPAL — FILTROS + GRID
-========================================================
-*/
-
-.portfolio__body {
-  position: relative;
-  padding: 72px 80px 80px;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 10%;
-    right: 10%;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-    pointer-events: none;
+  &.scrolled {
+    background: rgba(8,8,10,0.72);
+    backdrop-filter: blur(14px);
+    border-bottom-color: $border;
   }
 }
 
-/*
-========================================================
-FILTROS DE CATEGORIA
-========================================================
-
-Barra de pills horizontais para filtrar projetos.
-O pill ativo é preenchido em vermelho.
-*/
-
-.portfolio__filters {
+.ps-brand {
   display: flex;
   align-items: center;
   gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 52px;
+  text-decoration: none;
+
+  &__logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+
+  &:hover &__logo { transform: scale(1.05); }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+
+    strong { color: white; font-size: 1.6rem; font-weight: 800; }
+    span   { color: #d4d4d4; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
+  }
 }
 
-/*
-Botão de filtro base.
-*/
+.ps-nav__links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
 
-.portfolio__filter-btn {
+  a {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: 0.3s;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -6px;
+      width: 0; height: 2px;
+      background: $red;
+      transition: width 0.3s;
+    }
+
+    &:hover::after,
+    &[aria-current="page"]::after { width: 100%; }
+  }
+}
+
+.ps-nav__cta {
   display: flex;
   align-items: center;
   gap: 8px;
-
-  padding: 10px 22px;
-
+  padding: 12px 22px;
   border-radius: 999px;
-
-  border: 1px solid rgba(255, 255, 255, 0.1);
-
-  background: transparent;
-
-  color: rgba(255, 255, 255, 0.72);
-
-  font-size: 0.9rem;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: 0.25s ease;
-}
-
-.portfolio__filter-btn:hover {
-  border-color: rgba(255, 255, 255, 0.25);
+  background: $red;
   color: white;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-/*
-Filtro ativo — fundo vermelho.
-*/
-
-.portfolio__filter-btn.active {
-  background: #ef3b3b;
-  border-color: #ef3b3b;
-  color: white;
-}
-
-.portfolio__filter-btn.active:hover {
-  background: #ff4a4a;
-  border-color: #ff4a4a;
-}
-
-.portfolio__filter-icon {
-  font-size: 1rem;
-  line-height: 1;
-}
-
-/*
-========================================================
-GRID DE PROJETOS
-========================================================
-
-3 colunas, 2 linhas = 6 cards.
-Cada card é um article com imagem de fundo.
-*/
-
-.portfolio__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-/*
-========================================================
-CARD DE PROJETO
-========================================================
-
-Card com:
-- imagem de fundo
-- overlay escuro
-- label de categoria
-- nome + localização
-- botão seta
-*/
-
-.portfolio__card {
-  position: relative;
-
-  border-radius: 20px;
-
-  overflow: hidden;
-
-  height: 280px;
-
-  cursor: pointer;
-
-  border: 1px solid rgba(255, 255, 255, 0.05);
-
-  /* Necessário pois o card agora é um <a> */
-  display: block;
   text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: 0.25s;
 
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  &:hover { transform: translateY(-2px); background: $red-hover; }
 }
 
-.portfolio__card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(239, 59, 59, 0.35);
-}
+// ─── HERO ─────────────────────────────────────────────────────────────────────
 
-/*
-Imagem de fundo do card.
-*/
-
-.portfolio__card-image {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.5s ease;
-}
-
-.portfolio__card:hover .portfolio__card-image {
-  transform: scale(1.05);
-}
-
-/*
-Overlay escuro gradiente.
-Mais escuro na base para legibilidade do texto.
-*/
-
-.portfolio__card-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.28) 0%,
-      rgba(0, 0, 0, 0.72) 100%
-    );
-  transition: background 0.3s ease;
-}
-
-.portfolio__card:hover .portfolio__card-overlay {
-  background:
-    linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.35) 0%,
-      rgba(0, 0, 0, 0.82) 100%
-    );
-}
-
-/*
-Conteúdo sobreposto (z-index acima do overlay).
-*/
-
-.portfolio__card-content {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  padding: 22px 22px 20px;
-}
-
-/*
-Label de categoria — topo esquerdo.
-*/
-
-.portfolio__card-category {
-  display: inline-block;
-
-  color: #ef3b3b;
-
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-/*
-Rodapé do card: nome + localização + botão.
-*/
-
-.portfolio__card-footer {
+.ps-hero {
+  position: relative;
+  min-height: 600px;
+  background: url('/home-hero.jpg') center/cover no-repeat;
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
-  gap: 12px;
-}
+  padding: 0 80px 80px;
 
-.portfolio__card-info h3 {
-  color: white;
-  font-size: 1.15rem;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 4px;
-}
-
-.portfolio__card-info p {
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 0.82rem;
-}
-
-/*
-Seta — canto inferior direito.
-Era <button>, agora é <span> pois o card inteiro é um <a>.
-*/
-
-.portfolio__card-arrow {
-  flex-shrink: 0;
-
-  width: 38px;
-  height: 38px;
-
-  border-radius: 50%;
-
-  border: 1px solid rgba(255, 255, 255, 0.3);
-
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-
-  color: white;
-
-  font-size: 1.1rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  transition: 0.25s ease;
-}
-
-.portfolio__card:hover .portfolio__card-arrow {
-  background: #ef3b3b;
-  border-color: #ef3b3b;
-}
-
-/*
-========================================================
-CTA FINAL
-========================================================
-
-Barra de conversão ao final da página.
-Fundo vermelho com gradiente para chamar atenção.
-Grid: ícone | texto | botões
-*/
-
-.portfolio__cta {
-  margin: 0 80px 72px;
-  padding: 40px 48px;
-  border-radius: 20px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #c42a2a,
-      #ef3b3b 60%,
-      #d43232
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(0,0,0,0.88) 0%,
+      rgba(0,0,0,0.5)  60%,
+      rgba(0,0,0,0.2)  100%
     );
+    z-index: 1;
+  }
 
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 36px;
-  align-items: center;
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(5,5,5,0)   0%,
+      rgba(5,5,5,0.2) 40%,
+      rgba(5,5,5,0.9) 85%,
+      $bg-dark        100%
+    );
+    z-index: 1;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 2;
+    max-width: 620px;
+  }
+
+  &__eyebrow {
+    display: block;
+    color: $red;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: 4.5rem;
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 20px;
+
+    strong { color: $red; }
+  }
+
+  &__desc {
+    color: $text-dim;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 36px;
+  }
+
+  &__stats {
+    display: flex;
+    gap: 32px;
+  }
 }
 
-/*
-Ícone decorativo no círculo escuro.
-*/
+.hero-stat {
+  display: flex;
+  flex-direction: column;
 
-.portfolio__cta-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
+  &__num {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+  }
+
+  &__label {
+    font-size: 0.8rem;
+    color: $text-dim;
+    margin-top: 4px;
+    letter-spacing: 1px;
+  }
+}
+
+// ─── SHOWCASE ─────────────────────────────────────────────────────────────────
+
+.showcase {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+// ─── FILTERS BAR ─────────────────────────────────────────────────────────────
+
+.filters-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 28px 48px;
+  background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid $border;
+}
+
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent;
+  color: $text-dim;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    border-color: rgba(255,255,255,0.28);
+    color: white;
+    background: rgba(255,255,255,0.06);
+  }
+
+  &.active {
+    background: $red;
+    border-color: $red;
+    color: white;
+
+    &:hover { background: $red-hover; border-color: $red-hover; }
+  }
+
+  &__badge {
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    opacity: 0.7;
+  }
+}
+
+// ─── SHOWCASE GRID ────────────────────────────────────────────────────────────
+
+.showcase__grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  min-height: 680px;
+}
+
+// ─── STAGE ────────────────────────────────────────────────────────────────────
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid $border;
+}
+
+.stage__canvas {
+  position: relative;
+  flex: 1;
+  background: $bg-stage;
+  overflow: hidden;
+  min-height: 420px;
+}
+
+.blueprint-art {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.2);
-  flex-shrink: 0;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 }
 
-.portfolio__cta-icon span {
-  color: white;
-  font-size: 1.8rem;
-}
-
-/*
-Bloco de texto.
-*/
-
-.portfolio__cta-text strong {
-  display: block;
+// Navigation buttons
+.stage-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
   color: white;
   font-size: 1.2rem;
-  font-weight: 800;
-  margin-bottom: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: rgba(239,59,59,0.7);
+    border-color: $red;
+  }
+
+  &--prev { left: 20px; }
+  &--next { right: 20px; }
 }
 
-.portfolio__cta-text p {
-  color: rgba(255, 255, 255, 0.82);
+// Counter
+.stage-counter {
+  position: absolute;
+  bottom: 24px;
+  left: 28px;
+  z-index: 10;
+  font-family: 'JetBrains Mono', monospace;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+
+  &__cur {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: white;
+    line-height: 1;
+  }
+
+  &__sep {
+    font-size: 1rem;
+    color: $text-sub;
+  }
+
+  &__tot {
+    font-size: 1rem;
+    color: $text-dim;
+  }
+}
+
+// Progress bar
+.stage-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  z-index: 10;
+
+  &.idle .stage-progress-fill { background: rgba(255,255,255,0.2); }
+}
+
+.stage-progress-fill {
+  height: 100%;
+  background: $red;
+  transition: width 0.1s linear;
+  width: 0%;
+}
+
+// Autoplay button
+.autoplay-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
+  color: white;
   font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+
+  &:hover { background: rgba(239,59,59,0.6); border-color: $red; }
+  &.playing { background: rgba(239,59,59,0.5); border-color: $red; }
 }
 
-/*
-Botões de ação.
-*/
+// ─── STAGE INFO PANEL ─────────────────────────────────────────────────────────
 
-.portfolio__cta-actions {
+.stage__info {
+  padding: 32px 48px 36px;
+  background: $bg-dark;
+  border-top: 1px solid $border;
+}
+
+.stage-info {
+
+  &__eyebrow {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: $red;
+    margin-bottom: 12px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  &__title {
+    font-size: 1.9rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  &__loc {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: $text-dim;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+
+    &-icon { font-size: 0.85rem; }
+  }
+
+  &__meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid $border;
+  }
+
+  &__meta-item {
+    dt {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: $text-sub;
+      margin-bottom: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    dd {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: white;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+}
+
+// ─── THUMBS PANEL ─────────────────────────────────────────────────────────────
+
+.thumbs-panel {
+  overflow-y: auto;
+  max-height: calc(680px + 56px); // showcase__grid min-height + filters-bar approx
+  background: rgba(255,255,255,0.015);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.15) transparent;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+}
+
+.thumb-item {
   display: flex;
   align-items: center;
   gap: 14px;
-  flex-shrink: 0;
+  width: 100%;
+  padding: 16px 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $border;
+  color: white;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s;
+
+  &:hover { background: rgba(255,255,255,0.04); }
+
+  &.active {
+    background: rgba(239,59,59,0.08);
+    border-left: 3px solid $red;
+    padding-left: 17px;
+  }
+
+  &__mini-bp {
+    flex-shrink: 0;
+    width: 68px;
+    height: 50px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: $bg-stage;
+
+    svg { width: 100%; height: 100%; display: block; }
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  &__num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: $text-sub;
+  }
+
+  &__title {
+    font-weight: 700;
+    font-size: 0.88rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__loc {
+    font-size: 0.75rem;
+    color: $text-dim;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__arrow {
+    flex-shrink: 0;
+    color: $text-sub;
+    font-size: 0.9rem;
+    transition: 0.2s;
+  }
+
+  &:hover &__arrow,
+  &.active &__arrow { color: $red; }
 }
 
-/*
-========================================================
-ANIMAÇÕES — REVEAL
-========================================================
-*/
+// ─── CTA BANNER ───────────────────────────────────────────────────────────────
+
+.cta-banner {
+  margin: 60px 80px;
+  padding: 40px 48px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #c42a2a, $red 60%, #d43232);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 32px;
+  align-items: center;
+
+  &__icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.2);
+    flex-shrink: 0;
+
+    span { color: white; font-size: 1.7rem; }
+  }
+
+  &__text {
+    strong { display: block; font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; }
+    p      { color: rgba(255,255,255,0.82); font-size: 0.9rem; }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+  }
+}
+
+// ─── FOOTER ───────────────────────────────────────────────────────────────────
+
+.ps-footer {
+  border-top: 1px solid $border;
+  padding: 28px 80px;
+
+  &__inner {
+    text-align: center;
+    color: $text-sub;
+    font-size: 0.85rem;
+  }
+}
+
+// ─── ANIMATIONS ───────────────────────────────────────────────────────────────
 
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.portfolio__hero-text {
-  animation: fadeUp 0.8s ease both;
+.ps-hero__content { animation: fadeUp 0.8s ease both; }
+
+// ─── RESPONSIVE — 1100px ─────────────────────────────────────────────────────
+
+@media (max-width: 1100px) {
+
+  .ps-nav { padding: 20px 40px; }
+
+  .ps-hero { padding: 0 40px 60px; }
+  .ps-hero__title { font-size: 3.4rem; }
+
+  .filters-bar { padding: 22px 32px; }
+
+  .showcase__grid { grid-template-columns: 1fr; }
+
+  .stage { border-right: none; }
+
+  .thumbs-panel {
+    max-height: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border-top: 1px solid $border;
+  }
+
+  .cta-banner { margin: 40px; }
+
+  .stage-info__meta { grid-template-columns: repeat(2, 1fr); }
+}
+
+// ─── RESPONSIVE — 768px ──────────────────────────────────────────────────────
+
+@media (max-width: 768px) {
+
+  .ps-nav {
+    padding: 16px 24px;
+
+    .ps-nav__links { display: none; }
+    .ps-nav__cta   { padding: 10px 16px; font-size: 0.8rem; }
+  }
+
+  .ps-hero {
+    padding: 80px 24px 48px;
+    min-height: 480px;
+    align-items: flex-start;
+
+    &__title { font-size: 2.6rem; }
+    &__stats { gap: 20px; }
+  }
+
+  .hero-stat__num { font-size: 2rem; }
+
+  .filters-bar { padding: 16px 20px; gap: 8px; }
+
+  .filter-pill { padding: 7px 14px; font-size: 0.82rem; }
+
+  .thumbs-panel { grid-template-columns: 1fr; }
+
+  .stage__info { padding: 24px 24px 28px; }
+
+  .stage-info {
+    &__title { font-size: 1.5rem; }
+    &__meta  { grid-template-columns: repeat(2, 1fr); }
+    &__actions .btn { padding: 12px 18px; font-size: 0.82rem; }
+  }
+
+  .cta-banner {
+    margin: 24px 16px;
+    padding: 28px 24px;
+    grid-template-columns: 1fr;
+
+    &__icon { display: none; }
+    &__actions { flex-direction: column; }
+  }
+
+  .ps-footer { padding: 20px 24px; }
 }

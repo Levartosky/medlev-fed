@@ -295,12 +295,11 @@ esquerda: headline | direita: glass card
 .about__hero-body {
   position: relative;
   z-index: 2;
-  margin-top: 120px;
+  padding-top: 128px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 60px;
-  flex: 1;
 }
 
 /*
@@ -315,8 +314,8 @@ Coluna de texto.
   color: #ef3b3b;
   text-transform: uppercase;
   letter-spacing: 4px;
-  font-size: 0.85rem;
   font-weight: 700;
+  font-size:14px;
 }
 
 .about__hero-text h1 {

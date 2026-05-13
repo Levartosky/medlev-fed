@@ -142,27 +142,6 @@ localhost:4200/portfolio
 
 /*
 ========================================================
-DETALHE DO PROJETO
-========================================================
-
-Página de detalhe de um projeto específico do portfólio.
-O param :id corresponde ao id numérico do projeto.
-
-URL:
-localhost:4200/portfolio/1
-*/
-{
-  path: 'portfolio/:id',
-
-  loadComponent: () =>
-
-    import('./features/portfolio/portfolio-detail/portfolio-detail')
-      .then(m => m.PortfolioDetailComponent)
-
-},
-
-/*
-========================================================
 SERVIÇOS
 ========================================================
 

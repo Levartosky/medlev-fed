@@ -1,254 +1,287 @@
-/*
-========================================================
-PORTFOLIO COMPONENT
-========================================================
-
-Página de portfólio da MEDLEV.
-
-Responsabilidades:
-- exibir projetos realizados
-- filtrar por categoria
-- gerar interesse e conversão
-- manter consistência visual com a Home
-
-Tecnologias:
-- Angular Standalone
-- SCSS modular
-- Filtros reativos com getter
-- Reveal animation via IntersectionObserver
-
-========================================================
-*/
-
-/*
-Importa Component do Angular e hooks de ciclo de vida.
-*/
-import { AfterViewInit, Component, HostListener, Inject, OnDestroy, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser, NgFor, NgClass, NgIf } from '@angular/common';
-
-/*
-Importa RouterModule para navegação SPA.
-*/
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  Inject,
+  OnDestroy,
+  PLATFORM_ID,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { BLUEPRINTS, MINI_BLUEPRINTS } from './portfolio.blueprints';
 
-/*
-========================================================
-INTERFACE — PROJECT
-========================================================
+// ─── Types ────────────────────────────────────────────────────────────────────
 
-Define o formato de cada projeto do portfólio.
-*/
-interface Project {
+export type ProjectCategory =
+  | 'residencial'
+  | 'comercial'
+  | 'esportivo'
+  | 'industrial'
+  | 'institucional';
+
+export interface Project {
   id: number;
-  category: string;
-  categoryLabel: string;
-  name: string;
-  location: string;
-  image: string;
+  cat: ProjectCategory;
+  catLabel: string;
+  title: string;
+  loc: string;
+  area: string;
+  year: string;
+  service: string;
+  delivery: string;
+  pdfUrl?: string;
 }
 
-/*
-========================================================
-INTERFACE — FILTER
-========================================================
-
-Define o formato de cada filtro de categoria.
-*/
-interface Filter {
-  id: string;
+export interface FilterOption {
+  key: ProjectCategory | 'all';
   label: string;
-  icon: string;
 }
 
-/*
-========================================================
-COMPONENT
-========================================================
-*/
+// ─── Component ────────────────────────────────────────────────────────────────
+
 @Component({
-
-  /*
-  Nome da tag HTML.
-  */
   selector: 'app-portfolio',
-
-  /*
-  Angular moderno standalone.
-  */
   standalone: true,
-
-  /*
-  Tudo usado no HTML
-  precisa ser importado aqui.
-
-  NgFor: para iterar projetos e filtros
-  NgClass: para aplicar classe .active nos filtros
-  RouterModule: para routerLink
-  */
-  imports: [
-    RouterModule,
-    NgFor,
-    NgClass,
-    NgIf
-  ],
-
-  /*
-  HTML da página.
-  */
+  imports: [RouterModule],
   templateUrl: './portfolio.html',
-
-  /*
-  SCSS da página.
-  */
-  styleUrl: './portfolio.scss'
-
+  styleUrl: './portfolio.scss',
 })
-
-/*
-========================================================
-CLASS
-========================================================
-*/
 export class PortfolioComponent implements AfterViewInit, OnDestroy {
 
-  /*
-  Controla se o header ficou scrollado
-  para aplicar o efeito glassmorphism.
-  */
+  @ViewChildren('thumbRef') thumbRefs!: QueryList<ElementRef<HTMLButtonElement>>;
+
+  // ── State ──────────────────────────────────────────────────────────────────
+
   isNavScrolled = false;
+  currentIndex = 0;
+  activeFilter: ProjectCategory | 'all' = 'all';
+  autoplayActive = false;
+  progressFillWidth = 0;
 
-  /*
-  Filtro ativo no momento.
-  'todos' é o valor padrão.
-  */
-  activeFilter = 'todos';
+  // ── Constants ──────────────────────────────────────────────────────────────
 
-  /*
-  Observer para animação reveal nas seções.
-  */
-  private observer?: IntersectionObserver;
+  private readonly AUTOPLAY_INTERVAL = 5000;
+  private readonly IDLE_THRESHOLD = 5000;
 
-  /*
-  ========================================================
-  FILTROS DE CATEGORIA
-  ========================================================
+  // ── Timers ─────────────────────────────────────────────────────────────────
 
-  Cada filtro tem:
-  - id: valor usado para comparação
-  - label: texto exibido no botão
-  - icon: ícone decorativo
-  */
-  filters: Filter[] = [
-    { id: 'todos',                  label: 'Todos',                  icon: ''  },
-    { id: 'residencial',            label: 'Residencial',            icon: '🏠' },
-    { id: 'comercial',              label: 'Comercial',              icon: '📋' },
-    { id: 'levantamento',           label: 'Levantamento',           icon: '⚙️' },
-    { id: 'planta-digital',         label: 'Planta digital',         icon: '💻' },
-    { id: 'projeto-arquitetonico',  label: 'Projeto arquitetônico',  icon: '✏️' },
+  private autoplayTimer: ReturnType<typeof setTimeout> | null = null;
+  private idleTimer: ReturnType<typeof setTimeout> | null = null;
+  private progressInterval: ReturnType<typeof setInterval> | null = null;
+
+  // ── Data ───────────────────────────────────────────────────────────────────
+
+  readonly projects: Project[] = [
+    { id: 1,  cat: 'residencial',   catLabel: 'Residencial',   title: 'Apartamento 120m²',      loc: 'Santana — São Paulo, SP',          area: '120 m²',   year: '2024', service: 'Levantamento técnico',  delivery: 'PDF + DWG' },
+    { id: 2,  cat: 'residencial',   catLabel: 'Residencial',   title: 'Casa térrea Aldeota',     loc: 'Alphaville — Barueri, SP',         area: '285 m²',   year: '2024', service: 'Projeto arquitetônico', delivery: 'PDF + DWG + 3D' },
+    { id: 3,  cat: 'comercial',     catLabel: 'Comercial',     title: 'Escritório 122m²',        loc: 'Av. Paulista — São Paulo, SP',     area: '122 m²',   year: '2023', service: 'Planta digitalizada',   delivery: 'PDF + DWG' },
+    { id: 4,  cat: 'esportivo',     catLabel: 'Esportivo',     title: 'Beach tennis Apoio',      loc: 'Praia Grande — SP',                area: '180 m²',   year: '2024', service: 'Projeto arquitetônico', delivery: 'PDF + DWG' },
+    { id: 5,  cat: 'residencial',   catLabel: 'Residencial',   title: 'Apartamento duplex',      loc: 'Itaim — São Paulo, SP',            area: '210 m²',   year: '2023', service: 'As Built',              delivery: 'PDF + DWG + BIM' },
+    { id: 6,  cat: 'industrial',    catLabel: 'Industrial',    title: 'Bloco ADM Fábrica',       loc: 'Cumbica — Guarulhos, SP',          area: '420 m²',   year: '2023', service: 'Levantamento 3D',       delivery: 'PDF + DWG' },
+    { id: 7,  cat: 'industrial',    catLabel: 'Industrial',    title: 'Bloco Central — Galpão',  loc: 'Cumbica — Guarulhos, SP',          area: '780 m²',   year: '2023', service: 'Planta digitalizada',   delivery: 'PDF + DWG' },
+    { id: 8,  cat: 'comercial',     catLabel: 'Comercial',     title: 'Cachaçaria Alambique',    loc: 'Embu das Artes, SP',               area: '95 m²',    year: '2024', service: 'Projeto arquitetônico', delivery: 'PDF + DWG' },
+    { id: 9,  cat: 'esportivo',     catLabel: 'Esportivo',     title: 'Bloco Recreação',         loc: 'Condomínio Reserva — Atibaia',    area: '310 m²',   year: '2024', service: 'Projeto arquitetônico', delivery: 'PDF + DWG + 3D' },
+    { id: 10, cat: 'residencial',   catLabel: 'Residencial',   title: 'Casa de gerador',         loc: 'Fazenda Boa Vista — Porto Feliz', area: '45 m²',    year: '2024', service: 'As Built',              delivery: 'PDF + DWG' },
+    { id: 11, cat: 'residencial',   catLabel: 'Residencial',   title: 'Casa Dona Angela',        loc: 'Jundiaí — SP',                    area: '165 m²',   year: '2024', service: 'Regularização',         delivery: 'PDF + Habite-se' },
+    { id: 12, cat: 'residencial',   catLabel: 'Residencial',   title: 'Casa Sr. Hélio',          loc: 'Indaiatuba — SP',                 area: '198 m²',   year: '2024', service: 'Projeto de reforma',    delivery: 'PDF + DWG' },
+    { id: 13, cat: 'institucional', catLabel: 'Institucional', title: 'Capela São Francisco',    loc: 'Bragança Paulista, SP',           area: '140 m²',   year: '2023', service: 'Levantamento técnico',  delivery: 'PDF + DWG' },
+    { id: 14, cat: 'comercial',     catLabel: 'Comercial',     title: 'Loja conceito Jardins',   loc: 'Jardins — São Paulo, SP',         area: '88 m²',    year: '2023', service: 'Projeto arquitetônico', delivery: 'PDF + DWG + 3D' },
+    { id: 15, cat: 'residencial',   catLabel: 'Residencial',   title: 'Cobertura Vila Mariana',  loc: 'Vila Mariana — São Paulo, SP',    area: '245 m²',   year: '2022', service: 'Projeto de reforma',    delivery: 'PDF + DWG' },
+    { id: 16, cat: 'industrial',    catLabel: 'Industrial',    title: 'Galpão logístico',        loc: 'Itupeva — SP',                    area: '1.250 m²', year: '2022', service: 'Planta digitalizada',   delivery: 'PDF + DWG' },
+    { id: 17, cat: 'institucional', catLabel: 'Institucional', title: 'Centro comunitário',      loc: 'Embu-Guaçu, SP',                 area: '320 m²',   year: '2023', service: 'Projeto arquitetônico', delivery: 'PDF + DWG' },
+    { id: 18, cat: 'comercial',     catLabel: 'Comercial',     title: 'Restaurante terraço',     loc: 'Pinheiros — São Paulo, SP',       area: '175 m²',   year: '2024', service: 'Projeto arquitetônico', delivery: 'PDF + DWG + 3D' },
   ];
 
-  /*
-  ========================================================
-  PROJETOS
-  ========================================================
-
-  Lista de projetos do portfólio.
-
-  Cada projeto tem:
-  - id: identificador único
-  - category: slug da categoria (usado no filtro)
-  - categoryLabel: texto exibido no card
-  - name: nome do projeto
-  - location: localização
-  - image: caminho da imagem em public/
-  */
-  projects: Project[] = [
-    {
-      id: 1,
-      category: 'residencial',
-      categoryLabel: 'RESIDENCIAL',
-      name: 'Apartamento 120m²',
-      location: 'Santana – SP',
-      image: '/portfolio-1.jpg'
-    },
-    {
-      id: 2,
-      category: 'planta-digital',
-      categoryLabel: 'PLANTA DIGITAL',
-      name: 'Planta digitalizada',
-      location: 'Itaim Bibi – SP',
-      image: '/portfolio-2.jpg'
-    },
-    {
-      id: 3,
-      category: 'residencial',
-      categoryLabel: 'RESIDENCIAL',
-      name: 'Escritório 122m²',
-      location: 'Avenida Paulista – SP',
-      image: '/portfolio-3.jpg'
-    },
-    {
-      id: 4,
-      category: 'residencial',
-      categoryLabel: 'RESIDENCIAL',
-      name: 'Casa térrea',
-      location: 'Jaguariúna – SP',
-      image: '/portfolio-4.jpg'
-    },
-    {
-      id: 5,
-      category: 'residencial',
-      categoryLabel: 'RESIDENCIAL',
-      name: 'Apartamento duplex',
-      location: 'Moema – SP',
-      image: '/portfolio-5.jpg'
-    },
-    {
-      id: 6,
-      category: 'levantamento',
-      categoryLabel: 'LEVANTAMENTO',
-      name: 'Levantamento 3D',
-      location: 'Condomínio fechado – SP',
-      image: '/portfolio-6.jpg'
-    },
+  readonly filters: FilterOption[] = [
+    { key: 'all',           label: 'Todos' },
+    { key: 'residencial',   label: 'Residencial' },
+    { key: 'comercial',     label: 'Comercial' },
+    { key: 'esportivo',     label: 'Esportivo' },
+    { key: 'industrial',    label: 'Industrial' },
+    { key: 'institucional', label: 'Institucional' },
   ];
 
-  /*
-  ========================================================
-  GETTER — PROJETOS FILTRADOS
-  ========================================================
+  // ── Constructor ────────────────────────────────────────────────────────────
 
-  Retorna todos os projetos quando o filtro é 'todos',
-  ou filtra por categoria quando um filtro está ativo.
+  constructor(
+    @Inject(PLATFORM_ID) private readonly platformId: object,
+    private readonly sanitizer: DomSanitizer,
+  ) {}
 
-  Getter é usado ao invés de array separado para
-  que o template sempre reflita o estado atual.
-  */
+  // ── Getters ────────────────────────────────────────────────────────────────
+
   get filteredProjects(): Project[] {
-    if (this.activeFilter === 'todos') return this.projects;
-    return this.projects.filter(p => p.category === this.activeFilter);
+    if (this.activeFilter === 'all') return this.projects;
+    return this.projects.filter(p => p.cat === this.activeFilter);
   }
 
-  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
+  // ── Navigation ─────────────────────────────────────────────────────────────
 
-  /*
-  ========================================================
-  MÉTODO — SET FILTER
-  ========================================================
-
-  Altera o filtro ativo ao clicar em uma categoria.
-  */
-  setFilter(filterId: string): void {
-    this.activeFilter = filterId;
+  next(): void {
+    this.currentIndex = (this.currentIndex + 1) % this.filteredProjects.length;
+    this.scrollActiveThumbIntoView();
   }
 
-  /*
-  ========================================================
-  SCROLL — EFEITO HEADER
-  ========================================================
+  prev(): void {
+    this.currentIndex =
+      (this.currentIndex - 1 + this.filteredProjects.length) %
+      this.filteredProjects.length;
+    this.scrollActiveThumbIntoView();
+  }
 
-  Detecta scroll para ativar glassmorphism no header.
-  */
+  goTo(index: number): void {
+    this.currentIndex = index;
+    this.scrollActiveThumbIntoView();
+  }
+
+  // ── Filters ────────────────────────────────────────────────────────────────
+
+  applyFilter(key: ProjectCategory | 'all'): void {
+    this.activeFilter = key;
+    this.currentIndex = 0;
+  }
+
+  getFilterCount(key: ProjectCategory | 'all'): number {
+    if (key === 'all') return this.projects.length;
+    return this.projects.filter(p => p.cat === key).length;
+  }
+
+  // ── Autoplay ───────────────────────────────────────────────────────────────
+
+  toggleAutoplay(): void {
+    if (this.autoplayActive) {
+      this.stopAutoplay();
+    } else {
+      this.startAutoplay();
+    }
+  }
+
+  onUserInteraction(): void {
+    this.stopAutoplay();
+    if (!isPlatformBrowser(this.platformId)) return;
+    clearTimeout(this.idleTimer!);
+    this.idleTimer = setTimeout(
+      () => this.startAutoplay(),
+      this.IDLE_THRESHOLD,
+    );
+  }
+
+  private startAutoplay(): void {
+    if (this.autoplayActive) return;
+    this.autoplayActive = true;
+    this.scheduleNextAutoplay();
+  }
+
+  private stopAutoplay(): void {
+    this.autoplayActive = false;
+    this.clearAllTimers();
+    this.resetProgress();
+  }
+
+  private scheduleNextAutoplay(): void {
+    this.resetProgress();
+    this.startProgressInterval();
+    this.autoplayTimer = setTimeout(() => {
+      this.next();
+      if (this.autoplayActive) this.scheduleNextAutoplay();
+    }, this.AUTOPLAY_INTERVAL);
+  }
+
+  private startProgressInterval(): void {
+    const tickMs = 100;
+    const totalTicks = this.AUTOPLAY_INTERVAL / tickMs;
+    let tick = 0;
+    this.progressInterval = setInterval(() => {
+      tick++;
+      this.progressFillWidth = (tick / totalTicks) * 100;
+    }, tickMs);
+  }
+
+  private resetProgress(): void {
+    if (this.progressInterval !== null) {
+      clearInterval(this.progressInterval);
+      this.progressInterval = null;
+    }
+    this.progressFillWidth = 0;
+  }
+
+  private clearAllTimers(): void {
+    if (this.autoplayTimer !== null) {
+      clearTimeout(this.autoplayTimer);
+      this.autoplayTimer = null;
+    }
+    if (this.idleTimer !== null) {
+      clearTimeout(this.idleTimer);
+      this.idleTimer = null;
+    }
+    this.resetProgress();
+  }
+
+  // ── Blueprints ─────────────────────────────────────────────────────────────
+
+  getBlueprint(projectId: number): string {
+    return BLUEPRINTS[(projectId - 1) % BLUEPRINTS.length];
+  }
+
+  getMiniBlueprint(projectId: number): string {
+    return MINI_BLUEPRINTS[(projectId - 1) % MINI_BLUEPRINTS.length];
+  }
+
+  getSafeBlueprint(projectId: number): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(this.getBlueprint(projectId));
+  }
+
+  getSafeMiniBlueprint(projectId: number): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(
+      this.getMiniBlueprint(projectId),
+    );
+  }
+
+  // ── Helpers ────────────────────────────────────────────────────────────────
+
+  getCurrentProject(): Project | undefined {
+    return this.filteredProjects[this.currentIndex];
+  }
+
+  pad(n: number): string {
+    return String(n).padStart(2, '0');
+  }
+
+  // ── Scroll ─────────────────────────────────────────────────────────────────
+
+  private scrollActiveThumbIntoView(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    requestAnimationFrame(() => {
+      const thumbs = this.thumbRefs?.toArray();
+      if (thumbs?.[this.currentIndex]) {
+        thumbs[this.currentIndex].nativeElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+        });
+      }
+    });
+  }
+
+  // ── Lifecycle ──────────────────────────────────────────────────────────────
+
+  ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    this.idleTimer = setTimeout(
+      () => this.startAutoplay(),
+      this.IDLE_THRESHOLD,
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.clearAllTimers();
+  }
+
+  // ── Host Listeners ─────────────────────────────────────────────────────────
+
   @HostListener('window:scroll')
   onScroll(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -256,34 +289,21 @@ export class PortfolioComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  /*
-  ========================================================
-  LIFECYCLE — REVEAL ANIMATION
-  ========================================================
+  @HostListener('window:keydown', ['$event'])
+  onKeyDown(e: KeyboardEvent): void {
+    if (e.key === 'ArrowRight') { this.next();  this.onUserInteraction(); }
+    if (e.key === 'ArrowLeft')  { this.prev();  this.onUserInteraction(); }
+  }
 
-  IntersectionObserver observa elementos com .reveal
-  e adiciona .visible quando entram na viewport.
-  */
-  ngAfterViewInit(): void {
+  @HostListener('window:mousemove')
+  @HostListener('window:touchstart')
+  onActivity(): void {
+    if (this.autoplayActive) return;
     if (!isPlatformBrowser(this.platformId)) return;
-    this.observer = new IntersectionObserver(
-      entries => entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          this.observer?.unobserve(e.target);
-        }
-      }),
-      { threshold: 0.12 }
+    clearTimeout(this.idleTimer!);
+    this.idleTimer = setTimeout(
+      () => this.startAutoplay(),
+      this.IDLE_THRESHOLD,
     );
-    document.querySelectorAll('.reveal').forEach(el => this.observer!.observe(el));
   }
-
-  /*
-  Limpa o observer ao destruir o componente
-  para evitar memory leaks.
-  */
-  ngOnDestroy(): void {
-    this.observer?.disconnect();
-  }
-
 }
