@@ -1,0 +1,404 @@
+<!--
+========================================================
+ABOUT PAGE — MEDLEV ARQUITETURA
+========================================================
+
+Página institucional premium.
+
+IMPORTANTE:
+O header desta página usa as MESMAS classes da Home:
+.brand / .header__nav / .header__button
+Isso garante padrão visual 100% idêntico.
+
+Seções:
+1. Hero — mesmo container da Home, conteúdo adaptado
+2. Filosofia — 3 pilares
+3. Métricas — 4 cards com número + descrição
+4. Diferencial — imagem + texto + checklist
+5. Valores — headline + 3 cards
+6. CTA final
+
+========================================================
+-->
+
+<main class="about">
+
+  <!--
+  ========================================================
+  HERO SECTION
+  ========================================================
+
+  Usa EXATAMENTE a mesma estrutura da Home:
+  - .hero (mesma classe)
+  - .hero__overlay (mesmo overlay)
+  - .header com .brand / .header__nav / .header__button
+
+  Apenas o conteúdo principal muda
+  (split em 2 colunas: texto | glass card).
+  -->
+  <section class="hero">
+
+    <!-- Overlay cinematográfico — igual à Home -->
+    <div class="hero__overlay"></div>
+
+    <!--
+    ========================================================
+    HEADER — IDÊNTICO À HOME
+    ========================================================
+    -->
+    <header class="header" [class.scrolled]="isNavScrolled">
+
+      <!--
+      Logo leva para a Home.
+      Usa <a> e classe .brand — igual à Home.
+      -->
+      <a routerLink="/" class="brand">
+
+        <img
+          src="/logo-medlev.png"
+          alt="Logo MedLev Arquitetura"
+          class="brand__logo"
+        />
+
+        <div class="brand__text">
+          <strong>MedLev</strong>
+          <span>Arquitetura</span>
+        </div>
+
+      </a>
+
+      <!--
+      Navegação — mesma classe .header__nav da Home.
+      "Sobre" recebe .active para exibir underline vermelho.
+      -->
+      <nav class="header__nav">
+
+        <a routerLink="/">Início</a>
+        <a routerLink="/portfolio">Portfólio</a>
+        <a routerLink="/servicos">Serviços</a>
+        <a routerLink="/sobre" class="active">Sobre</a>
+        <a routerLink="/contato">Contato</a>
+
+      </nav>
+
+      <!--
+      Botão CTA — mesma classe .header__button da Home.
+      -->
+      <a routerLink="/orcamento" class="header__button">
+        Solicitar orçamento <span>→</span>
+      </a>
+
+    </header>
+
+    <!--
+    ========================================================
+    CONTEÚDO HERO — ABOUT
+    ========================================================
+
+    Diferença da Home: layout split em 2 colunas.
+    Esquerda: headline institucional.
+    Direita: glass card flutuante.
+    -->
+    <div class="about__hero-body">
+
+      <!--
+      ====================================================
+      ESQUERDA — HEADLINE
+      ====================================================
+      -->
+      <div class="about__hero-text">
+
+        <!-- Label vermelho superior -->
+        <span class="about__label reveal">SOBRE A MEDLEV</span>
+
+        <!--
+        Título principal.
+        Palavras-chave em vermelho = destaques de identidade.
+        -->
+        <h1 class="reveal">
+          Criamos espaços que unem
+          <strong>estética,<br>precisão</strong>
+          e experiência.
+        </h1>
+
+        <!-- Linha divisória vermelha -->
+        <div class="about__divider reveal"></div>
+
+        <p class="reveal">Acreditamos que arquitetura vai além da planta ou execução.</p>
+        <p class="reveal">Projetamos ambientes capazes de gerar sensações, conforto e identidade.</p>
+
+      </div>
+
+      <!--
+      ====================================================
+      DIREITA — GLASS CARD
+      ====================================================
+      -->
+      <div class="about__hero-card">
+
+        <div class="glass-card">
+
+          <!-- Glow vermelho interno -->
+          <div class="glass-card__glow"></div>
+
+          <!-- Ícone em círculo -->
+          <div class="glass-card__icon">
+            <span class="material-symbols-outlined">apartment</span>
+          </div>
+
+          <!-- Texto -->
+          <div class="glass-card__text">
+            <strong>Arquitetura autoral</strong>
+            <p>Atenção a cada detalhe e foco em resultados.</p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!--
+  ========================================================
+  FILOSOFIA
+  ========================================================
+
+  3 pilares que sustentam a abordagem da MEDLEV.
+  Grid de 3 colunas, centralizado.
+  -->
+  <section class="about__philosophy">
+
+    <span class="about__section-tag reveal">NOSSA FILOSOFIA</span>
+
+    <h2 class="reveal">Cada detalhe <em>importa.</em></h2>
+
+    <div class="about__philosophy-grid">
+
+      <!-- PILAR 1 -->
+      <div class="about__philosophy-card reveal">
+        <span class="material-symbols-outlined">center_focus_strong</span>
+        <h3>Precisão técnica</h3>
+        <p>Levantamentos e medições com máxima confiabilidade para decisões seguras.</p>
+      </div>
+
+      <!-- PILAR 2 -->
+      <div class="about__philosophy-card reveal">
+        <span class="material-symbols-outlined">deployed_code</span>
+        <h3>Visão contemporânea</h3>
+        <p>Projetos alinhados às tendências da arquitetura moderna, com soluções funcionais e elegantes.</p>
+      </div>
+
+      <!-- PILAR 3 -->
+      <div class="about__philosophy-card reveal">
+        <span class="material-symbols-outlined">groups</span>
+        <h3>Atendimento próximo</h3>
+        <p>Processos claros e acompanhamento em todas as etapas, do início à entrega final.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!--
+  ========================================================
+  MÉTRICAS
+  ========================================================
+
+  4 cards lado a lado.
+  Cada card: ícone + número grande + label + descrição.
+  -->
+  <section class="about__metrics">
+
+    <!-- CARD 1 -->
+    <div class="about__metric-card reveal">
+      <span class="material-symbols-outlined">apartment</span>
+      <strong>+120</strong>
+      <span class="about__metric-label">PROJETOS ENTREGUES</span>
+      <p>Residenciais, comerciais e corporativos.</p>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="about__metric-card reveal">
+      <span class="material-symbols-outlined">calendar_month</span>
+      <strong>+8</strong>
+      <span class="about__metric-label">ANOS DE EXPERIÊNCIA</span>
+      <p>Atuando com excelência e compromisso.</p>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="about__metric-card reveal">
+      <span class="material-symbols-outlined">groups</span>
+      <strong>100%</strong>
+      <span class="about__metric-label">PROJETOS PERSONALIZADOS</span>
+      <p>Cada projeto é único, como deve ser.</p>
+    </div>
+
+    <!-- CARD 4 -->
+    <div class="about__metric-card reveal">
+      <span class="material-symbols-outlined">location_on</span>
+      <strong>Atuação</strong>
+      <span class="about__metric-label">EM TODO O BRASIL</span>
+      <p>Atendemos projetos presenciais e remotos.</p>
+    </div>
+
+  </section>
+
+  <!--
+  ========================================================
+  DIFERENCIAL
+  ========================================================
+
+  Grid de 3 colunas:
+  [imagem] [texto] [checklist]
+  -->
+  <section class="about__differential">
+
+    <!--
+    Coluna 1 — imagem com overlay escuro.
+    -->
+    <div class="about__diff-image">
+      <img src="/home-hero.jpg" alt="Interior arquitetônico premium" />
+    </div>
+
+    <!--
+    Coluna 2 — texto e headline.
+    -->
+    <div class="about__diff-text">
+
+      <span class="about__section-tag reveal">NOSSO DIFERENCIAL</span>
+
+      <h2 class="reveal">Não entregamos apenas desenhos.</h2>
+
+      <h3>
+        Entregamos clareza,
+        planejamento e confiança
+        para execução.
+      </h3>
+
+      <div class="about__divider"></div>
+
+    </div>
+
+    <!--
+    Coluna 3 — checklist de diferenciais.
+    -->
+    <div class="about__diff-list">
+
+      <div class="about__diff-item">
+        <span class="material-symbols-outlined">check_circle</span>
+        <p>Levantamento técnico e análise detalhada</p>
+      </div>
+
+      <div class="about__diff-item">
+        <span class="material-symbols-outlined">check_circle</span>
+        <p>Compatibilização e soluções inteligentes</p>
+      </div>
+
+      <div class="about__diff-item">
+        <span class="material-symbols-outlined">check_circle</span>
+        <p>Escopo completo e organizado</p>
+      </div>
+
+      <div class="about__diff-item">
+        <span class="material-symbols-outlined">check_circle</span>
+        <p>Acompanhamento próximo e consultivo</p>
+      </div>
+
+      <div class="about__diff-item">
+        <span class="material-symbols-outlined">check_circle</span>
+        <p>Precisão dimensional e responsabilidade técnica</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!--
+  ========================================================
+  VALORES
+  ========================================================
+
+  Split: texto à esquerda, 3 cards à direita.
+  -->
+  <section class="about__values">
+
+    <!-- ESQUERDA — headline -->
+    <div class="about__values-text">
+      <h2>
+        Arquitetura pensada para quem
+        valoriza <em>experiência.</em>
+      </h2>
+      <p>Mais do que projetos, criamos ambientes que melhoram a forma de viver, trabalhar e sentir.</p>
+      <div class="about__divider"></div>
+    </div>
+
+    <!-- DIREITA — 3 mini cards -->
+    <div class="about__values-cards">
+
+      <div class="about__value-card">
+        <span class="material-symbols-outlined">visibility</span>
+        <h3>Visão</h3>
+        <p>Enxergamos além do óbvio para criar soluções únicas.</p>
+      </div>
+
+      <div class="about__value-card">
+        <span class="material-symbols-outlined">layers</span>
+        <h3>Propósito</h3>
+        <p>Cada projeto nasce com intenção e significado.</p>
+      </div>
+
+      <div class="about__value-card">
+        <span class="material-symbols-outlined">favorite</span>
+        <h3>Experiência</h3>
+        <p>Arquitetura que transforma rotina em bem-estar.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!--
+  ========================================================
+  CTA FINAL
+  ========================================================
+
+  Grid: ícone | headline | descrição | botões.
+  -->
+  <section class="about__cta">
+
+    <!-- Ícone decorativo -->
+    <div class="about__cta-icon">
+      <span class="material-symbols-outlined">apartment</span>
+    </div>
+
+    <!-- Headline -->
+    <div class="about__cta-headline">
+      <h2>Vamos transformar sua ideia em um <em>projeto real.</em></h2>
+    </div>
+
+    <!-- Descrição -->
+    <p class="about__cta-desc">
+      Fale com nosso time e dê o primeiro passo para tirar seu projeto do papel.
+    </p>
+
+    <!-- Botões -->
+    <div class="about__cta-actions">
+
+      <a routerLink="/orcamento" class="btn btn--primary">
+        Solicitar orçamento <span>→</span>
+      </a>
+
+      <a  href="https://wa.me/5511972651827?text=Olá!%20Vi%20o%20portfólio%20da%20MedLev%20Arquitetura%20e%20gostaria%20de%20saber%20mais."
+          target="_blank"
+          rel="noopener noreferrer" class="btn btn--secondary">
+        <span class="material-symbols-outlined">chat</span>
+        Falar no WhatsApp
+      </a>
+
+    </div>
+
+  </section>
+
+</main>

@@ -1,73 +1,320 @@
-<section class="hero">
+<!--
+========================================================
+HOME PAGE - MEDLEV ARQUITETURA
+========================================================
 
-  <!-- HEADER -->
-  <header class="header">
+Esta é a página principal (Home) do site.
 
-    <!-- LOGO -->
-    <a href="#" class="brand">
-      <div class="brand__symbol">
-        <span class="dot dot--square dot--top-left"></span>
-        <span class="letter letter--m">m</span>
-        <span class="dot dot--circle dot--top-right"></span>
+Ela possui:
+- Hero section
+- Header/Navbar
+- Seção de serviços
+- Portfólio
+- Diferenciais
+- CTA final
+- Footer
 
-        <span class="letter letter--l">L</span>
-        <span class="letter letter--e">e</span>
-        <span class="letter letter--v">v</span>
+Tudo está estruturado em seções separadas
+seguindo padrão enterprise/profissional.
 
-        <span class="dot dot--circle dot--bottom-left"></span>
-        <span class="letter letter--d">d</span>
-        <span class="dot dot--square dot--bottom-right"></span>
-      </div>
+========================================================
+-->
 
-      <div class="brand__text">
-        <strong>MedLev</strong>
-        <span>arquitetura</span>
-      </div>
-    </a>
+<main class="home">
 
-    <!-- MENU -->
-    <nav class="header__nav">
-      <a href="#" class="active">Início</a>
-      <a href="#">Portfólio</a>
-      <a href="#">Serviços</a>
-      <a href="#">Sobre</a>
-      <a href="#">Contato</a>
-    </nav>
+  <!--
+  ========================================================
+  HERO SECTION
+  ========================================================
 
-    <!-- BOTÃO HEADER -->
-    <a href="#" class="header__button">
-      Solicitar orçamento
-      <span>→</span>
-    </a>
+  A Hero é a primeira seção do site.
 
-  </header>
+  Objetivo:
+  - causar impacto visual
+  - transmitir sofisticação
+  - apresentar a empresa
+  - gerar conversão
 
-  <!-- HERO CONTENT -->
-  <div class="hero__content">
+  Ela ocupa praticamente a tela inteira.
+  -->
 
-    <h1>
-      <span>MedLev</span>
-      <strong>Arquitetura</strong>
-    </h1>
+  <section class="hero">
 
-    <p>
-      Medição, levantamento e projetos com precisão técnica e visão moderna.
-    </p>
+    <!--
+    Overlay escuro sobre a imagem.
 
-    <div class="hero__actions">
+    Objetivo:
+    - escurecer o fundo
+    - melhorar leitura do texto
+    - deixar visual premium
+    -->
+    <div class="hero__overlay"></div>
 
-      <a href="#" class="btn btn--primary">
+    <!--
+    ========================================================
+    HEADER / NAVBAR
+    ========================================================
+    -->
+    <header class="header" [class.scrolled]="isNavScrolled">
+
+      <!--
+      ========================================================
+      LOGO / BRAND
+      ========================================================
+
+      Container principal da marca.
+
+      Estrutura:
+      - imagem do logo
+      - nome da empresa
+      - subtítulo
+
+      A tag <a> é usada porque:
+      - normalmente o logo leva para home
+      - padrão de mercado
+      -->
+      <a href="#" class="brand">
+
+        <!--
+        Logo PNG transparente.
+
+        O src busca o arquivo dentro da pasta public/.
+
+        Caminho:
+        public/logo-medlev.png
+        -->
+        <img src="/logo-medlev.png" alt="Logo MedLev Arquitetura" class="brand__logo" />
+
+        <!--
+        Texto da marca
+        -->
+        <div class="brand__text">
+
+          <!-- Nome principal -->
+          <strong>MedLev</strong>
+
+          <!-- Subtítulo -->
+          <span>Arquitetura</span>
+
+        </div>
+
+      </a>
+
+      <!--
+      ========================================================
+      MENU DE NAVEGAÇÃO
+      ========================================================
+
+      Nav contém links de navegação do site.
+      -->
+      <nav class="header__nav">
+
+        <a href="#" class="active">
+          Início
+        </a>
+
+        <a routerLink="/portfolio">
+          Portfólio
+        </a>
+
+        <a routerLink="/servicos">
+          Serviços
+        </a>
+
+        <a routerLink="/sobre">
+          Sobre
+        </a>
+
+        <a routerLink="/contato">
+          Contato
+        </a>
+
+      </nav>
+
+      <!--
+      ========================================================
+      BOTÃO CTA HEADER
+      ========================================================
+
+      CTA = Call To Action
+
+      Objetivo:
+      gerar conversão/orçamento.
+      -->
+      <a routerLink="/orcamento" class="header__button">
+
         Solicitar orçamento
+
         <span>→</span>
+
       </a>
 
-      <a href="#" class="btn btn--secondary">
-        Ver projetos
-        <span>→</span>
-      </a>
+    </header>
+
+    <!--
+    ========================================================
+    CONTEÚDO PRINCIPAL DA HERO
+    ========================================================
+    -->
+    <div class="hero__content">
+
+      <!-- Texto pequeno superior -->
+      <span class="hero__subtitle">
+        Arquitetura contemporânea
+      </span>
+
+      <!--
+      Título principal.
+
+      O strong é usado para destacar
+      a palavra "Arquitetura".
+      -->
+      <h1>
+
+        MedLev
+
+        <strong>
+          Arquitetura
+        </strong>
+
+      </h1>
+
+      <!-- Descrição -->
+      <p>
+        Medição, levantamento e projetos
+        com precisão técnica e visão moderna.
+      </p>
+
+      <!--
+      ========================================================
+      BOTÕES PRINCIPAIS
+      ========================================================
+      -->
+      <div class="hero__actions">
+
+        <!-- Botão principal -->
+        <a routerLink="/orcamento" class="btn btn--primary">
+
+          Solicitar orçamento
+
+          <span>→</span>
+
+        </a>
+
+        <!-- Botão secundário -->
+        <a routerLink="/portfolio" class="btn btn--secondary">
+
+          Ver projetos
+
+          <span>→</span>
+
+        </a>
+
+      </div>
 
     </div>
 
-  </div>
+  </section>
 
-</section>
+  <!--
+  ========================================================
+  SERVICES SECTION
+  ========================================================
+
+  Seção de serviços oferecidos.
+  -->
+  <section class="services">
+
+    <!-- Container central -->
+    <div class="container">
+
+      <!-- Título pequeno -->
+      <span class="section-tag reveal">
+        O QUE FAZEMOS
+      </span>
+
+      <!-- Título principal -->
+      <h2 class="reveal">
+        Soluções técnicas com excelência
+      </h2>
+
+      <!--
+      Grid dos cards.
+
+      CSS Grid será usado aqui.
+      -->
+      <div class="services__grid">
+
+        <!-- CARD 1 -->
+        <article class="service-card reveal">
+
+          <div class="service-card__icon">
+            📐
+          </div>
+
+          <h3>
+            Levantamento técnico
+          </h3>
+
+          <p>
+            Levantamentos precisos para projetos,
+            regularizações e documentação técnica.
+          </p>
+
+          <a routerLink="/servicos">
+            Saiba mais →
+          </a>
+
+        </article>
+
+        <!-- CARD 2 -->
+        <article class="service-card reveal">
+
+          <div class="service-card__icon">
+            📏
+          </div>
+
+          <h3>
+            Medição de imóveis
+          </h3>
+
+          <p>
+            Medições detalhadas com precisão
+            para qualquer tipo de imóvel.
+          </p>
+
+          <a routerLink="/servicos">
+            Saiba mais →
+          </a>
+
+        </article>
+
+        <!-- CARD 3 -->
+        <article class="service-card reveal">
+
+          <div class="service-card__icon">
+            🏠
+          </div>
+
+          <h3>
+            Projetos arquitetônicos
+          </h3>
+
+          <p>
+            Projetos modernos, funcionais
+            e personalizados.
+          </p>
+
+          <a routerLink="/servicos">
+            Saiba mais →
+          </a>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>

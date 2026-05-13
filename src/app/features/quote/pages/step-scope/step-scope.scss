@@ -1,0 +1,400 @@
+:host {
+  display: block;
+  background: white;
+  min-height: 100vh;
+}
+
+.step-scope {
+
+  max-width: 1280px;
+
+  margin: 0 auto;
+
+  min-height: 100vh;
+
+  padding: 0 80px;
+
+  background: white;
+
+}
+
+/* reaproveitamento padrão */
+.step-scope__header,
+.step-scope__footer {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+}
+
+.step-scope__header {
+
+  padding: 24px 0;
+
+  border-bottom: 1px solid #ececec;
+
+}
+
+.step-scope__brand {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+}
+
+.step-scope__logo {
+
+  width: 64px;
+
+  height: 64px;
+
+  border-radius: 50%;
+
+}
+
+.step-scope__brand-text {
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+.step-scope__brand-text h1 {
+
+  margin: 0;
+
+  font-size: 28px;
+
+  font-weight: 700;
+
+}
+
+.step-scope__brand-text span {
+
+  font-size: 15px;
+
+  color: #666;
+
+}
+
+.step-scope__support {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+}
+
+.step-scope__support a {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  text-decoration: none;
+
+  color: #19b15f;
+
+  font-weight: 600;
+
+}
+
+/* stepper */
+.step-scope__steps {
+
+  position: relative;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 40px 0;
+
+}
+
+.step-scope__steps::before {
+
+  content: '';
+
+  position: absolute;
+
+  top: 60px;
+
+  left: 60px;
+
+  right: 60px;
+
+  height: 1px;
+
+  background: #ececec;
+
+}
+
+.step {
+
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: #b7b7b7;
+
+}
+
+.step--active {
+
+  color: #ef3d37;
+
+}
+
+.step__circle {
+
+  width: 42px;
+
+  height: 42px;
+
+  border-radius: 50%;
+
+  background: #ececec;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-weight: 700;
+
+}
+
+.step--active .step__circle,
+.step--completed .step__circle {
+
+  background: #ef3d37;
+
+  color: white;
+
+}
+
+/* conteúdo */
+.step-scope__content {
+
+  padding-bottom: 48px;
+
+}
+
+.step-scope__content h2 {
+
+  font-size: 42px;
+
+  margin-bottom: 10px;
+
+}
+
+.step-scope__content p {
+
+  color: #777;
+
+  margin-bottom: 28px;
+
+}
+
+/* accordion */
+.scope-sections {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+
+}
+
+.scope-card {
+
+  border: 1px solid #e3e3e3;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+
+}
+
+.scope-card__header {
+
+  padding: 18px 20px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  cursor: pointer;
+
+}
+
+.scope-card__title {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-weight: 600;
+
+}
+
+.scope-card__info {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: #888;
+
+  font-size: 14px;
+
+}
+
+.scope-card__body {
+
+  border-top: 1px solid #ececec;
+
+  padding: 20px;
+
+}
+
+.scope-items {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 12px;
+
+  margin-top: 20px;
+
+}
+
+.scope-checkbox {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+}
+
+/* extra field */
+.extra-field {
+
+  margin-top: 24px;
+
+}
+
+.extra-field label {
+
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-weight: 600;
+
+}
+
+.extra-field input {
+
+  width: 100%;
+
+  height: 54px;
+
+  border-radius: 10px;
+
+  border: 1px solid #d9d9d9;
+
+  padding: 0 16px;
+
+}
+
+/* dica */
+.scope-tip {
+
+  margin-top: 24px;
+
+  background: #fff6dd;
+
+  border-radius: 10px;
+
+  padding: 20px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+
+  color: #946200;
+
+}
+
+/* footer */
+.step-scope__footer {
+
+  padding: 32px 0;
+
+  border-top: 1px solid #ececec;
+
+}
+
+.secondary-button {
+
+  height: 52px;
+
+  padding: 0 28px;
+
+  border-radius: 12px;
+
+  border: 1px solid #d9d9d9;
+
+  background: white;
+
+}
+
+.primary-button {
+
+  height: 52px;
+
+  padding: 0 32px;
+
+  border-radius: 12px;
+
+  border: none;
+
+  background: #ef3d37;
+
+  color: white;
+
+}

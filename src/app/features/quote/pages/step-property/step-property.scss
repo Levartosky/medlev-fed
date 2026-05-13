@@ -1,0 +1,645 @@
+/*
+========================================================
+CONTAINER PRINCIPAL
+========================================================
+*/
+
+:host {
+  display: block;
+  background: white;
+  min-height: 100vh;
+}
+
+.step-property {
+
+  max-width: 1280px;
+
+  margin: 0 auto;
+
+  min-height: 100vh;
+
+  padding: 0 80px;
+
+  background: white;
+
+}
+
+/*
+========================================================
+HEADER
+========================================================
+*/
+.step-property__header {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 24px 0;
+
+  border-bottom: 1px solid #ececec;
+
+}
+
+/*
+Marca.
+*/
+.step-property__brand {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+}
+
+/*
+Logo.
+*/
+.step-property__logo {
+
+  width: 64px;
+
+  height: 64px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+}
+
+/*
+Textos marca.
+*/
+.step-property__brand-text {
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+/*
+Título marca.
+*/
+.step-property__brand-text h1 {
+
+  margin: 0;
+
+  font-size: 28px;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+}
+
+/*
+Subtítulo marca.
+*/
+.step-property__brand-text span {
+
+  margin-top: 4px;
+
+  font-size: 15px;
+
+  color: #666666;
+
+}
+
+/*
+========================================================
+SUPORTE
+========================================================
+*/
+.step-property__support {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-size: 15px;
+
+}
+
+/*
+Link WhatsApp.
+*/
+.step-property__support a {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  text-decoration: none;
+
+  color: #19b15f;
+
+  font-weight: 600;
+
+}
+
+/*
+========================================================
+STEPPER
+========================================================
+*/
+.step-property__steps {
+
+  position: relative;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 40px 0;
+
+}
+
+/*
+Linha horizontal.
+*/
+.step-property__steps::before {
+
+  content: '';
+
+  position: absolute;
+
+  top: 60px;
+
+  left: 60px;
+
+  right: 60px;
+
+  height: 1px;
+
+  background: #ececec;
+
+}
+
+/*
+Etapa.
+*/
+.step {
+
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color: #b8b8b8;
+
+}
+
+/*
+Ativa.
+*/
+.step--active {
+
+  color: #ef3d37;
+
+}
+
+/*
+Concluída.
+*/
+.step--completed {
+
+  color: #8f8f8f;
+
+}
+
+/*
+Círculo.
+*/
+.step__circle {
+
+  width: 42px;
+
+  height: 42px;
+
+  border-radius: 50%;
+
+  background: #ececec;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-weight: 600;
+
+}
+
+/*
+Círculo ativo.
+*/
+.step--active .step__circle {
+
+  background: #ef3d37;
+
+  color: white;
+
+}
+
+/*
+Círculo concluído.
+*/
+.step--completed .step__circle {
+
+  background: #ef3d37;
+
+  color: white;
+
+}
+
+/*
+========================================================
+CONTEÚDO
+========================================================
+*/
+.step-property__content {
+
+  padding: 24px 0 56px;
+
+}
+
+/*
+Título principal.
+*/
+.step-property__content h2 {
+
+  margin-bottom: 12px;
+
+  font-size: 42px;
+
+  font-weight: 700;
+
+  color: #1c1c1c;
+
+}
+
+/*
+Subtítulo.
+*/
+.step-property__content p {
+
+  margin-bottom: 32px;
+
+  font-size: 18px;
+
+  color: #6a6a6a;
+
+}
+
+/*
+========================================================
+LABEL SECTIONS
+========================================================
+*/
+.section-label {
+
+  display: block;
+
+  margin-bottom: 16px;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  color: #444444;
+
+}
+
+/*
+========================================================
+GRID CARDS
+========================================================
+*/
+.property-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 16px;
+
+}
+
+/*
+Card imóvel.
+*/
+.property-card {
+
+  position: relative;
+
+  border: 1px solid #e3e3e3;
+
+  border-radius: 16px;
+
+  padding: 20px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+
+}
+
+/*
+Card ativo.
+*/
+.property-card--active {
+
+  border-color: #ef3d37;
+
+}
+
+/*
+Radio card.
+*/
+.property-card__radio {
+
+  width: 18px;
+
+  height: 18px;
+
+  border-radius: 50%;
+
+  border: 2px solid #d9d9d9;
+
+}
+
+/*
+Radio ativo.
+*/
+.property-card--active .property-card__radio {
+
+  border-color: #ef3d37;
+
+  background: #ef3d37;
+
+  box-shadow: inset 0 0 0 4px white;
+
+}
+
+/*
+Ícone card.
+*/
+.property-card__icon {
+
+  margin: 20px 0 12px;
+
+  color: #ef3d37;
+
+}
+
+/*
+Ícone material.
+*/
+.property-card__icon .material-symbols-outlined {
+
+  font-size: 42px;
+
+}
+
+/*
+Título card.
+*/
+.property-card h3 {
+
+  margin: 0 0 6px;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+}
+
+/*
+Descrição.
+*/
+.property-card__description {
+
+  font-size: 14px;
+
+  color: #8b8b8b;
+
+}
+
+/*
+========================================================
+GRID CAMPOS
+========================================================
+*/
+.step-property__fields-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 16px;
+
+  margin-top: 24px;
+
+}
+
+/*
+========================================================
+FORM GROUP
+========================================================
+*/
+.form-group {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+}
+
+/*
+Label.
+*/
+.form-group label {
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  color: #444444;
+
+}
+
+/*
+Input/select.
+*/
+.form-group input,
+.form-group select {
+
+  height: 54px;
+
+  border: 1px solid #d9d9d9;
+
+  border-radius: 10px;
+
+  padding: 0 16px;
+
+  font-size: 15px;
+
+  outline: none;
+
+}
+
+/*
+========================================================
+SECTION
+========================================================
+*/
+.step-property__section {
+
+  margin-top: 28px;
+
+}
+
+/*
+========================================================
+OCUPAÇÃO
+========================================================
+*/
+.occupation-options {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 28px;
+
+}
+
+/*
+Item ocupação.
+*/
+.occupation-option {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  cursor: pointer;
+
+}
+
+/*
+Radio ocupação.
+*/
+.occupation-option__radio {
+
+  width: 18px;
+
+  height: 18px;
+
+  border-radius: 50%;
+
+  border: 2px solid #cfcfcf;
+
+}
+
+/*
+Radio ativo.
+*/
+.occupation-option__radio--active {
+
+  border-color: #ef3d37;
+
+  background: #ef3d37;
+
+  box-shadow: inset 0 0 0 4px white;
+
+}
+
+/*
+========================================================
+FOOTER
+========================================================
+*/
+.step-property__footer {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 32px 0;
+
+  border-top: 1px solid #ececec;
+
+  margin-top: 40px;
+
+}
+
+/*
+Botão secundário.
+*/
+.secondary-button {
+
+  height: 52px;
+
+  padding: 0 28px;
+
+  border-radius: 12px;
+
+  border: 1px solid #d9d9d9;
+
+  background: white;
+
+  cursor: pointer;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+}
+
+/*
+Botão principal.
+*/
+.primary-button {
+
+  height: 52px;
+
+  padding: 0 32px;
+
+  border-radius: 12px;
+
+  border: none;
+
+  background: #ef3d37;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+}

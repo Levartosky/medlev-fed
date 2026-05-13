@@ -1,0 +1,280 @@
+<main class="portfolio-showcase">
+
+  <!-- ═══ NAV ════════════════════════════════════════════════════════════════ -->
+  <header class="ps-nav" [class.scrolled]="isNavScrolled">
+
+    <a routerLink="/" class="ps-brand">
+      <img src="/logo-medlev.png" alt="Logo MedLev Arquitetura" class="ps-brand__logo" />
+      <div class="ps-brand__text">
+        <strong>MedLev</strong>
+        <span>Arquitetura</span>
+      </div>
+    </a>
+
+    <nav class="ps-nav__links">
+      <a routerLink="/">Início</a>
+      <a routerLink="/portfolio" aria-current="page">Portfólio</a>
+      <a routerLink="/servicos">Serviços</a>
+      <a routerLink="/sobre">Sobre</a>
+      <a routerLink="/contato">Contato</a>
+    </nav>
+
+    <a routerLink="/orcamento" class="ps-nav__cta">
+      Solicitar orçamento <span>→</span>
+    </a>
+
+  </header>
+
+  <!-- ═══ HERO ═══════════════════════════════════════════════════════════════ -->
+  <section class="ps-hero">
+
+    <div class="ps-hero__overlay"></div>
+
+    <div class="ps-hero__content">
+
+      <span class="ps-hero__eyebrow">PORTFÓLIO</span>
+
+      <h1 class="ps-hero__title">
+        Projetos <strong>realizados</strong>
+      </h1>
+
+      <p class="ps-hero__desc">
+        Do levantamento técnico ao projeto autoral —
+        cada entrega com precisão e comprometimento.
+      </p>
+
+      <div class="ps-hero__stats">
+
+        <div class="hero-stat">
+          <span class="hero-stat__num">18</span>
+          <span class="hero-stat__label">Projetos entregues</span>
+        </div>
+
+        <div class="hero-stat">
+          <span class="hero-stat__num">5</span>
+          <span class="hero-stat__label">Categorias</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ═══ SHOWCASE ═══════════════════════════════════════════════════════════ -->
+  <section class="showcase" id="showcase" aria-label="Portfólio de projetos">
+
+    <!-- ── Filters bar ────────────────────────────────────────────────────── -->
+    <div class="filters-bar" role="toolbar" aria-label="Filtros de categoria">
+
+      @for (filter of filters; track filter.key) {
+        <button
+          class="filter-pill"
+          [class.active]="filter.key === activeFilter"
+          [attr.aria-pressed]="filter.key === activeFilter"
+          (click)="applyFilter(filter.key); onUserInteraction()"
+        >
+          {{ filter.label }}
+          <span class="filter-pill__badge">{{ getFilterCount(filter.key) }}</span>
+        </button>
+      }
+
+    </div>
+
+    <!-- ── Stage + Thumbs grid ────────────────────────────────────────────── -->
+    <div class="showcase__grid">
+
+      <!-- ── STAGE ────────────────────────────────────────────────────────── -->
+      <div class="stage">
+
+        <!-- Blueprint canvas -->
+        <div class="stage__canvas">
+
+          @if (getCurrentProject(); as project) {
+            <div
+              class="blueprint-art"
+              [innerHTML]="getSafeBlueprint(project.id)"
+              aria-hidden="true"
+            ></div>
+          }
+
+          <!-- Navigation arrows -->
+          <button
+            class="stage-nav stage-nav--prev"
+            aria-label="Projeto anterior"
+            (click)="prev(); onUserInteraction()"
+          >
+            ←
+          </button>
+
+          <button
+            class="stage-nav stage-nav--next"
+            aria-label="Próximo projeto"
+            (click)="next(); onUserInteraction()"
+          >
+            →
+          </button>
+
+          <!-- Counter -->
+          <div class="stage-counter" aria-live="polite" aria-atomic="true">
+            <span class="stage-counter__cur">{{ pad(currentIndex + 1) }}</span>
+            <span class="stage-counter__sep">/</span>
+            <span class="stage-counter__tot">{{ pad(filteredProjects.length) }}</span>
+          </div>
+
+          <!-- Progress bar -->
+          <div class="stage-progress" [class.idle]="!autoplayActive">
+            <div
+              class="stage-progress-fill"
+              [style.width.%]="progressFillWidth"
+            ></div>
+          </div>
+
+          <!-- Autoplay toggle -->
+          <button
+            class="autoplay-btn"
+            [class.playing]="autoplayActive"
+            [attr.aria-pressed]="autoplayActive"
+            [attr.aria-label]="autoplayActive ? 'Pausar apresentação' : 'Iniciar apresentação'"
+            (click)="toggleAutoplay()"
+          >
+            @if (autoplayActive) {
+              <span>⏸</span>
+            } @else {
+              <span>▶</span>
+            }
+          </button>
+
+        </div>
+
+        <!-- Project info panel -->
+        @if (getCurrentProject(); as project) {
+          <div class="stage__info">
+
+            <span class="stage-info__eyebrow">{{ project.catLabel }}</span>
+
+            <h2 class="stage-info__title">{{ project.title }}</h2>
+
+            <p class="stage-info__loc">
+              <span class="stage-info__loc-icon">📍</span>
+              {{ project.loc }}
+            </p>
+
+            <dl class="stage-info__meta">
+              <div class="stage-info__meta-item">
+                <dt>Área</dt>
+                <dd>{{ project.area }}</dd>
+              </div>
+              <div class="stage-info__meta-item">
+                <dt>Ano</dt>
+                <dd>{{ project.year }}</dd>
+              </div>
+              <div class="stage-info__meta-item">
+                <dt>Serviço</dt>
+                <dd>{{ project.service }}</dd>
+              </div>
+              <div class="stage-info__meta-item">
+                <dt>Entrega</dt>
+                <dd>{{ project.delivery }}</dd>
+              </div>
+            </dl>
+
+            <div class="stage-info__actions">
+              @if (project.pdfUrl) {
+                <a
+                  [href]="project.pdfUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn--primary"
+                >
+                  Baixar planta <span>↓</span>
+                </a>
+              } @else {
+                <button class="btn btn--primary" disabled>
+                  Planta em breve
+                </button>
+              }
+              <a routerLink="/orcamento" class="btn btn--secondary">
+                Solicitar orçamento <span>→</span>
+              </a>
+            </div>
+
+          </div>
+        }
+
+      </div>
+
+      <!-- ── THUMBS PANEL ─────────────────────────────────────────────────── -->
+      <aside class="thumbs-panel" aria-label="Lista de projetos">
+
+        @for (project of filteredProjects; track project.id; let i = $index) {
+          <button
+            #thumbRef
+            class="thumb-item"
+            [class.active]="i === currentIndex"
+            [attr.aria-current]="i === currentIndex ? 'true' : null"
+            (click)="goTo(i); onUserInteraction()"
+          >
+
+            <div
+              class="thumb-item__mini-bp"
+              [innerHTML]="getSafeMiniBlueprint(project.id)"
+              aria-hidden="true"
+            ></div>
+
+            <div class="thumb-item__info">
+              <span class="thumb-item__num">{{ pad(i + 1) }}</span>
+              <span class="thumb-item__title">{{ project.title }}</span>
+              <span class="thumb-item__loc">{{ project.loc }}</span>
+            </div>
+
+            <span class="thumb-item__arrow">→</span>
+
+          </button>
+        }
+
+      </aside>
+
+    </div>
+
+  </section>
+
+  <!-- ═══ CTA BANNER ═════════════════════════════════════════════════════════ -->
+  <section class="cta-banner">
+
+    <div class="cta-banner__icon">
+      <span class="material-symbols-outlined">description</span>
+    </div>
+
+    <div class="cta-banner__text">
+      <strong>Tem um projeto em mente?</strong>
+      <p>Fale com a gente e receba um orçamento personalizado.</p>
+    </div>
+
+    <div class="cta-banner__actions">
+
+      <a
+        href="https://wa.me/5511972651827?text=Olá!%20Vi%20o%20portfólio%20da%20MedLev%20Arquitetura%20e%20gostaria%20de%20saber%20mais."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn btn--secondary"
+      >
+        Falar no WhatsApp <span>→</span>
+      </a>
+
+      <a routerLink="/orcamento" class="btn btn--primary">
+        Solicitar orçamento <span>→</span>
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- ═══ FOOTER ══════════════════════════════════════════════════════════════ -->
+  <footer class="ps-footer">
+    <div class="ps-footer__inner">
+      <p>© 2025 MedLev Arquitetura. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+</main>

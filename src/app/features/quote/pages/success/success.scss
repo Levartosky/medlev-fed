@@ -1,0 +1,541 @@
+/*
+========================================================
+SUCCESS PAGE
+========================================================
+*/
+
+:host {
+  display: block;
+}
+
+.success-page {
+
+  position: relative;
+
+  min-height: 100vh;
+
+  overflow: hidden;
+
+  padding: 32px 80px;
+
+  background-image:
+    url('/home-hero.jpg');
+
+  background-size: cover;
+
+  background-position: center;
+
+}
+
+/*
+========================================================
+OVERLAY
+========================================================
+*/
+
+.success-page__overlay {
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, .78),
+      rgba(0, 0, 0, .72)
+    );
+
+  backdrop-filter: blur(2px);
+
+}
+
+/*
+========================================================
+HEADER
+========================================================
+*/
+
+.success-header {
+
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+}
+
+.success-header__brand {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+}
+
+.success-header__logo {
+
+  width: 72px;
+
+  height: 72px;
+
+  border-radius: 50%;
+
+}
+
+.success-header__text {
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+.success-header__text h1 {
+
+  margin: 0;
+
+  font-size: 48px;
+
+  color: white;
+
+  font-weight: 800;
+
+}
+
+.success-header__text span {
+
+  color: white;
+
+  opacity: .75;
+
+  letter-spacing: 4px;
+
+  text-transform: uppercase;
+
+}
+
+.success-header__support {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: white;
+
+}
+
+.success-header__support a {
+
+  color: #15d26d;
+
+  text-decoration: none;
+
+  font-weight: 700;
+
+}
+
+/*
+========================================================
+STEPS
+========================================================
+*/
+
+.success-steps {
+
+  position: relative;
+
+  z-index: 2;
+
+  margin-top: 40px;
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 90px;
+
+}
+
+.success-steps::before {
+
+  content: '';
+
+  position: absolute;
+
+  top: 21px;
+
+  left: calc(50% - 264px);
+
+  right: calc(50% - 264px);
+
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.2);
+
+}
+
+.step {
+
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: rgba(255,255,255,.55);
+
+}
+
+.step--active {
+
+  color: #ef3d37;
+
+}
+
+.step__circle {
+
+  width: 42px;
+
+  height: 42px;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,.15);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-weight: 700;
+
+}
+
+.step--completed .step__circle,
+.step--active .step__circle {
+
+  background: #ef3d37;
+
+  color: white;
+
+}
+
+/*
+========================================================
+CONTENT
+========================================================
+*/
+
+.success-content {
+
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  margin-top: 60px;
+
+}
+
+/*
+========================================================
+CARD
+========================================================
+*/
+
+.success-card {
+
+  width: 100%;
+
+  max-width: 760px;
+
+  padding: 56px;
+
+  border-radius: 28px;
+
+  background:
+    rgba(255,255,255,.06);
+
+  border:
+    1px solid rgba(255,255,255,.18);
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.35);
+
+  text-align: center;
+
+}
+
+/*
+========================================================
+ÍCONE
+========================================================
+*/
+
+.success-card__icon {
+
+  width: 130px;
+
+  height: 130px;
+
+  margin: 0 auto 30px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(239,61,55,.35),
+      rgba(239,61,55,.12)
+    );
+
+  border:
+    2px solid rgba(239,61,55,.45);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+.success-card__icon span {
+
+  font-size: 72px;
+
+  color: #ef3d37;
+
+}
+
+/*
+========================================================
+TEXTOS
+========================================================
+*/
+
+.success-card h2 {
+
+  font-size: 64px;
+
+  line-height: 1.05;
+
+  margin-bottom: 28px;
+
+  color: white;
+
+}
+
+.success-card h2 span {
+
+  color: #ef3d37;
+
+}
+
+.success-card p {
+
+  color: rgba(255,255,255,.78);
+
+  font-size: 22px;
+
+  line-height: 1.7;
+
+}
+
+/*
+========================================================
+STATUS
+========================================================
+*/
+
+.success-status {
+
+  margin-top: 40px;
+
+  padding: 28px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(0,0,0,.22);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+.success-status__item {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color: white;
+
+}
+
+.success-status__circle {
+
+  width: 44px;
+
+  height: 44px;
+
+  border-radius: 50%;
+
+  background: #ef3d37;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+.success-status__line {
+
+  width: 80px;
+
+  height: 2px;
+
+  margin: 0 18px;
+
+  background:
+    rgba(255,255,255,.22);
+
+}
+
+/*
+========================================================
+ACTIONS
+========================================================
+*/
+
+.success-actions {
+
+  margin-top: 42px;
+
+  display: flex;
+
+  gap: 20px;
+
+}
+
+.primary-button,
+.secondary-button {
+
+  flex: 1;
+
+  height: 68px;
+
+  border-radius: 18px;
+
+  border: none;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+}
+
+.primary-button {
+
+  background: #ef3d37;
+
+  color: white;
+
+}
+
+.secondary-button {
+
+  background:
+    rgba(255,255,255,.06);
+
+  border:
+    1px solid rgba(255,255,255,.18);
+
+  color: white;
+
+}
+
+/*
+========================================================
+FOOTER
+========================================================
+*/
+
+.success-footer {
+
+  margin-top: 42px;
+
+  padding-top: 32px;
+
+  border-top:
+    1px solid rgba(255,255,255,.12);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 10px;
+
+}
+
+.success-footer span {
+
+  color: #ef3d37;
+
+}
+
+.success-footer p {
+
+  font-size: 18px;
+
+}
+
+.success-footer strong {
+
+  color: #ef3d37;
+
+}

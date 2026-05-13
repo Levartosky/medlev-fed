@@ -1,27 +1,23 @@
 /*
 ========================================================
-HOME COMPONENT
+ABOUT COMPONENT
 ========================================================
 
-Este é o componente principal da Home.
+Página institucional premium da MEDLEV.
 
 Responsabilidades:
-- controlar lógica da página
-- responder eventos
-- integrar APIs futuramente
-- controlar animações
-- controlar interações
+- apresentar posicionamento da marca
+- reforçar autoridade
+- transmitir sofisticação
+- manter consistência visual com a Home
 
-Atualmente:
-- componente estático
-- sem lógica complexa
+A página foi construída utilizando:
+- Angular Standalone
+- SCSS modular
+- Glassmorphism
+- UI cinematográfica
+- Layout responsivo
 
-Mais pra frente:
-- integraremos backend
-- WhatsApp
-- formulário
-- animações
-- IA
 ========================================================
 */
 
@@ -34,27 +30,23 @@ import { isPlatformBrowser } from '@angular/common';
 /*
 Importa RouterModule.
 
-Responsável por disponibilizar:
+Necessário para:
 - routerLink
-- router-outlet
 - navegação SPA
 */
 import { RouterModule } from '@angular/router';
 
 /*
-Decorator do Angular.
-
-Define:
-- selector
-- html
-- scss
+========================================================
+COMPONENT
+========================================================
 */
 @Component({
 
   /*
-  Nome da tag HTML do componente.
+  Nome da tag HTML.
   */
-  selector: 'app-home',
+  selector: 'app-about',
 
   /*
   Angular moderno standalone.
@@ -62,10 +54,7 @@ Define:
   standalone: true,
 
   /*
-  IMPORTS DO COMPONENTE
-
-  Em standalone:
-  tudo que o HTML usa
+  Tudo usado no HTML
   precisa ser importado aqui.
   */
   imports: [
@@ -73,21 +62,23 @@ Define:
   ],
 
   /*
-  Arquivo HTML do componente.
+  HTML da página.
   */
-  templateUrl: './home.html',
+  templateUrl: './about.html',
 
   /*
-  Arquivo SCSS do componente.
+  SCSS da página.
   */
-  styleUrl: './home.scss'
+  styleUrl: './about.scss'
 
 })
 
 /*
-Classe principal do componente.
+========================================================
+CLASS
+========================================================
 */
-export class HomeComponent implements AfterViewInit, OnDestroy {
+export class AboutComponent implements AfterViewInit, OnDestroy {
 
   isNavScrolled = false;
   private observer?: IntersectionObserver;

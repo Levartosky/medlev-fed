@@ -1,0 +1,426 @@
+/*
+========================================================
+CONTAINER PRINCIPAL
+========================================================
+*/
+
+:host {
+  display: block;
+  background: white;
+  min-height: 100vh;
+}
+
+.quote-form {
+
+  max-width: 1280px;
+
+  margin: 0 auto;
+
+  min-height: 100vh;
+
+  padding: 0 80px;
+
+  background: white;
+
+}
+
+/*
+========================================================
+HEADER
+========================================================
+*/
+.quote-form__header {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 24px 0;
+
+  border-bottom: 1px solid #ececec;
+
+}
+
+/*
+Marca.
+*/
+.quote-form__brand {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+}
+
+/*
+Logo.
+*/
+.quote-form__logo {
+
+  width: 64px;
+
+  height: 64px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+}
+
+/*
+Textos marca.
+*/
+.quote-form__brand-text {
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+/*
+Título marca.
+*/
+.quote-form__brand-text h1 {
+
+  margin: 0;
+
+  font-size: 28px;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+}
+
+/*
+Subtítulo.
+*/
+.quote-form__brand-text span {
+
+  margin-top: 4px;
+
+  font-size: 15px;
+
+  color: #666666;
+
+}
+
+/*
+========================================================
+SUPORTE
+========================================================
+*/
+.quote-form__support {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-size: 15px;
+
+}
+
+/*
+Link WhatsApp.
+*/
+.quote-form__support a {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  text-decoration: none;
+
+  color: #19b15f;
+
+  font-weight: 600;
+
+}
+
+/*
+========================================================
+STEPPER
+========================================================
+*/
+.quote-form__steps {
+
+  position: relative;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 40px 0;
+
+}
+
+/*
+Linha horizontal.
+*/
+.quote-form__steps::before {
+
+  content: '';
+
+  position: absolute;
+
+  top: 60px;
+
+  left: 60px;
+
+  right: 60px;
+
+  height: 1px;
+
+  background: #ececec;
+
+}
+
+/*
+Etapa.
+*/
+.step {
+
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color: #b8b8b8;
+
+}
+
+/*
+Ativa.
+*/
+.step--active {
+
+  color: #ef3d37;
+
+}
+
+/*
+Círculo.
+*/
+.step__circle {
+
+  width: 42px;
+
+  height: 42px;
+
+  border-radius: 50%;
+
+  background: #ececec;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-weight: 600;
+
+}
+
+/*
+Círculo ativo.
+*/
+.step--active .step__circle {
+
+  background: #ef3d37;
+
+  color: white;
+
+}
+
+/*
+========================================================
+CONTEÚDO
+========================================================
+*/
+.quote-form__content {
+
+  padding: 24px 0 56px;
+
+}
+
+/*
+Título principal.
+*/
+.quote-form__content h2 {
+
+  margin-bottom: 12px;
+
+  font-size: 42px;
+
+  font-weight: 700;
+
+  color: #1c1c1c;
+
+}
+
+/*
+Texto auxiliar.
+*/
+.quote-form__content p {
+
+  margin-bottom: 48px;
+
+  font-size: 18px;
+
+  color: #6a6a6a;
+
+}
+
+/*
+========================================================
+FORMULÁRIO
+========================================================
+*/
+.quote-form__form {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 32px;
+
+}
+
+/*
+Grupo campo.
+*/
+.form-group {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+}
+
+/*
+Label.
+*/
+.form-group label {
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  color: #444444;
+
+}
+
+/*
+Input.
+*/
+.form-group input {
+
+  height: 58px;
+
+  border: 1px solid #d9d9d9;
+
+  border-radius: 12px;
+
+  padding: 0 20px;
+
+  font-size: 16px;
+
+  outline: none;
+
+  transition: 0.2s ease;
+
+}
+
+/*
+Focus input.
+*/
+.form-group input:focus {
+
+  border-color: #ef3d37;
+
+}
+
+/*
+========================================================
+FOOTER
+========================================================
+*/
+.quote-form__footer {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 32px 0;
+
+  border-top: 1px solid #ececec;
+
+}
+
+/*
+Botão secundário.
+*/
+.secondary-button {
+
+  height: 52px;
+
+  padding: 0 28px;
+
+  border-radius: 12px;
+
+  border: 1px solid #d9d9d9;
+
+  background: white;
+
+  cursor: pointer;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+}
+
+/*
+Botão principal.
+*/
+.primary-button {
+
+  height: 52px;
+
+  padding: 0 32px;
+
+  border-radius: 12px;
+
+  border: none;
+
+  background: #ef3d37;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+}

@@ -1,0 +1,371 @@
+<!--
+========================================================
+CONTACT PAGE — MEDLEV ARQUITETURA
+========================================================
+
+Página de contato premium.
+
+IMPORTANTE:
+O header desta página usa as MESMAS classes da Home:
+.brand / .header__nav / .header__button
+Isso garante padrão visual 100% idêntico.
+
+Seções:
+1. Hero — mesmo container da Home, conteúdo adaptado
+2. Canais + Formulário — dark, 2 colunas
+3. Footer — dark luxury
+
+========================================================
+-->
+
+<main class="contact">
+
+  <!--
+  ========================================================
+  HERO SECTION
+  ========================================================
+
+  Usa EXATAMENTE a mesma estrutura da Home:
+  - .hero (mesma classe)
+  - .hero__overlay (mesmo overlay)
+  - .header com .brand / .header__nav / .header__button
+  -->
+  <section class="hero">
+
+    <!-- Overlay cinematográfico — igual à Home -->
+    <div class="hero__overlay"></div>
+
+    <!--
+    ========================================================
+    HEADER — IDÊNTICO À HOME
+    ========================================================
+    -->
+    <header class="header" [class.scrolled]="isNavScrolled">
+
+      <!--
+      Logo leva para a Home.
+      Usa <a> e classe .brand — igual à Home.
+      -->
+      <a routerLink="/" class="brand">
+
+        <img
+          src="/logo-medlev.png"
+          alt="Logo MedLev Arquitetura"
+          class="brand__logo"
+        />
+
+        <div class="brand__text">
+          <strong>MedLev</strong>
+          <span>Arquitetura</span>
+        </div>
+
+      </a>
+
+      <!--
+      Navegação — mesma classe .header__nav da Home.
+      "Contato" recebe .active para exibir underline vermelho.
+      -->
+      <nav class="header__nav">
+
+        <a routerLink="/">Início</a>
+        <a routerLink="/portfolio">Portfólio</a>
+        <a routerLink="/servicos">Serviços</a>
+        <a routerLink="/sobre">Sobre</a>
+        <a class="active">Contato</a>
+
+      </nav>
+
+      <!--
+      Botão CTA — mesma classe .header__button da Home.
+      -->
+      <a routerLink="/orcamento" class="header__button">
+        Solicitar orçamento <span>→</span>
+      </a>
+
+    </header>
+
+    <!--
+    ========================================================
+    CONTEÚDO HERO — CONTACT
+    ========================================================
+
+    Headline principal da página de contato.
+    Texto centralizado à esquerda, sem card lateral.
+    -->
+    <div class="contact__hero-body">
+
+      <!-- Label vermelho superior -->
+      <span class="contact__label">CONTATO</span>
+
+      <!--
+      Título principal.
+      Chamada direta ao diálogo com o cliente.
+      -->
+      <h1>
+        Vamos conversar<br>
+        sobre seu <strong>projeto?</strong>
+      </h1>
+
+      <!-- Linha divisória vermelha -->
+      <div class="contact__divider"></div>
+
+      <p>
+        Estamos prontos para entender suas necessidades<br>
+        e transformar suas ideias em realidade.
+      </p>
+
+    </div>
+
+  </section>
+
+  <!--
+  ========================================================
+  SEÇÃO PRINCIPAL — CANAIS + FORMULÁRIO
+  ========================================================
+
+  Fundo escuro (preto), substituindo o branco do mockup
+  para seguir os padrões dark luxury do projeto.
+
+  Grid de 2 colunas:
+  Esquerda: canais de atendimento
+  Direita: formulário de contato
+  -->
+  <section class="contact__body">
+
+    <!--
+    ====================================================
+    ESQUERDA — CANAIS DE ATENDIMENTO
+    ====================================================
+    -->
+    <div class="contact__channels">
+
+      <!-- Label vermelho superior -->
+      <span class="contact__section-tag reveal">FALE COM A GENTE</span>
+
+      <h2 class="reveal">Nossos canais<br>de atendimento</h2>
+
+      <!-- Linha divisória vermelha -->
+      <div class="contact__divider"></div>
+
+      <!-- CANAL 1 — WhatsApp -->
+      <div class="contact__channel-item reveal">
+
+        <div class="contact__channel-icon">
+          <span class="material-symbols-outlined">chat</span>
+        </div>
+
+        <div class="contact__channel-info">
+          <strong>WhatsApp</strong>
+          <span>(11) 99999-9999</span>
+          <p>Atendimento rápido e direto.</p>
+        </div>
+
+      </div>
+
+      <!-- CANAL 2 — E-mail -->
+      <div class="contact__channel-item reveal">
+
+        <div class="contact__channel-icon">
+          <span class="material-symbols-outlined">mail</span>
+        </div>
+
+        <div class="contact__channel-info">
+          <strong>E-mail</strong>
+          <span>contato&#64;medlevarq.br</span>
+          <p>Retornamos em até 24h.</p>
+        </div>
+
+      </div>
+
+      <!-- CANAL 3 — Instagram -->
+      <div class="contact__channel-item reveal">
+
+        <div class="contact__channel-icon">
+          <span class="material-symbols-outlined">photo_camera</span>
+        </div>
+
+        <div class="contact__channel-info">
+          <strong>Instagram</strong>
+          <span>&#64;medlev.arq</span>
+          <p>Acompanhe nossos projetos.</p>
+        </div>
+
+      </div>
+
+      <!-- CANAL 4 — Localização -->
+      <div class="contact__channel-item reveal">
+
+        <div class="contact__channel-icon">
+          <span class="material-symbols-outlined">location_on</span>
+        </div>
+
+        <div class="contact__channel-info">
+          <strong>Localização</strong>
+          <span>São Paulo – SP</span>
+          <p>Atendendo em todo o Grande São Paulo.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!--
+    ====================================================
+    DIREITA — FORMULÁRIO DE CONTATO
+    ====================================================
+
+    Formulário de envio de mensagem.
+    Campos: Nome, WhatsApp, E-mail, Assunto, Mensagem.
+    Checkbox de autorização de dados.
+    Botão de envio vermelho.
+    -->
+    <div class="contact__form-wrapper">
+
+      <h2>Envie sua mensagem</h2>
+      <p class="contact__form-subtitle">
+        Preencha o formulário ao lado que entraremos em contato com você.
+      </p>
+
+      <form class="contact__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <!--
+        Feedback de sucesso
+        -->
+        @if (formState === 'success') {
+          <div class="contact__feedback contact__feedback--success">
+            <span class="material-symbols-outlined">check_circle</span>
+            <div class="contact__feedback-text">
+              <strong>Mensagem enviada!</strong>
+              <p>Entraremos em contato em breve pelo e-mail ou WhatsApp informados.</p>
+            </div>
+            <button type="button" class="contact__feedback-close" (click)="resetState()">
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+        }
+
+        <!--
+        Feedback de erro
+        -->
+        @if (formState === 'error') {
+          <div class="contact__feedback contact__feedback--error">
+            <span class="material-symbols-outlined">error</span>
+            <div class="contact__feedback-text">
+              <strong>Falha ao enviar.</strong>
+              <p>Tente novamente ou entre em contato pelo WhatsApp.</p>
+            </div>
+            <button type="button" class="contact__feedback-close" (click)="resetState()">
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+        }
+
+        <!--
+        Linha 1: Nome + WhatsApp
+        -->
+        <div class="contact__form-row">
+
+          <div
+            class="contact__form-group"
+            [class.contact__form-group--invalid]="form.get('nome')?.invalid && form.get('nome')?.touched"
+          >
+            <label>Nome *</label>
+            <input type="text" placeholder="Seu nome" formControlName="nome" />
+            @if (form.get('nome')?.invalid && form.get('nome')?.touched) {
+              <span class="contact__form-error">Informe seu nome completo.</span>
+            }
+          </div>
+
+          <div
+            class="contact__form-group"
+            [class.contact__form-group--invalid]="form.get('whatsapp')?.invalid && form.get('whatsapp')?.touched"
+          >
+            <label>WhatsApp *</label>
+            <input type="tel" placeholder="(11) 99999-9999" formControlName="whatsapp" maxlength="15" (input)="maskWhatsApp($event)" />
+            @if (form.get('whatsapp')?.invalid && form.get('whatsapp')?.touched) {
+              <span class="contact__form-error">Informe um WhatsApp válido: (XX) XXXXX-XXXX.</span>
+            }
+          </div>
+
+        </div>
+
+        <!--
+        Linha 2: E-mail + Assunto
+        -->
+        <div class="contact__form-row">
+
+          <div
+            class="contact__form-group"
+            [class.contact__form-group--invalid]="form.get('email')?.invalid && form.get('email')?.touched"
+          >
+            <label>E-mail *</label>
+            <input type="email" placeholder="seu&#64;email.com" formControlName="email" />
+            @if (form.get('email')?.invalid && form.get('email')?.touched) {
+              <span class="contact__form-error">Informe um e-mail válido.</span>
+            }
+          </div>
+
+          <div
+            class="contact__form-group"
+            [class.contact__form-group--invalid]="form.get('assunto')?.invalid && form.get('assunto')?.touched"
+          >
+            <label>Assunto *</label>
+            <input type="text" placeholder="Sobre o que deseja falar?" formControlName="assunto" />
+            @if (form.get('assunto')?.invalid && form.get('assunto')?.touched) {
+              <span class="contact__form-error">Informe o assunto.</span>
+            }
+          </div>
+
+        </div>
+
+        <!--
+        Mensagem — campo full width
+        -->
+        <div
+          class="contact__form-group contact__form-group--full"
+          [class.contact__form-group--invalid]="form.get('mensagem')?.invalid && form.get('mensagem')?.touched"
+        >
+          <label>Mensagem *</label>
+          <textarea rows="5" placeholder="Conte mais sobre seu projeto ou dúvida..." formControlName="mensagem"></textarea>
+          @if (form.get('mensagem')?.invalid && form.get('mensagem')?.touched) {
+            <span class="contact__form-error">Escreva sua mensagem (mínimo 10 caracteres).</span>
+          }
+        </div>
+
+        <!--
+        Rodapé do form: checkbox + botão
+        -->
+        <div class="contact__form-footer">
+
+          <label
+            class="contact__form-check"
+            [class.contact__form-check--invalid]="form.get('autorizo')?.invalid && form.get('autorizo')?.touched"
+          >
+            <input type="checkbox" formControlName="autorizo" />
+            <span>Autorizo o uso dos meus dados para atendimento desta solicitação</span>
+          </label>
+
+          <button
+            type="submit"
+            class="contact__form-submit"
+            [class.contact__form-submit--sending]="formState === 'sending'"
+            [disabled]="formState === 'sending' || !form.get('autorizo')?.value"
+          >
+            @if (formState === 'sending') {
+              <span class="contact__form-spinner"></span>
+              Enviando...
+            } @else {
+              <span class="material-symbols-outlined">send</span>
+              Enviar mensagem
+            }
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </section>
+
+</main>
