@@ -227,12 +227,14 @@ export class StepPropertyComponent implements AfterViewInit, OnDestroy {
   Navega para:
   ETAPA 3 - ESCOPO
   */
+  metragem = '';
+  endereco = '';
+  submitted = false;
+
   nextStep(): void {
-
-    this.router.navigate([
-      '/orcamento/escopo'
-    ]);
-
+    this.submitted = true;
+    if (!this.metragem.trim() || !this.endereco.trim()) return;
+    this.router.navigate(['/orcamento/escopo']);
   }
 
 }

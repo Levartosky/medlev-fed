@@ -90,15 +90,13 @@ export class StepScopeComponent implements AfterViewInit, OnDestroy {
       title: 'Estrutura e vedações',
       icon: '⚠️',
       expanded: true,
-      selected: 3,
-      total: 6,
       items: [
-        'Alvenarias (paredes)',
-        'Aberturas (portas e janelas)',
-        'Pé direito de ambientes',
-        'Pé direito e vigas aparentes',
-        'Identificação de forro/laje',
-        'Desníveis de piso'
+        { label: 'Alvenarias (paredes)', checked: false },
+        { label: 'Aberturas (portas e janelas)', checked: false },
+        { label: 'Pé direito de ambientes', checked: false },
+        { label: 'Pé direito e vigas aparentes', checked: false },
+        { label: 'Identificação de forro/laje', checked: false },
+        { label: 'Desníveis de piso', checked: false }
       ]
     },
 
@@ -106,54 +104,69 @@ export class StepScopeComponent implements AfterViewInit, OnDestroy {
       title: 'Marcenaria, bancadas e nichos',
       icon: '🪑',
       expanded: false,
-      selected: 0,
-      total: 4,
-      items: []
+      items: [
+        { label: 'Bancadas (medidas totais)', checked: false },
+        { label: 'Armários embutidos / Marcenarias fixas', checked: false },
+        { label: 'Nichos', checked: false },
+        { label: 'Lareiras', checked: false }
+      ]
     },
 
     {
       title: 'Áreas molhadas',
       icon: '💧',
       expanded: false,
-      selected: 0,
-      total: 4,
-      items: []
+      items: [
+        { label: 'Box do chuveiro', checked: false },
+        { label: 'Aquecedores', checked: false },
+        { label: 'Pias e cubas', checked: false },
+        { label: 'Área de serviço (tanque e lavanderia)', checked: false }
+      ]
     },
 
     {
       title: 'Circulação',
       icon: '🏠',
       expanded: false,
-      selected: 0,
-      total: 4,
-      items: []
+      items: [
+        { label: 'Hall social', checked: false },
+        { label: 'Hall de serviço', checked: false },
+        { label: 'Escadas internas', checked: false },
+        { label: 'Guarda-corpo', checked: false }
+      ]
     },
 
     {
       title: 'Áreas externas',
       icon: '🌳',
       expanded: false,
-      selected: 0,
-      total: 5,
-      items: []
+      items: [
+        { label: 'Churrasqueiras', checked: false },
+        { label: 'Floreiras', checked: false },
+        { label: 'Piscina (medidas gerais e profundidades)', checked: false },
+        { label: 'Áreas externas', checked: false },
+        { label: 'Ar condicionado e condensadora', checked: false }
+      ]
     },
 
     {
       title: 'Itens elétricos',
       icon: '⚡',
       expanded: false,
-      selected: 0,
-      total: 0,
-      items: []
+      items: [
+        { label: 'Medir eixos e alturas exatos dos pontos elétricos', checked: false },
+        { label: 'Locar aproximadamente a posição dos pontos (baixo, médio ou alto)', checked: false }
+      ]
     },
 
     {
       title: 'Itens hidráulicos',
       icon: '🚰',
       expanded: false,
-      selected: 0,
-      total: 0,
-      items: []
+      items: [
+        { label: 'Medir eixos e alturas dos pontos hidráulicos (água/esgoto/gás)', checked: false },
+        { label: 'Medir eixos de metais e louças (cubas, bacias, torneiras)', checked: false }
+      ]
     }
 
   ];
@@ -164,10 +177,26 @@ export class StepScopeComponent implements AfterViewInit, OnDestroy {
   ========================================================
   */
   toggleSection(index: number): void {
+    this.scopeSections[index].expanded = !this.scopeSections[index].expanded;
+  }
 
-    this.scopeSections[index].expanded =
-      !this.scopeSections[index].expanded;
+  toggleItem(sectionIndex: number, itemIndex: number): void {
+    this.scopeSections[sectionIndex].items[itemIndex].checked =
+      !this.scopeSections[sectionIndex].items[itemIndex].checked;
+  }
 
+  isAllSelected(sectionIndex: number): boolean {
+    const items = this.scopeSections[sectionIndex].items;
+    return items.length > 0 && items.every(i => i.checked);
+  }
+
+  toggleAll(sectionIndex: number): void {
+    const allSelected = this.isAllSelected(sectionIndex);
+    this.scopeSections[sectionIndex].items.forEach(i => i.checked = !allSelected);
+  }
+
+  getSelectedCount(sectionIndex: number): number {
+    return this.scopeSections[sectionIndex].items.filter(i => i.checked).length;
   }
 
   /*

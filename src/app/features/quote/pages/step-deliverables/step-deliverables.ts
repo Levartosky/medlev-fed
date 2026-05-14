@@ -80,9 +80,9 @@ export class StepDeliverablesComponent implements AfterViewInit, OnDestroy {
   ========================================================
   */
 
-  selected3DType = 'Pacote básico';
+  selected3DType = '';
 
-  selectedSoftware = 'SketchUp';
+  selectedSoftware = '';
 
   /*
   ========================================================

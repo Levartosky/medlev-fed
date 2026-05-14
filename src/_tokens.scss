@@ -1,0 +1,109 @@
+// ============================================================
+// MEDLEV — DESIGN TOKENS
+// Fonte única de verdade para cores, tipografia e espaçamento.
+// Use var(--nome-do-token) em qualquer arquivo SCSS ou CSS.
+// ============================================================
+
+:root {
+
+  // === CORES — BRAND ===
+  --color-primary:        #ef3d37;
+  --color-primary-hover:  #ff4a4a;
+  --color-primary-muted:  rgba(239, 61, 55, 0.08);
+  --color-primary-border: rgba(239, 61, 55, 0.25);
+  --color-primary-glow:   rgba(239, 61, 55, 0.28);
+
+  // === CORES — TEMA ESCURO (site) ===
+  --color-bg:          #050505;
+  --color-bg-card:     #0d0d0d;
+  --color-bg-alt:      #0f0f0f;
+
+  --color-text:          #ffffff;
+  --color-text-secondary: #d4d4d4;
+  --color-text-muted:    rgba(255, 255, 255, 0.55);
+  --color-text-subtle:   rgba(255, 255, 255, 0.45);
+
+  --color-border:        rgba(255, 255, 255, 0.05);
+  --color-border-light:  rgba(255, 255, 255, 0.08);
+  --color-border-hover:  rgba(239, 61, 55, 0.40);
+
+  // === CORES — TEMA CLARO (formulário) ===
+  --color-bg-form:           #ffffff;
+  --color-bg-form-input:     #ffffff;
+  --color-text-form:         #1c1c1c;
+  --color-text-form-secondary: #555555;
+  --color-border-form:       #d9d9d9;
+  --color-border-form-focus: #ef3d37;
+
+  // === CORES — ACENTO ===
+  --color-green:       #19b15f;
+  --color-green-bg:    #e8f5ea;
+  --color-green-border: #c6e8d0;
+
+  // === TIPOGRAFIA ===
+  --font-primary: 'Plus Jakarta Sans', Arial, sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  // Escala de tamanhos
+  --text-xs:   0.75rem;    // 12px
+  --text-sm:   0.875rem;   // 14px
+  --text-base: 1rem;       // 16px
+  --text-lg:   1.125rem;   // 18px
+  --text-xl:   1.25rem;    // 20px
+  --text-2xl:  1.5rem;     // 24px
+  --text-3xl:  2rem;       // 32px
+  --text-4xl:  2.625rem;   // 42px
+  --text-5xl:  3rem;       // 48px
+  --text-hero: 6rem;       // 96px
+
+  // Pesos
+  --weight-regular:   400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+  --weight-extrabold: 800;
+
+  // Line heights
+  --leading-tight:  1.05;
+  --leading-snug:   1.3;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.8;
+
+  // === ESPAÇAMENTO ===
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-30: 120px;
+
+  // === BORDER RADIUS ===
+  --radius-sm:     8px;
+  --radius-md:     12px;
+  --radius-lg:     20px;
+  --radius-xl:     24px;
+  --radius-full:   999px;
+  --radius-circle: 50%;
+
+  // === TRANSIÇÕES ===
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.8s ease;
+
+  // === LAYOUT ===
+  --container-max:     1400px;
+  --container-padding: 80px;
+  --container-padding-mobile: 20px;
+
+  // === SOMBRAS ===
+  --shadow-card:    0 0 50px rgba(239, 61, 55, 0.12);
+  --shadow-primary: 0 8px 32px rgba(239, 61, 55, 0.35);
+
+}

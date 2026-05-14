@@ -158,7 +158,13 @@ capturar lead inicial.
         <input
           type="text"
           placeholder="Estúdio Moraes Arquitetura"
+          [value]="nome"
+          (input)="nome = $any($event.target).value"
         >
+
+        @if (submitted && !nome.trim()) {
+          <span class="field-error">Campo obrigatório</span>
+        }
 
       </div>
 
@@ -172,7 +178,13 @@ capturar lead inicial.
         <input
           type="text"
           placeholder="(11) 99999-9999"
+          [value]="whatsapp"
+          (input)="formatWhatsapp($event)"
         >
+
+        @if (submitted && !whatsapp.trim()) {
+          <span class="field-error">Campo obrigatório</span>
+        }
 
       </div>
 

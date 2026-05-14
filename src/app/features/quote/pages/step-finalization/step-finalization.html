@@ -290,6 +290,10 @@
 
     </div>
 
+    @if (submitted && !acceptedPrivacy) {
+      <span class="field-error">Você precisa aceitar a Política de Privacidade para continuar</span>
+    }
+
   </main>
 
   <!-- FOOTER -->

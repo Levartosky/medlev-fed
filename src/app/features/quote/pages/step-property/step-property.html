@@ -216,11 +216,11 @@ Dados do imóvel.
         </label>
 
         <select>
-
-          <option>
-            2 (duplex)
-          </option>
-
+          <option>1 pavimento</option>
+          <option>2 pavimentos (duplex)</option>
+          <option>3 pavimentos</option>
+          <option>4 pavimentos</option>
+          <option>5 ou mais pavimentos</option>
         </select>
 
       </div>
@@ -234,8 +234,14 @@ Dados do imóvel.
 
         <input
           type="text"
-          value="180"
+          placeholder="Ex.: 120"
+          [value]="metragem"
+          (input)="metragem = $any($event.target).value"
         >
+
+        @if (submitted && !metragem.trim()) {
+          <span class="field-error">Campo obrigatório</span>
+        }
 
       </div>
 
@@ -271,7 +277,13 @@ Dados do imóvel.
         <input
           type="text"
           placeholder="Rua, número, bairro, cidade, estado"
+          [value]="endereco"
+          (input)="endereco = $any($event.target).value"
         >
+
+        @if (submitted && !endereco.trim()) {
+          <span class="field-error">Campo obrigatório</span>
+        }
 
       </div>
 

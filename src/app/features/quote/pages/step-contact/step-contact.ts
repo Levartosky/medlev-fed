@@ -18,11 +18,7 @@ Importa Component e hooks de ciclo de vida.
 */
 import { AfterViewInit, Component, Inject, OnDestroy, PLATFORM_ID } from '@angular/core';
 
-/*
-isPlatformBrowser: garante que o IntersectionObserver
-só rode no browser (não no SSR).
-*/
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 /*
 Importa Router.
@@ -49,9 +45,8 @@ COMPONENT
   */
   standalone: true,
 
-  /*
-  HTML componente.
-  */
+  imports: [CommonModule],
+
   templateUrl: './step-contact.html',
 
   /*
@@ -124,12 +119,29 @@ export class StepContactComponent implements AfterViewInit, OnDestroy {
   Navega para:
   ETAPA 2 - IMÓVEL
   */
+  nome = '';
+  whatsapp = '';
+  submitted = false;
+
   nextStep(): void {
+    this.submitted = true;
+    if (!this.nome.trim() || !this.whatsapp.trim()) return;
+    this.router.navigate(['/orcamento/imovel']);
+  }
 
-    this.router.navigate([
-      '/orcamento/imovel'
-    ]);
-
+  formatWhatsapp(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    let digits = input.value.replace(/\D/g, '').slice(0, 11);
+    let formatted = digits;
+    if (digits.length > 7) {
+      formatted = `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+    } else if (digits.length > 2) {
+      formatted = `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+    } else if (digits.length > 0) {
+      formatted = `(${digits}`;
+    }
+    input.value = formatted;
+    this.whatsapp = formatted;
   }
 
   /*

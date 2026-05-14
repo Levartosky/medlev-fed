@@ -1,214 +1,88 @@
-<!--
-========================================================
-HOME PAGE - MEDLEV ARQUITETURA
-========================================================
-
-Esta é a página principal (Home) do site.
-
-Ela possui:
-- Hero section
-- Header/Navbar
-- Seção de serviços
-- Portfólio
-- Diferenciais
-- CTA final
-- Footer
-
-Tudo está estruturado em seções separadas
-seguindo padrão enterprise/profissional.
-
-========================================================
--->
-
 <main class="home">
 
-  <!--
-  ========================================================
-  HERO SECTION
-  ========================================================
-
-  A Hero é a primeira seção do site.
-
-  Objetivo:
-  - causar impacto visual
-  - transmitir sofisticação
-  - apresentar a empresa
-  - gerar conversão
-
-  Ela ocupa praticamente a tela inteira.
-  -->
-
+  <!-- ============================================================
+  HERO
+  ============================================================ -->
   <section class="hero">
 
-    <!--
-    Overlay escuro sobre a imagem.
-
-    Objetivo:
-    - escurecer o fundo
-    - melhorar leitura do texto
-    - deixar visual premium
-    -->
     <div class="hero__overlay"></div>
 
-    <!--
-    ========================================================
-    HEADER / NAVBAR
-    ========================================================
-    -->
+    <!-- HEADER -->
     <header class="header" [class.scrolled]="isNavScrolled">
 
-      <!--
-      ========================================================
-      LOGO / BRAND
-      ========================================================
-
-      Container principal da marca.
-
-      Estrutura:
-      - imagem do logo
-      - nome da empresa
-      - subtítulo
-
-      A tag <a> é usada porque:
-      - normalmente o logo leva para home
-      - padrão de mercado
-      -->
       <a href="#" class="brand">
-
-        <!--
-        Logo PNG transparente.
-
-        O src busca o arquivo dentro da pasta public/.
-
-        Caminho:
-        public/logo-medlev.png
-        -->
         <img src="/logo-medlev.png" alt="Logo MedLev Arquitetura" class="brand__logo" />
-
-        <!--
-        Texto da marca
-        -->
         <div class="brand__text">
-
-          <!-- Nome principal -->
           <strong>MedLev</strong>
-
-          <!-- Subtítulo -->
           <span>Arquitetura</span>
-
         </div>
-
       </a>
 
-      <!--
-      ========================================================
-      MENU DE NAVEGAÇÃO
-      ========================================================
-
-      Nav contém links de navegação do site.
-      -->
       <nav class="header__nav">
-
-        <a href="#" class="active">
-          Início
-        </a>
-
-        <a routerLink="/portfolio">
-          Portfólio
-        </a>
-
-        <a routerLink="/servicos">
-          Serviços
-        </a>
-
-        <a routerLink="/sobre">
-          Sobre
-        </a>
-
-        <a routerLink="/contato">
-          Contato
-        </a>
-
+        <a href="#" class="active">Início</a>
+        <a routerLink="/portfolio">Portfólio</a>
+        <a routerLink="/servicos">Serviços</a>
+        <a routerLink="/sobre">Sobre</a>
+        <a routerLink="/contato">Contato</a>
       </nav>
 
-      <!--
-      ========================================================
-      BOTÃO CTA HEADER
-      ========================================================
-
-      CTA = Call To Action
-
-      Objetivo:
-      gerar conversão/orçamento.
-      -->
       <a routerLink="/orcamento" class="header__button">
-
         Solicitar orçamento
-
-        <span>→</span>
-
+        <span class="material-symbols-outlined">arrow_forward</span>
       </a>
 
     </header>
 
-    <!--
-    ========================================================
-    CONTEÚDO PRINCIPAL DA HERO
-    ========================================================
-    -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <div class="hero__content">
 
-      <!-- Texto pequeno superior -->
-      <span class="hero__subtitle">
-        Arquitetura contemporânea
-      </span>
+      <span class="hero__eyebrow">Medlev Arquitetura</span>
 
-      <!--
-      Título principal.
-
-      O strong é usado para destacar
-      a palavra "Arquitetura".
-      -->
       <h1>
-
-        MedLev
-
-        <strong>
-          Arquitetura
-        </strong>
-
+        Medição e
+        <strong>Levantamento</strong>
       </h1>
 
-      <!-- Descrição -->
       <p>
-        Medição, levantamento e projetos
-        com precisão técnica e visão moderna.
+        Levantamentos arquitetônicos com precisão técnica.<br>
+        Atendemos São Paulo e todo o Brasil desde 2019.
       </p>
 
-      <!--
-      ========================================================
-      BOTÕES PRINCIPAIS
-      ========================================================
-      -->
       <div class="hero__actions">
 
-        <!-- Botão principal -->
         <a routerLink="/orcamento" class="btn btn--primary">
-
           Solicitar orçamento
-
-          <span>→</span>
-
+          <span class="material-symbols-outlined">arrow_forward</span>
         </a>
 
-        <!-- Botão secundário -->
         <a routerLink="/portfolio" class="btn btn--secondary">
-
           Ver projetos
-
-          <span>→</span>
-
+          <span class="material-symbols-outlined">arrow_forward</span>
         </a>
+
+      </div>
+
+      <!-- MÉTRICAS -->
+      <div class="hero__stats">
+
+        <div class="hero__stat">
+          <strong>+7 anos</strong>
+          <span>No mercado</span>
+        </div>
+
+        <div class="hero__stat-divider"></div>
+
+        <div class="hero__stat">
+          <strong>SP + Brasil</strong>
+          <span>Cobertura nacional</span>
+        </div>
+
+        <div class="hero__stat-divider"></div>
+
+        <div class="hero__stat">
+          <strong>100% técnico</strong>
+          <span>Equipe especializada</span>
+        </div>
 
       </div>
 
@@ -216,99 +90,65 @@ seguindo padrão enterprise/profissional.
 
   </section>
 
-  <!--
-  ========================================================
-  SERVICES SECTION
-  ========================================================
-
-  Seção de serviços oferecidos.
-  -->
+  <!-- ============================================================
+  SERVIÇOS
+  ============================================================ -->
   <section class="services">
 
-    <!-- Container central -->
     <div class="container">
 
-      <!-- Título pequeno -->
-      <span class="section-tag reveal">
-        O QUE FAZEMOS
-      </span>
+      <span class="section-tag reveal">O QUE FAZEMOS</span>
 
-      <!-- Título principal -->
-      <h2 class="reveal">
-        Soluções técnicas com excelência
-      </h2>
+      <h2 class="reveal">Soluções técnicas<br>com excelência</h2>
 
-      <!--
-      Grid dos cards.
-
-      CSS Grid será usado aqui.
-      -->
       <div class="services__grid">
 
         <!-- CARD 1 -->
         <article class="service-card reveal">
-
           <div class="service-card__icon">
-            📐
+            <span class="material-symbols-outlined">square_foot</span>
           </div>
-
-          <h3>
-            Levantamento técnico
-          </h3>
-
+          <h3>Levantamento técnico</h3>
           <p>
-            Levantamentos precisos para projetos,
-            regularizações e documentação técnica.
+            Plantas baixas, cortes e fachadas com precisão
+            milimétrica. Da medição à entrega em DWG e PDF.
           </p>
-
-          <a routerLink="/servicos">
-            Saiba mais →
+          <a routerLink="/servicos" class="service-card__link">
+            Saiba mais
+            <span class="material-symbols-outlined">arrow_forward</span>
           </a>
-
         </article>
 
         <!-- CARD 2 -->
         <article class="service-card reveal">
-
           <div class="service-card__icon">
-            📏
+            <span class="material-symbols-outlined">straighten</span>
           </div>
-
-          <h3>
-            Medição de imóveis
-          </h3>
-
+          <h3>Medição de imóveis</h3>
           <p>
-            Medições detalhadas com precisão
-            para qualquer tipo de imóvel.
+            Casas, apartamentos, coberturas, salas comerciais
+            e galpões. Qualquer tipologia, com agilidade.
           </p>
-
-          <a routerLink="/servicos">
-            Saiba mais →
+          <a routerLink="/servicos" class="service-card__link">
+            Saiba mais
+            <span class="material-symbols-outlined">arrow_forward</span>
           </a>
-
         </article>
 
         <!-- CARD 3 -->
         <article class="service-card reveal">
-
           <div class="service-card__icon">
-            🏠
+            <span class="material-symbols-outlined">architecture</span>
           </div>
-
-          <h3>
-            Projetos arquitetônicos
-          </h3>
-
+          <h3>Projetos arquitetônicos</h3>
           <p>
-            Projetos modernos, funcionais
-            e personalizados.
+            Do levantamento ao projeto executivo. Documentação
+            completa, pronta para aprovação e obra.
           </p>
-
-          <a routerLink="/servicos">
-            Saiba mais →
+          <a routerLink="/servicos" class="service-card__link">
+            Saiba mais
+            <span class="material-symbols-outlined">arrow_forward</span>
           </a>
-
         </article>
 
       </div>

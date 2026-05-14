@@ -88,7 +88,8 @@ export class StepFinalizationComponent implements AfterViewInit, OnDestroy {
 
   selectedRpa = 'Não';
 
-  acceptedPrivacy = true;
+  acceptedPrivacy = false;
+  submitted = false;
 
   /*
   ========================================================
@@ -154,11 +155,9 @@ export class StepFinalizationComponent implements AfterViewInit, OnDestroy {
   ========================================================
   */
   submitForm(): void {
-
-    this.router.navigate([
-      '/orcamento/sucesso'
-    ]);
-
+    this.submitted = true;
+    if (!this.acceptedPrivacy) return;
+    this.router.navigate(['/orcamento/sucesso']);
   }
 
 }
