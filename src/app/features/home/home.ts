@@ -30,16 +30,18 @@ Importa Component do Angular.
 */
 import { AfterViewInit, Component, HostListener, Inject, OnDestroy, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-
-/*
-Importa RouterModule.
-
-Responsável por disponibilizar:
-- routerLink
-- router-outlet
-- navegação SPA
-*/
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { MINI_BLUEPRINTS } from '../portfolio/portfolio.blueprints';
+
+interface FeaturedProject {
+  title: string;
+  catLabel: string;
+  loc: string;
+  area: string;
+  year: string;
+  safeMini: SafeHtml;
+}
 
 /*
 Decorator do Angular.
@@ -92,7 +94,19 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   isNavScrolled = false;
   private observer?: IntersectionObserver;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
+  readonly featuredProjects: FeaturedProject[];
+
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: object,
+    private sanitizer: DomSanitizer,
+  ) {
+    this.featuredProjects = [
+      { title: 'Apartamento 120m²',  catLabel: 'Residencial', loc: 'Santana — São Paulo, SP',  area: '120 m²',   year: '2024', safeMini: sanitizer.bypassSecurityTrustHtml(MINI_BLUEPRINTS[0]) },
+      { title: 'Escritório 122m²',   catLabel: 'Comercial',   loc: 'Av. Paulista — São Paulo', area: '122 m²',   year: '2023', safeMini: sanitizer.bypassSecurityTrustHtml(MINI_BLUEPRINTS[1]) },
+      { title: 'Beach Tennis Apoio', catLabel: 'Esportivo',   loc: 'Praia Grande — SP',        area: '180 m²',   year: '2024', safeMini: sanitizer.bypassSecurityTrustHtml(MINI_BLUEPRINTS[2]) },
+      { title: 'Galpão logístico',   catLabel: 'Industrial',  loc: 'Itupeva — SP',             area: '1.250 m²', year: '2022', safeMini: sanitizer.bypassSecurityTrustHtml(MINI_BLUEPRINTS[3]) },
+    ];
+  }
 
   @HostListener('window:scroll')
   onScroll(): void {

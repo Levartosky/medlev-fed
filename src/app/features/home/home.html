@@ -10,7 +10,7 @@
     <!-- HEADER -->
     <header class="header" [class.scrolled]="isNavScrolled">
 
-      <a href="#" class="brand">
+      <a routerLink="/" class="brand">
         <img src="/logo-medlev.png" alt="Logo MedLev Arquitetura" class="brand__logo" />
         <div class="brand__text">
           <strong>MedLev</strong>
@@ -19,7 +19,7 @@
       </a>
 
       <nav class="header__nav">
-        <a href="#" class="active">Início</a>
+        <a routerLink="/" class="active">Início</a>
         <a routerLink="/portfolio">Portfólio</a>
         <a routerLink="/servicos">Serviços</a>
         <a routerLink="/sobre">Sobre</a>
@@ -36,8 +36,6 @@
     <!-- CONTEÚDO PRINCIPAL -->
     <div class="hero__content">
 
-      <span class="hero__eyebrow">Medlev Arquitetura</span>
-
       <h1>
         Medição e
         <strong>Levantamento</strong>
@@ -45,7 +43,6 @@
 
       <p>
         Levantamentos arquitetônicos com precisão técnica.<br>
-        Atendemos São Paulo e todo o Brasil desde 2019.
       </p>
 
       <div class="hero__actions">
@@ -81,7 +78,7 @@
 
         <div class="hero__stat">
           <strong>100% técnico</strong>
-          <span>Equipe especializada</span>
+          <span>Time especializado</span>
         </div>
 
       </div>
@@ -156,5 +153,244 @@
     </div>
 
   </section>
+
+  <!-- ============================================================
+  PORTFÓLIO
+  ============================================================ -->
+  <section class="home-portfolio">
+
+    <div class="container">
+
+      <div class="home-portfolio__header reveal">
+        <div>
+          <span class="section-tag">Portfólio</span>
+          <h2>Projetos que<br>falam por si</h2>
+        </div>
+        <a routerLink="/portfolio" class="portfolio-header__link">
+          Ver portfólio completo
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+      </div>
+
+      <div class="home-portfolio__grid">
+
+        @for (project of featuredProjects; track project.title) {
+          <article class="portfolio-card reveal">
+
+            <div class="portfolio-card__preview">
+              <div class="portfolio-card__blueprint" [innerHTML]="project.safeMini"></div>
+              <span class="portfolio-card__cat">{{ project.catLabel }}</span>
+            </div>
+
+            <div class="portfolio-card__body">
+              <h3>{{ project.title }}</h3>
+              <p class="portfolio-card__loc">
+                <span class="material-symbols-outlined">location_on</span>
+                {{ project.loc }}
+              </p>
+              <div class="portfolio-card__meta">
+                <span>{{ project.area }}</span>
+                <span>{{ project.year }}</span>
+              </div>
+            </div>
+
+          </article>
+        }
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+  DIFERENCIAIS
+  ============================================================ -->
+  <section class="differentials">
+
+    <div class="container">
+
+      <span class="section-tag reveal">Por que a MedLev</span>
+
+      <h2 class="reveal">Rigor técnico<br>do início ao fim</h2>
+
+      <div class="differentials__grid">
+
+        <article class="diff-item reveal">
+          <div class="diff-item__icon">
+            <span class="material-symbols-outlined">precision_manufacturing</span>
+          </div>
+          <div class="diff-item__text">
+            <h3>Precisão milimétrica</h3>
+            <p>Equipamentos de ponta para medições exatas em qualquer tipologia de imóvel.</p>
+          </div>
+        </article>
+
+        <article class="diff-item reveal">
+          <div class="diff-item__icon">
+            <span class="material-symbols-outlined">timer</span>
+          </div>
+          <div class="diff-item__text">
+            <h3>Prazo garantido</h3>
+            <p>Cronograma definido antes do início. Entregamos no prazo combinado, sempre.</p>
+          </div>
+        </article>
+
+        <article class="diff-item reveal">
+          <div class="diff-item__icon">
+            <span class="material-symbols-outlined">draft</span>
+          </div>
+          <div class="diff-item__text">
+            <h3>DWG, PDF e BIM</h3>
+            <p>Arquivos em todos os formatos exigidos pelo mercado: AutoCAD, PDF vetorial e Revit.</p>
+          </div>
+        </article>
+
+        <article class="diff-item reveal">
+          <div class="diff-item__icon">
+            <span class="material-symbols-outlined">travel_explore</span>
+          </div>
+          <div class="diff-item__text">
+            <h3>SP e todo o Brasil</h3>
+            <p>Atendimento presencial em São Paulo e deslocamento nacional para qualquer estado.</p>
+          </div>
+        </article>
+
+        <article class="diff-item reveal">
+          <div class="diff-item__icon">
+            <span class="material-symbols-outlined">groups</span>
+          </div>
+          <div class="diff-item__text">
+            <h3>Equipe especializada</h3>
+            <p>Arquitetos e técnicos com formação e experiência em levantamento e projeto executivo.</p>
+          </div>
+        </article>
+
+        <article class="diff-item reveal">
+          <div class="diff-item__icon">
+            <span class="material-symbols-outlined">workspace_premium</span>
+          </div>
+          <div class="diff-item__text">
+            <h3>+7 anos de mercado</h3>
+            <p>Mais de 18 projetos entregues em residencial, comercial, industrial, esportivo e institucional.</p>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+  CTA FINAL
+  ============================================================ -->
+  <section class="home-cta">
+
+    <div class="container">
+
+      <div class="cta-card reveal">
+
+        <div class="cta-card__body">
+          <span class="cta-card__tag">Próximo passo</span>
+          <h2>Pronto para o seu<br>levantamento?</h2>
+          <p>Orçamento sem compromisso. Resposta em até 24h.</p>
+        </div>
+
+        <div class="cta-card__actions">
+          <a routerLink="/orcamento" class="cta-btn cta-btn--light">
+            Solicitar orçamento
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+          <a
+            href="https://wa.me/5511972651827?text=Olá!%20Vim%20pelo%20site%20da%20MedLev%20e%20gostaria%20de%20solicitar%20um%20orçamento."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="cta-btn cta-btn--ghost"
+          >
+            <span class="material-symbols-outlined">chat</span>
+            WhatsApp
+          </a>
+        </div>
+
+        <div class="cta-card__deco" aria-hidden="true">
+          <span class="material-symbols-outlined">square_foot</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+  FOOTER
+  ============================================================ -->
+  <footer class="site-footer">
+
+    <div class="container">
+
+      <div class="footer__grid">
+
+        <!-- BRAND -->
+        <div class="footer__brand">
+          <a routerLink="/" class="footer__logo">
+            <img src="/logo-medlev.png" alt="Logo MedLev Arquitetura" />
+            <div>
+              <strong>MedLev</strong>
+              <span>Arquitetura</span>
+            </div>
+          </a>
+          <p>Medição e levantamento arquitetônico com precisão técnica. São Paulo e todo o Brasil desde 2019.</p>
+          <a
+            href="https://wa.me/5511972651827?text=Olá!%20Vim%20pelo%20site%20da%20MedLev%20e%20gostaria%20de%20solicitar%20um%20orçamento."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer__whatsapp"
+          >
+            <span class="material-symbols-outlined">chat</span>
+            (11) 97265-1827
+          </a>
+        </div>
+
+        <!-- NAVEGAÇÃO -->
+        <nav class="footer__nav">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a routerLink="/">Início</a></li>
+            <li><a routerLink="/portfolio">Portfólio</a></li>
+            <li><a routerLink="/servicos">Serviços</a></li>
+            <li><a routerLink="/sobre">Sobre</a></li>
+            <li><a routerLink="/contato">Contato</a></li>
+          </ul>
+        </nav>
+
+        <!-- CONTATO -->
+        <div class="footer__contact">
+          <h4>Atendimento</h4>
+          <div class="footer__contact-item">
+            <span class="material-symbols-outlined">location_on</span>
+            <span>São Paulo — SP<br>Atendimento nacional</span>
+          </div>
+          <div class="footer__contact-item">
+            <span class="material-symbols-outlined">schedule</span>
+            <span>Seg – Sex, 8h às 18h</span>
+          </div>
+          <a routerLink="/orcamento" class="footer__cta">
+            Solicitar orçamento
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <p>© 2026 MedLev Arquitetura. Todos os direitos reservados.</p>
+        <p>São Paulo, SP · Atendimento nacional</p>
+      </div>
+
+    </div>
+
+  </footer>
 
 </main>
